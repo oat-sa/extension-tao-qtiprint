@@ -1,0 +1,40 @@
+{
+
+    "name": "oat-sa/extension-tao-itemqtiprint",
+    "description" : "Provides printable rendering for QTI Items",
+    "type" : "tao-extension",
+    "authors": [{
+        "name": "Open Assessment Technologies S.A.",
+        "homepage": "http://www.taotesting.com"
+    }, {
+        "name": "Bertrand Chevrier",
+        "role": "Developer"
+    }],
+    "support": {
+        "forum": "http://forum.taotesting.com",
+        "issues": "http://forge.taotesting.com"
+    },
+    "homepage": "http://www.taotesting.com",
+    "license": [
+        "GPL-2.0"
+    ],
+    "keywords" : [
+        "tao",
+        "oat",
+        "QTI",
+        "computer-based-assessment",
+        "paper-based-assessment"
+    ],
+    "extra" : {
+        "tao-extension-name" : "taoQtiItemPrint"
+    },
+    "minimum-stability" : "dev",
+    "require": {
+        "oat-sa/oatbox-extension-installer": "dev-master"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "oat\\taoQtiItemPrint\\" : ""
+        }
+    }
+}
