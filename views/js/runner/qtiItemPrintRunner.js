@@ -13,23 +13,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015 (original work) Open Assessment Technologies SA ;
+ * Copyright (c) 2014 (original work) Open Assessment Technlogies SA (under the project TAO-PRODUCT);
+ *
  */
 
 /**
- * The QTI Print renderer built using the print config
- *
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'taoQtiItem/qtiRunner/core/Renderer',
-    'taoQtiItemPrint/qtiPrintRenderer/renderers/config'
-], function(Renderer, config){
+    'taoItems/runner/api/itemRunner',
+    'taoQtiItemPrint/runner/provider/qtiprint'
+], function(itemRunner, qtiRuntimeProvider){
     'use strict';
 
+    //register the QTI Provider
+    itemRunner.register('qtiprint', qtiRuntimeProvider);
+
     /**
-     * Build and expost the printRenderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/config
+     * Expose the itemRunner with the QTI provider registered
+     * @exports taoQtiItemPrint/runner/qtiItemPrintRunner
      */
-    return Renderer.build(config.locations, config.name);
+    return itemRunner;
 });
