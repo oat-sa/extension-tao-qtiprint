@@ -1,0 +1,14 @@
+/*
+ * New Item Runner style.
+ * It will replace qti.css once the new runner is integrated.
+ */
+@charset "UTF-8";
+
+$mainContainer : '.qti-item';
+@import "inc/bootstrap";
+@import "inc/base";
+
+
+.qti-item {
+    color: pink;
+}
