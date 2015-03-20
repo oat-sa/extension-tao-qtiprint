@@ -20,7 +20,7 @@
  */
 
 return array(
-    'name' => 'taoQtiItemPrint',
+    'name' => 'taoQtiPrint',
 	'label' => 'qti',
 	'description' => 'Provides printable rendering for QTI Items',
     'license' => 'GPL-2.0',
@@ -29,28 +29,28 @@ return array(
 	'requires' => array('tao' => '>=2.7.10','taoQtiItem' => '>=2.7.4'),
 	// for compatibility
 	'dependencies' => array('tao','taoQtiItem'),
-	'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiItemPrintManager',
+	'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager',
     'acl' => array(
-        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiItemPrintManager', array('ext'=>'taoQtiItemPrint')),
+        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager', array('ext'=>'taoQtiPrint')),
     ),
     'uninstall' => array(
     ),
     'autoload' => array (
         'psr-4' => array(
-            'oat\\taoQtiItemPrint\\' => dirname(__FILE__).DIRECTORY_SEPARATOR
+            'oat\\taoQtiPrint\\' => dirname(__FILE__).DIRECTORY_SEPARATOR
         )
     ),
     'routes' => array(
-        '/taoQtiItemPrint' => 'oat\\taoQtiItemPrint\\controller'
+        '/taoQtiPrint' => 'oat\\taoQtiPrint\\controller'
     ),
 	'constants' => array(
 	    # views directory
 	    "DIR_VIEWS" => dirname(__FILE__).DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR,
 
 		#BASE URL (usually the domain root)
-		'BASE_URL' => ROOT_URL.'taoQtiItemPrint/',
+		'BASE_URL' => ROOT_URL.'taoQtiPrint/',
 
 	    #BASE WWW required by JS
-	    'BASE_WWW' => ROOT_URL.'taoQtiItemPrint/views/'
+	    'BASE_WWW' => ROOT_URL.'taoQtiPrint/views/'
 	)
 );
