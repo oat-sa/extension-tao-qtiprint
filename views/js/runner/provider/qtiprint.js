@@ -23,12 +23,12 @@
  */
 define([
     'taoQtiItem/qtiItem/core/Loader',
-    'taoQtiItemPrint/qtiPrintRenderer/renderers/Renderer'],
+    'taoQtiPrint/qtiPrintRenderer/renderers/Renderer'],
 function(QtiLoader, QtiRenderer){
     'use strict';
 
     /**
-     * @exports taoQtiItemPrint/runner/provider/qtiprint
+     * @exports taoQtiPrint/runner/provider/qtiprint
      */
     var qtiItemRuntimeProvider = {
 

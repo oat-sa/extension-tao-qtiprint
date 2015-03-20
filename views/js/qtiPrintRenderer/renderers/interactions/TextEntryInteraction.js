@@ -22,14 +22,14 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/interactions/textEntryInteraction',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container'
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/interactions/textEntryInteraction',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'
 ], function(tpl, getContainer){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/interactions/TextEntryInteraction
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/interactions/TextEntryInteraction
      */
     return {
         qtiClass:     'textEntryInteraction',

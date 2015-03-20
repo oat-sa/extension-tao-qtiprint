@@ -22,14 +22,14 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/stylesheet',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container'],
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/stylesheet',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'],
 function(tpl, getContainer){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/Stylesheet
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Stylesheet
      */
     return {
         qtiClass:     'stylesheet',

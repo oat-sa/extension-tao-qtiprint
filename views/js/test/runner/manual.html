@@ -11,7 +11,7 @@
         <script  type="text/javascript">
             //load the config
             require(['/tao/ClientConfig/config'], function(){
-                require(['taoQtiItemPrint/runner/qtiItemPrintRunner'], function(qtiItemRunner){
+                require(['taoQtiPrint/runner/qtiItemPrintRunner'], function(qtiItemRunner){
                     var runner;
 
                     var itemContainer   = document.getElementById('item-container');
@@ -37,7 +37,7 @@
                         var itemPath = selectItem.value;
                         if(itemPath){
                             out('Loading sample ' + itemPath, '');
-                            require(['json!taoQtiItemPrint/test/samples/' + itemPath], function(item){
+                            require(['json!taoQtiPrint/test/samples/' + itemPath], function(item){
 
 
                                 runner =

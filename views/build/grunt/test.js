@@ -5,8 +5,8 @@ module.exports = function(grunt) {
     var testUrl     = 'http://127.0.0.1:' + grunt.option('testPort');
     var root        = grunt.option('root');
 
-    var testRunners = root + '/taoQtiItemPrint/views/js/test/**/test.html';
-    var testFiles = root + '/taoQtiItemPrint/views/js/test/**/test.js';
+    var testRunners = root + '/taoQtiPrint/views/js/test/**/test.html';
+    var testFiles = root + '/taoQtiPrint/views/js/test/**/test.js';
 
     //extract unit tests
     var extractTests = function extractTests(){

@@ -22,14 +22,14 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/img',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container'
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/img',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'
 ], function(tpl, getContainer){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/Img
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Img
      */
     return {
         qtiClass:     'img',

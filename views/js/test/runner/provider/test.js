@@ -2,8 +2,8 @@ define([
     'jquery',
     'lodash',
     'taoItems/runner/api/itemRunner',
-    'taoQtiItemPrint/runner/provider/qtiprint',
-    'json!taoQtiItemPrint/test/samples/space-shuttle.json'
+    'taoQtiPrint/runner/provider/qtiprint',
+    'json!taoQtiPrint/test/samples/space-shuttle.json'
 ], function($, _, itemRunner, qtiRuntimeProvider, itemData){
 
     var containerId = 'item-container';

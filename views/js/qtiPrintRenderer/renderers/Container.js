@@ -21,12 +21,12 @@
  *
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
-define(['tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/container'], function(tpl){
+define(['tpl!taoQtiPrint/qtiPrintRenderer/tpl/container'], function(tpl){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/Container
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Container
      */
     return {
         qtiClass : '_container',

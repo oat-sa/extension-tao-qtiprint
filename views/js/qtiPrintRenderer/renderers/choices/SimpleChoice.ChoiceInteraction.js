@@ -22,14 +22,14 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-   'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/choices/simpleChoice.choiceInteraction',
-   'taoQtiItemPrint/qtiPrintRenderer/helpers/container'
+   'tpl!taoQtiPrint/qtiPrintRenderer/tpl/choices/simpleChoice.choiceInteraction',
+   'taoQtiPrint/qtiPrintRenderer/helpers/container'
 ], function(tpl, getContainer){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteration
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteration
      */
     return {
         qtiClass:     'simpleChoice.choiceInteraction',

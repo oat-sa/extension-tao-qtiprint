@@ -22,15 +22,15 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/item',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/itemStylesheetHandler'
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/item',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container',
+    'taoQtiPrint/qtiPrintRenderer/helpers/itemStylesheetHandler'
 ], function(tpl, getContainer, itemStylesheetHandler) {
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/Item
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Item
      */
     return {
         qtiClass:     'assessmentItem',

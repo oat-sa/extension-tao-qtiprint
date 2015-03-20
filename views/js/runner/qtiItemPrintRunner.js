@@ -22,7 +22,7 @@
  */
 define([
     'taoItems/runner/api/itemRunner',
-    'taoQtiItemPrint/runner/provider/qtiprint'
+    'taoQtiPrint/runner/provider/qtiprint'
 ], function(itemRunner, qtiRuntimeProvider){
     'use strict';
 
@@ -31,7 +31,7 @@ define([
 
     /**
      * Expose the itemRunner with the QTI provider registered
-     * @exports taoQtiItemPrint/runner/qtiItemPrintRunner
+     * @exports taoQtiPrint/runner/qtiItemPrintRunner
      */
     return itemRunner;
 });

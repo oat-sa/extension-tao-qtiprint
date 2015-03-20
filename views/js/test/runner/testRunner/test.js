@@ -1,7 +1,7 @@
 define([
     'jquery',
-    'taoQtiItemPrint/runner/testRunner',
-    'json!taoQtiItemPrint/test/samples/test.json'
+    'taoQtiPrint/runner/testRunner',
+    'json!taoQtiPrint/test/samples/test.json'
 ], function($, testRunner, testData){
 
     var container = 'outside-container';

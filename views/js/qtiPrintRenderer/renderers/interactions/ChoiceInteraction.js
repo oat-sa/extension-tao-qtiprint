@@ -23,14 +23,14 @@
  */
 define([
     'lodash',
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/interactions/choiceInteraction',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container'
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/interactions/choiceInteraction',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'
 ], function(_, tpl, getContainer){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/interactions/ChoiceInteraction
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/interactions/ChoiceInteraction
      */
     return {
         qtiClass:     'choiceInteraction',

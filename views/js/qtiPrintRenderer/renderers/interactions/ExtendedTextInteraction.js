@@ -23,8 +23,8 @@
  */
 define([
     'lodash',
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/interactions/extendedTextInteraction',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container',
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/interactions/extendedTextInteraction',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container',
 ], function(_, tpl, getContainer){
     'use strict';
 
@@ -63,7 +63,7 @@ define([
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/interactions/ExtendedTextInteraction
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/interactions/ExtendedTextInteraction
      */
     return {
         qtiClass:           'extendedTextInteraction',

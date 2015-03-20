@@ -22,14 +22,14 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/rubricBlock',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container'],
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/rubricBlock',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'],
 function(tpl, getContainer){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/RubricBlock
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/RubricBlock
      */
     return {
         qtiClass:     'rubricBlock',

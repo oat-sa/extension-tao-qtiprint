@@ -23,7 +23,7 @@ define([
     'jquery',
     'lodash',
     'async',
-    'taoQtiItemPrint/runner/qtiItemPrintRunner'
+    'taoQtiPrint/runner/qtiItemPrintRunner'
 ], function($, _, async, itemRunner){
     'use strict';
 

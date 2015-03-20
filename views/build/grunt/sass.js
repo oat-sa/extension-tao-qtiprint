@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     var sass    = grunt.config('sass') || {};
     var watch   = grunt.config('watch') || {};
     var notify  = grunt.config('notify') || {};
-    var root    = grunt.option('root') + '/taoQtiItemPrint/views/';
+    var root    = grunt.option('root') + '/taoQtiPrint/views/';
 
     //override load path
     sass.taoqtiitemprint = {

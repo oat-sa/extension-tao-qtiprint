@@ -23,13 +23,13 @@
  */
 define([
     'taoQtiItem/qtiRunner/core/Renderer',
-    'taoQtiItemPrint/qtiPrintRenderer/renderers/config'
+    'taoQtiPrint/qtiPrintRenderer/renderers/config'
 ], function(Renderer, config){
     'use strict';
 
     /**
      * Build and expost the printRenderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/config
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/config
      */
     return Renderer.build(config.locations, config.name);
 });

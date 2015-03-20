@@ -26,22 +26,22 @@ define([], function(){
     'use strict';
 
     /**
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/config
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/config
      */
     return {
         name        : 'printRenderer',
         locations   : {
-            'assessmentItem':                              'taoQtiItemPrint/qtiPrintRenderer/renderers/Item',
-            '_container':                                  'taoQtiItemPrint/qtiPrintRenderer/renderers/Container',
-            'stylesheet':                                  'taoQtiItemPrint/qtiPrintRenderer/renderers/Stylesheet',
-            'img':                                         'taoQtiItemPrint/qtiPrintRenderer/renderers/Img',
-            'rubricBlock':                                 'taoQtiItemPrint/qtiPrintRenderer/renderers/RubricBlock',
-            'object':                                      'taoQtiItemPrint/qtiPrintRenderer/renderers/Object',
-            'prompt':                                      'taoQtiItemPrint/qtiPrintRenderer/renderers/interactions/Prompt',
-            'choiceInteraction':                           'taoQtiItemPrint/qtiPrintRenderer/renderers/interactions/ChoiceInteraction',
-            'extendedTextInteraction':                     'taoQtiItemPrint/qtiPrintRenderer/renderers/interactions/ExtendedTextInteraction',
-            'textEntryInteraction':                        'taoQtiItemPrint/qtiPrintRenderer/renderers/interactions/TextEntryInteraction',
-            'simpleChoice.choiceInteraction':              'taoQtiItemPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteraction',
+            'assessmentItem':                              'taoQtiPrint/qtiPrintRenderer/renderers/Item',
+            '_container':                                  'taoQtiPrint/qtiPrintRenderer/renderers/Container',
+            'stylesheet':                                  'taoQtiPrint/qtiPrintRenderer/renderers/Stylesheet',
+            'img':                                         'taoQtiPrint/qtiPrintRenderer/renderers/Img',
+            'rubricBlock':                                 'taoQtiPrint/qtiPrintRenderer/renderers/RubricBlock',
+            'object':                                      'taoQtiPrint/qtiPrintRenderer/renderers/Object',
+            'prompt':                                      'taoQtiPrint/qtiPrintRenderer/renderers/interactions/Prompt',
+            'choiceInteraction':                           'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ChoiceInteraction',
+            'extendedTextInteraction':                     'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ExtendedTextInteraction',
+            'textEntryInteraction':                        'taoQtiPrint/qtiPrintRenderer/renderers/interactions/TextEntryInteraction',
+            'simpleChoice.choiceInteraction':              'taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteraction',
 
 //do not print
             '_simpleFeedbackRule':                         false,

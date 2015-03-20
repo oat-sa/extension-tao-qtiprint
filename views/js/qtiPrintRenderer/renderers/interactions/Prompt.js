@@ -22,14 +22,14 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/interactions/prompt',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container'
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/interactions/prompt',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'
 ], function(tpl, getContainer){
     'use stict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/interactions/Prompt
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/interactions/Prompt
      */
     return {
         qtiClass:     'prompt',

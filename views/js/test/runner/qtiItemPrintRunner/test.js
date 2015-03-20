@@ -1,5 +1,5 @@
 define([
-    'taoQtiItemPrint/runner/qtiItemPrintRunner'
+    'taoQtiPrint/runner/qtiItemPrintRunner'
 ], function(qtiItemRunner){
 
 

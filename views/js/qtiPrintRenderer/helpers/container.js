@@ -29,7 +29,7 @@ define([
 
     /**
      * Helps you to retrieve the DOM element (as a jquery element)
-     * @exports taoQtiItemPrint/qtiPrintRenderer/helpers/container
+     * @exports taoQtiPrint/qtiPrintRenderer/helpers/container
      *
      * Get the container of the given element
      * @param {QtiElement} element - the QTI Element to find the container for

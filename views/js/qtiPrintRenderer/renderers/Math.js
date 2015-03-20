@@ -22,14 +22,14 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'tpl!taoQtiItemPrint/qtiPrintRenderer/tpl/math',
-    'taoQtiItemPrint/qtiPrintRenderer/helpers/container'
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/math',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'
 ], function(tpl, getContainer){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiItemPrint/qtiPrintRenderer/renderers/Math
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Math
      */
     return {
         qtiClass:     'math',
