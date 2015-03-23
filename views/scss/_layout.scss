@@ -1,0 +1,14 @@
+.qti-item{
+    break-after: always;
+
+
+    .qti-block-interaction{
+        padding: 40px 0;
+        border-bottom: 1px solid grey;
+    }
+    .qti-interaction-answer{
+        width: 100%;
+        border: 10px solid grey;
+        padding:20px;
+    }
+}

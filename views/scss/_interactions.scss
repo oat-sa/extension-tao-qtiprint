@@ -1,0 +1,25 @@
+.qti-choiceInteraction {
+    ol {
+        list-style-type: none;
+    }
+    .qti-choice {
+        input[type="radio"], input[type="checkbox"] {
+            border: solid #000 2px;
+            padding: 3px;
+            float: left;
+        }
+
+    }
+}
+
+.qti-extendedTextInteraction {
+    textarea {
+        border: solid #000 2px;
+    }
+}
+
+
+input.qti-textEntryInteraction {
+    border: solid #000 2px;
+    width: 200px;
+}

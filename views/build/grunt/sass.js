@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     var root    = grunt.option('root') + '/taoQtiPrint/views/';
 
     //override load path
-    sass.taoqtiitemprint = {
+    sass.taoqtiprint = {
         options : {
             loadPath : ['../scss/', '../js/lib/', root + 'scss/inc', root + 'scss/qti']
         },
@@ -14,18 +14,18 @@ module.exports = function(grunt) {
     };
 
     //files goes heres
-    sass.taoqtiitemprint.files[root + 'css/qti.css'] = root + 'scss/qti.scss';
+    sass.taoqtiprint.files[root + 'css/qti.css'] = root + 'scss/qti.scss';
 
 
-    watch.taoqtiitemprintsass = {
+    watch.taoqtiprintsass = {
         files : [root + 'scss/**/*.scss'],
-        tasks : ['sass:taoqtiitemprint', 'notify:taoqtiitemprintsass'],
+        tasks : ['sass:taoqtiprint', 'notify:taoqtiprintsass'],
         options : {
             debounceDelay : 1000
         }
     };
 
-    notify.taoqtiitemprintsass = {
+    notify.taoqtiprintsass = {
         options: {
             title: 'Grunt SASS',
             message: 'SASS files compiled to CSS'
@@ -37,5 +37,5 @@ module.exports = function(grunt) {
     grunt.config('notify', notify);
 
     //register an alias for main build
-    grunt.registerTask('taoqtiitemprintsass', ['sass:taoqtiitemprint']);
+    grunt.registerTask('taoqtiprintsass', ['sass:taoqtiprint']);
 };

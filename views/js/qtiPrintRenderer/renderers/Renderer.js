@@ -23,7 +23,8 @@
  */
 define([
     'taoQtiItem/qtiRunner/core/Renderer',
-    'taoQtiPrint/qtiPrintRenderer/renderers/config'
+    'taoQtiPrint/qtiPrintRenderer/renderers/config',
+    'css!taoQtiPrintCss/qti.css'
 ], function(Renderer, config){
     'use strict';
 
