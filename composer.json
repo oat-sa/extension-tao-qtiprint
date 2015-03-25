@@ -26,7 +26,7 @@
         "paper-based-assessment"
     ],
     "extra" : {
-        "tao-extension-name" : "taoQtiItemPrint"
+        "tao-extension-name" : "taoQtiPrint"
     },
     "minimum-stability" : "dev",
     "require": {
@@ -34,7 +34,7 @@
     },
     "autoload" : {
         "psr-4" : {
-            "oat\\taoQtiItemPrint\\" : ""
+            "oat\\taoQtiPrint\\" : ""
         }
     }
 }

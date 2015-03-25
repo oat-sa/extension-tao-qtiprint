@@ -21,6 +21,6 @@
 
 require_once dirname(__FILE__). '/../tao/includes/class.Bootstrap.php';
 
-$bootStrap = new BootStrap('taoQtiItemPrint');
+$bootStrap = new BootStrap('taoQtiPrint');
 $bootStrap->start();
 $bootStrap->dispatch();
