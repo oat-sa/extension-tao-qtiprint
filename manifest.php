@@ -26,7 +26,7 @@ return array(
     'license' => 'GPL-2.0',
     'version' => '0.1.0',
 	'author' => 'Open Assessment Technologies SA',
-	'requires' => array('tao' => '>=2.7.10','taoQtiItem' => '>=2.7.4'),
+	'requires' => array('tao' => '>=2.7.10','taoQtiItem' => '>=2.7.4', 'taoQtiTest' => '>=2.6'),
 	// for compatibility
 	'dependencies' => array('tao','taoQtiItem'),
 	'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager',
