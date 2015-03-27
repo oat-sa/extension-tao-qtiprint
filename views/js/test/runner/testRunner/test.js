@@ -18,11 +18,18 @@ define([
 
     QUnit.asyncTest('module', function(assert){
         QUnit.expect(1);
-        testRunner($('.' + container), testData);
-        setTimeout(function(){
-            assert.ok(true);
-            QUnit.start();
-        }, 1000);
+
+        testRunner(testData)
+            .on('error', function(e){
+
+            })
+            .on('ready', function(){
+
+                assert.ok(true);
+                console.log('timeout');
+                QUnit.start();
+            })
+            .render($('.' + container));
     });
 });
 

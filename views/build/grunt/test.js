@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     /**
      * tests to run
      */
-    qunit.taoqtiitemprinttest = {
+    qunit.taoqtiprinttest = {
         options : {
             console : true,
             urls : extractTests()
@@ -26,9 +26,9 @@ module.exports = function(grunt) {
     };
 
 
-    watch.taoqtiitemprinttest = {
+    watch.taoqtiprinttest = {
         files : [testRunners, testFiles],
-        tasks : ['qunit:taoqtiitemprinttest'],
+        tasks : ['qunit:taoqtiprinttest'],
         options : {
             debounceDelay : 10000
         }
@@ -38,5 +38,5 @@ module.exports = function(grunt) {
     grunt.config('watch', watch);
 
     // bundle task
-    grunt.registerTask('taoqtiitemprinttest', ['qunit:taoqtiitemprinttest']);
+    grunt.registerTask('taoqtiprinttest', ['qunit:taoqtiprinttest']);
 };

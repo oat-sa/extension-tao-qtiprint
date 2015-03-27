@@ -51,6 +51,6 @@ module.exports = function(grunt) {
     grunt.config('requirejs', requirejs);
 
     // bundle task
-    grunt.registerTask('taoqtiitemprintbundle', ['requirejs:qtiprintrunner']);
+    grunt.registerTask('taoqtiprintbundle', ['requirejs:qtiprintrunner']);
 
 };
