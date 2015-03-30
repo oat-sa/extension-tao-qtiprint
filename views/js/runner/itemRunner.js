@@ -31,7 +31,7 @@ define([
 
     /**
      * Expose the itemRunner with the QTI provider registered
-     * @exports taoQtiPrint/runner/qtiItemPrintRunner
+     * @exports taoQtiPrint/runner/itemRunner
      */
     return itemRunner;
 });

@@ -1,558 +1,365 @@
 {
-  "items": [{
-    "identifier": "space-shuttle-30-years-of-adventure",
-    "serial": "item_546cb89e037d2926817182",
-    "qtiClass": "assessmentItem",
-    "attributes": {
-      "identifier": "space-shuttle-30-years-of-adventure",
-      "title": "The Space Shuttle, 30 years of adventure",
-      "label": "",
-      "adaptive": false,
-      "timeDependent": false,
-      "toolName": "TAO",
-      "toolVersion": "3.0"
-    },
-    "body": {
-      "serial": "container_containeritembody_546cb89e037ba814681360",
-      "body": "<p id=\"stimulus\">\n\t\t\tDuring more than 30 years, the American Space Shuttle transported 355 astronauts in space over 135\n\t\t\torbital launchings from Cap Canaveral, Florida. This 2046-ton Behemoth traveled 870 million kilometers\n\t\t\taround the Earth from 12th of April 1981 to 21st of July 2011. The National Aeronautics and Space\n\t\t\tAdministration (NASA) built 5 Space Shuttles: Columbia, Challenger, Discovery, Atlantis and Endeavour.\n\t\t</p>\n    {{interaction_choiceinteraction_546cb89e04090230494786}}",
-      "elements": {
-        "interaction_choiceinteraction_546cb89e04090230494786": {
-          "serial": "interaction_choiceinteraction_546cb89e04090230494786",
-          "qtiClass": "choiceInteraction",
-          "attributes": {
-            "responseIdentifier": "RESPONSE",
-            "shuffle": false,
-            "maxChoices": 1,
-            "minChoices": 0,
-            "id": "interaction"
-          },
-          "choices": {
-            "choice_simplechoice_546cb89e0432c350250658": {
-              "identifier": "Discovery",
-              "serial": "choice_simplechoice_546cb89e0432c350250658",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Discovery",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e043a1762658686",
-                "body": "Discovery",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            },
-            "choice_simplechoice_546cb89e04418434995288": {
-              "identifier": "Challenger",
-              "serial": "choice_simplechoice_546cb89e04418434995288",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Challenger",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e04431616309193",
-                "body": "Challenger",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            },
-            "choice_simplechoice_546cb89e04495918665650": {
-              "identifier": "Pathfinder",
-              "serial": "choice_simplechoice_546cb89e04495918665650",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Pathfinder",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e044ad359477207",
-                "body": "Pathfinder",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            },
-            "choice_simplechoice_546cb89e0450e812009296": {
-              "identifier": "Atlantis",
-              "serial": "choice_simplechoice_546cb89e0450e812009296",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Atlantis",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e04526961278319",
-                "body": "Atlantis",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            },
-            "choice_simplechoice_546cb89e04585740349986": {
-              "identifier": "Endeavour",
-              "serial": "choice_simplechoice_546cb89e04585740349986",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Endeavour",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e0459d917435110",
-                "body": "Endeavour",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            }
-          },
-          "prompt": {
-            "serial": "container_containerstatic_546cb89e0420f262955533",
-            "body": "Which was the last Space Shuttle going into space during the STS-135 mission in July 2011?",
-            "elements": [],
-            "debug": {
-              "relatedItem": "item_546cb89e037d2926817182"
-            }
-          }
-        }
-      },
-      "debug": {
-        "relatedItem": "item_546cb89e037d2926817182"
-      }
-    },
-    "namespaces": {
-      "xml": "http://www.w3.org/XML/1998/namespace",
-      "xsi": "http://www.w3.org/2001/XMLSchema-instance",
-      "": "http://www.imsglobal.org/xsd/imsqti_v2p1"
-    },
-    "stylesheets": {
-
-    },
-    "outcomes": {
-      "outcomedeclaration_546cb89e03e9a471001669": {
-        "identifier": "SCORE",
-        "serial": "outcomedeclaration_546cb89e03e9a471001669",
-        "qtiClass": "outcomeDeclaration",
-        "attributes": {
-          "identifier": "SCORE",
-          "cardinality": "single",
-          "baseType": "integer"
-        },
-        "defaultValue": "0"
-      }
-    },
-    "responses": {
-      "responsedeclaration_546cb89e03b1a704637243": {
-        "identifier": "RESPONSE",
-        "serial": "responsedeclaration_546cb89e03b1a704637243",
-        "qtiClass": "responseDeclaration",
-        "attributes": {
-          "identifier": "RESPONSE",
-          "cardinality": "single",
-          "baseType": "identifier"
-        },
-        "correctResponses": [
-          "Atlantis"
-        ],
-        "mapping": [],
-        "areaMapping": [],
-        "howMatch": "http://www.imsglobal.org/question/qti_v2p1/rptemplates/match_correct",
-        "mappingAttributes": {
-          "defaultValue": 0
-        },
-        "feedbackRules": []
-      }
-    },
-    "feedbacks": [],
-    "responseProcessing": {
-      "serial": "response_templatesdriven_546cb89e0472b442135529",
-      "qtiClass": "responseProcessing",
-      "attributes": [],
-      "processingType": "templateDriven",
-      "template": "http://www.imsglobal.org/question/qti_v2p1/rptemplates/match_correct",
-      "responseRules": [{
-        "qtiClass": "responseCondition",
-        "responseIf": {
-          "qtiClass": "responseIf",
-          "expression": {
-            "qtiClass": "match",
-            "expressions": [{
-              "qtiClass": "variable",
-              "attributes": {
-                "identifier": "RESPONSE"
-              }
-            }, {
-              "qtiClass": "correct",
-              "attributes": {
-                "identifier": "RESPONSE"
-              }
-            }]
-          },
-          "responseRules": [{
-            "qtiClass": "setOutcomeValue",
-            "attributes": {
-              "identifier": "SCORE"
-            },
-            "expression": {
-              "qtiClass": "baseValue",
-              "attributes": {
-                "baseType": "float"
-              },
-              "value": "1"
-            }
-          }]
-        },
-        "responseElse": {
-          "qtiClass": "responseElse",
-          "responseRules": [{
-            "qtiClass": "setOutcomeValue",
-            "attributes": {
-              "identifier": "SCORE"
-            },
-            "expression": {
-              "qtiClass": "baseValue",
-              "attributes": {
-                "baseType": "float"
-              },
-              "value": "0"
-            }
-          }]
-        }
+  "type": "qtiprint",
+  "data": [{
+    "id": "testPart-1",
+    "sections": [{
+      "id": "assessmentSection-1",
+      "title": "Langage ",
+      "rubricBlock": [],
+      "items": [{
+        "id": "item-1",
+        "href": "http:\/\/bertao\/tao.rdf#i1427719530668161"
+      }, {
+        "id": "item-2",
+        "href": "http:\/\/bertao\/tao.rdf#i1427720040909863"
       }]
-    }
-  }, {
-    "identifier": "extendedText",
-    "serial": "item_547d89b1d6c23267948888",
-    "qtiClass": "assessmentItem",
-    "attributes": {
-      "identifier": "extendedText",
-      "title": "Writing a Postcard",
-      "label": "",
-      "adaptive": false,
-      "timeDependent": false,
-      "toolName": "TAO",
-      "toolVersion": "3.0"
-    },
-    "body": {
-      "serial": "container_containeritembody_547d89b1d6c0c246247099",
-      "body": "<p>Read this postcard from your English pen-friend, Sam.</p>\n    <div>\n      {{object_547d89b1db1ca294674790}}\n    </div>\n    {{interaction_extendedtextinteraction_547d89b1d9db7634390944}}",
-      "elements": {
-        "interaction_extendedtextinteraction_547d89b1d9db7634390944": {
-          "serial": "interaction_extendedtextinteraction_547d89b1d9db7634390944",
-          "qtiClass": "extendedTextInteraction",
-          "attributes": {
-            "responseIdentifier": "RESPONSE",
-            "base": 10,
-            "expectedLength": 500,
-            "minStrings": 0,
-            "expectedLines": 15,
-            "format": "plain"
+    }]
+  }],
+  "items": {
+    "http:\/\/bertao\/tao.rdf#i1427719530668161": {
+      "type": "qti",
+      "data": {
+        "identifier": "i1427719530668161",
+        "serial": "item_55194a1c73955300385841",
+        "qtiClass": "assessmentItem",
+        "attributes": {
+          "identifier": "i1427719530668161",
+          "title": "Item title",
+          "label": "",
+          "adaptive": false,
+          "timeDependent": false,
+          "toolName": "TAO",
+          "toolVersion": "3.0-RC05"
+        },
+        "body": {
+          "serial": "container_containeritembody_55194a1c7392e921549900",
+          "body": "<div class=\"grid-row\">\n      <div class=\"col-12\">\n        <h1>JavaScript Patterns<\/h1>\n      <\/div>\n    <\/div>\n    <div class=\"grid-row\">\n      <div class=\"col-6\">\n        <p>\n          <strong>\n            <span class=\"txt-underline\">Code sample<\/span>\n          <\/strong>\n        <\/p>\n        <pre>var incrementer = function incrementer(){\n\n    var x = 0;\n\n   return  (\n        inc : function inc(){\n              x += 3;\n        },\n        value : function value(){\n             return x;\n        }\n   }\n};<\/pre>\n        <p>console.log(incrementer().inc().value() + incrementer().inc().value())<\/p>\n        <pre>\n\u00a0<\/pre>\n      <\/div>\n      <div class=\"col-6\">\n        {{interaction_choiceinteraction_55194a1c75695075466055}}\n      <\/div>\n    <\/div>",
+          "elements": {
+            "interaction_choiceinteraction_55194a1c75695075466055": {
+              "serial": "interaction_choiceinteraction_55194a1c75695075466055",
+              "qtiClass": "choiceInteraction",
+              "attributes": {
+                "responseIdentifier": "RESPONSE",
+                "shuffle": false,
+                "maxChoices": 0,
+                "minChoices": 0,
+                "orientation": "vertical"
+              },
+              "choices": {
+                "choice_simplechoice_55194a1c75f51907774095": {
+                  "identifier": "choice_1",
+                  "serial": "choice_simplechoice_55194a1c75f51907774095",
+                  "qtiClass": "simpleChoice",
+                  "attributes": {
+                    "identifier": "choice_1",
+                    "fixed": false,
+                    "showHide": "show"
+                  },
+                  "body": {
+                    "serial": "container_containerstatic_55194a1c761ba782986537",
+                    "body": "9",
+                    "elements": [],
+                    "debug": {
+                      "relatedItem": "item_55194a1c73955300385841"
+                    }
+                  }
+                },
+                "choice_simplechoice_55194a1c762e7070979782": {
+                  "identifier": "choice_2",
+                  "serial": "choice_simplechoice_55194a1c762e7070979782",
+                  "qtiClass": "simpleChoice",
+                  "attributes": {
+                    "identifier": "choice_2",
+                    "fixed": false,
+                    "showHide": "show"
+                  },
+                  "body": {
+                    "serial": "container_containerstatic_55194a1c7635a220816005",
+                    "body": "6",
+                    "elements": [],
+                    "debug": {
+                      "relatedItem": "item_55194a1c73955300385841"
+                    }
+                  }
+                },
+                "choice_simplechoice_55194a1c7643c591300739": {
+                  "identifier": "choice_3",
+                  "serial": "choice_simplechoice_55194a1c7643c591300739",
+                  "qtiClass": "simpleChoice",
+                  "attributes": {
+                    "identifier": "choice_3",
+                    "fixed": false,
+                    "showHide": "show"
+                  },
+                  "body": {
+                    "serial": "container_containerstatic_55194a1c764c3525484206",
+                    "body": "12",
+                    "elements": [],
+                    "debug": {
+                      "relatedItem": "item_55194a1c73955300385841"
+                    }
+                  }
+                }
+              },
+              "prompt": {
+                "serial": "container_containerstatic_55194a1c75cab476545130",
+                "body": "What does the code sample output in a ES5 engine ?\u00a0",
+                "elements": [],
+                "debug": {
+                  "relatedItem": "item_55194a1c73955300385841"
+                }
+              }
+            }
           },
-          "choices": [],
-          "prompt": {
-            "serial": "container_containerstatic_547d89b1daf57997005360",
-            "body": "Write Sam a long letter. Answer the questions. Write 150 words (500 chars).",
-            "elements": [],
-            "debug": {
-              "relatedItem": "item_547d89b1d6c23267948888"
+          "debug": {
+            "relatedItem": "item_55194a1c73955300385841"
+          }
+        },
+        "namespaces": {
+          "xml": "http:\/\/www.w3.org\/XML\/1998\/namespace",
+          "m": "http:\/\/www.w3.org\/1998\/Math\/MathML",
+          "xsi": "http:\/\/www.w3.org\/2001\/XMLSchema-instance",
+          "": "http:\/\/www.imsglobal.org\/xsd\/imsqti_v2p1"
+        },
+        "stylesheets": {
+          "stylesheet_55194a1c7409b094021267": {
+            "serial": "stylesheet_55194a1c7409b094021267",
+            "qtiClass": "stylesheet",
+            "attributes": {
+              "href": "style\/custom\/tao-user-styles.css",
+              "type": "text\/css",
+              "media": "all",
+              "title": ""
             }
           }
         },
-        "object_547d89b1db1ca294674790": {
-          "serial": "object_547d89b1db1ca294674790",
-          "qtiClass": "object",
-          "attributes": {
-            "data": "images/postcard.png",
-            "type": "image/png"
-          },
-          "_alt": "\n        <blockquote class=\"postcard\">\n          <p>Here is a postcard of my town. Please send me<br/> a postcard from your town.\n\t\t\t\t\t\tWhat size is your<br/> town? What is the nicest part of your town?<br/>\n\t\t\t\t\t\tWhere do you go in the evenings?<br/> Sam.</p>\n        </blockquote>\n      "
-        }
-      },
-      "debug": {
-        "relatedItem": "item_547d89b1d6c23267948888"
-      }
-    },
-    "namespaces": {
-      "xml": "http://www.w3.org/XML/1998/namespace",
-      "xsi": "http://www.w3.org/2001/XMLSchema-instance",
-      "": "http://www.imsglobal.org/xsd/imsqti_v2p1"
-    },
-    "stylesheets": [],
-    "outcomes": {
-      "outcomedeclaration_547d89b1d8d81678487868": {
-        "identifier": "SCORE",
-        "serial": "outcomedeclaration_547d89b1d8d81678487868",
-        "qtiClass": "outcomeDeclaration",
-        "attributes": {
-          "identifier": "SCORE",
-          "cardinality": "single",
-          "baseType": "float"
-        },
-        "defaultValue": null
-      }
-    },
-    "responses": {
-      "responsedeclaration_547d89b1d82c0946659679": {
-        "identifier": "RESPONSE",
-        "serial": "responsedeclaration_547d89b1d82c0946659679",
-        "qtiClass": "responseDeclaration",
-        "attributes": {
-          "identifier": "RESPONSE",
-          "cardinality": "single",
-          "baseType": "string"
-        },
-        "correctResponses": [],
-        "mapping": [],
-        "areaMapping": [],
-        "howMatch": null,
-        "mappingAttributes": {
-          "defaultValue": 0
-        },
-        "feedbackRules": []
-      }
-    },
-    "feedbacks": [],
-    "responseProcessing": {
-      "serial": "response_custom_547d89b1dbc80108048924",
-      "qtiClass": "responseProcessing",
-      "attributes": [],
-      "processingType": "custom",
-      "data": "<responseProcessing/>"
-    }
-  }, {
-    "identifier": "space-shuttle-30-years-of-adventure",
-    "serial": "item_546cb89e037d2926817182",
-    "qtiClass": "assessmentItem",
-    "attributes": {
-      "identifier": "space-shuttle-30-years-of-adventure",
-      "title": "The Space Shuttle, 30 years of adventure",
-      "label": "",
-      "adaptive": false,
-      "timeDependent": false,
-      "toolName": "TAO",
-      "toolVersion": "3.0"
-    },
-    "body": {
-      "serial": "container_containeritembody_546cb89e037ba814681360",
-      "body": "<p id=\"stimulus\">\n\t\t\tDuring more than 30 years, the American Space Shuttle transported 355 astronauts in space over 135\n\t\t\torbital launchings from Cap Canaveral, Florida. This 2046-ton Behemoth traveled 870 million kilometers\n\t\t\taround the Earth from 12th of April 1981 to 21st of July 2011. The National Aeronautics and Space\n\t\t\tAdministration (NASA) built 5 Space Shuttles: Columbia, Challenger, Discovery, Atlantis and Endeavour.\n\t\t</p>\n    {{interaction_choiceinteraction_546cb89e04090230494786}}",
-      "elements": {
-        "interaction_choiceinteraction_546cb89e04090230494786": {
-          "serial": "interaction_choiceinteraction_546cb89e04090230494786",
-          "qtiClass": "choiceInteraction",
-          "attributes": {
-            "responseIdentifier": "RESPONSE",
-            "shuffle": false,
-            "maxChoices": 2,
-            "minChoices": 1,
-            "id": "interaction"
-          },
-          "choices": {
-            "choice_simplechoice_546cb89e0432c350250658": {
-              "identifier": "Discovery",
-              "serial": "choice_simplechoice_546cb89e0432c350250658",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Discovery",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e043a1762658686",
-                "body": "Discovery",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
+        "outcomes": {
+          "outcomedeclaration_55194a1c74ee3421166114": {
+            "identifier": "SCORE",
+            "serial": "outcomedeclaration_55194a1c74ee3421166114",
+            "qtiClass": "outcomeDeclaration",
+            "attributes": {
+              "identifier": "SCORE",
+              "cardinality": "single",
+              "baseType": "float"
             },
-            "choice_simplechoice_546cb89e04418434995288": {
-              "identifier": "Challenger",
-              "serial": "choice_simplechoice_546cb89e04418434995288",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Challenger",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e04431616309193",
-                "body": "Challenger",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            },
-            "choice_simplechoice_546cb89e04495918665650": {
-              "identifier": "Pathfinder",
-              "serial": "choice_simplechoice_546cb89e04495918665650",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Pathfinder",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e044ad359477207",
-                "body": "Pathfinder",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            },
-            "choice_simplechoice_546cb89e0450e812009296": {
-              "identifier": "Atlantis",
-              "serial": "choice_simplechoice_546cb89e0450e812009296",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Atlantis",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e04526961278319",
-                "body": "Atlantis",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            },
-            "choice_simplechoice_546cb89e04585740349986": {
-              "identifier": "Endeavour",
-              "serial": "choice_simplechoice_546cb89e04585740349986",
-              "qtiClass": "simpleChoice",
-              "attributes": {
-                "identifier": "Endeavour",
-                "fixed": false
-              },
-              "body": {
-                "serial": "container_containerstatic_546cb89e0459d917435110",
-                "body": "Endeavour",
-                "elements": [],
-                "debug": {
-                  "relatedItem": "item_546cb89e037d2926817182"
-                }
-              }
-            }
-          },
-          "prompt": {
-            "serial": "container_containerstatic_546cb89e0420f262955533",
-            "body": "Which was the last Space Shuttle going into space during the STS-135 mission in July 2011?",
-            "elements": [],
-            "debug": {
-              "relatedItem": "item_546cb89e037d2926817182"
-            }
+            "defaultValue": null
           }
+        },
+        "responses": {
+          "responsedeclaration_55194a1c746c8417697182": {
+            "identifier": "RESPONSE",
+            "serial": "responsedeclaration_55194a1c746c8417697182",
+            "qtiClass": "responseDeclaration",
+            "attributes": {
+              "identifier": "RESPONSE",
+              "cardinality": "multiple",
+              "baseType": "identifier"
+            },
+            "correctResponses": [],
+            "mapping": [],
+            "areaMapping": [],
+            "howMatch": "http:\/\/www.imsglobal.org\/question\/qti_v2p1\/rptemplates\/match_correct",
+            "mappingAttributes": {
+              "defaultValue": 0
+            },
+            "feedbackRules": []
+          }
+        },
+        "feedbacks": [],
+        "responseProcessing": {
+          "serial": "response_templatesdriven_55194a1c76b3c446101817",
+          "qtiClass": "responseProcessing",
+          "attributes": [],
+          "processingType": "templateDriven",
+          "responseRules": [{
+            "qtiClass": "responseCondition",
+            "responseIf": {
+              "qtiClass": "responseIf",
+              "expression": {
+                "qtiClass": "match",
+                "expressions": [{
+                  "qtiClass": "variable",
+                  "attributes": {
+                    "identifier": "RESPONSE"
+                  }
+                }, {
+                  "qtiClass": "correct",
+                  "attributes": {
+                    "identifier": "RESPONSE"
+                  }
+                }]
+              },
+              "responseRules": [{
+                "qtiClass": "setOutcomeValue",
+                "attributes": {
+                  "identifier": "SCORE"
+                },
+                "expression": {
+                  "qtiClass": "baseValue",
+                  "attributes": {
+                    "baseType": "float"
+                  },
+                  "value": "1"
+                }
+              }]
+            },
+            "responseElse": {
+              "qtiClass": "responseElse",
+              "responseRules": [{
+                "qtiClass": "setOutcomeValue",
+                "attributes": {
+                  "identifier": "SCORE"
+                },
+                "expression": {
+                  "qtiClass": "baseValue",
+                  "attributes": {
+                    "baseType": "float"
+                  },
+                  "value": "0"
+                }
+              }]
+            }
+          }]
         }
       },
-      "debug": {
-        "relatedItem": "item_546cb89e037d2926817182"
+      "assets": {
+        "css": ["style\/custom\/tao-user-styles.css"]
       }
     },
-    "namespaces": {
-      "xml": "http://www.w3.org/XML/1998/namespace",
-      "xsi": "http://www.w3.org/2001/XMLSchema-instance",
-      "": "http://www.imsglobal.org/xsd/imsqti_v2p1"
-    },
-    "stylesheets": {
-
-    },
-    "outcomes": {
-      "outcomedeclaration_546cb89e03e9a471001669": {
-        "identifier": "SCORE",
-        "serial": "outcomedeclaration_546cb89e03e9a471001669",
-        "qtiClass": "outcomeDeclaration",
+    "http:\/\/bertao\/tao.rdf#i1427720040909863": {
+      "type": "qti",
+      "data": {
+        "identifier": "i1427720040909863",
+        "serial": "item_55194a1ce7ebc178312779",
+        "qtiClass": "assessmentItem",
         "attributes": {
-          "identifier": "SCORE",
-          "cardinality": "single",
-          "baseType": "integer"
+          "identifier": "i1427720040909863",
+          "title": "Item title",
+          "label": "",
+          "adaptive": false,
+          "timeDependent": false,
+          "toolName": "TAO",
+          "toolVersion": "3.0-RC05"
         },
-        "defaultValue": "0"
-      }
-    },
-    "responses": {
-      "responsedeclaration_546cb89e03b1a704637243": {
-        "identifier": "RESPONSE",
-        "serial": "responsedeclaration_546cb89e03b1a704637243",
-        "qtiClass": "responseDeclaration",
-        "attributes": {
-          "identifier": "RESPONSE",
-          "cardinality": "multiple",
-          "baseType": "identifier"
-        },
-        "correctResponses": [
-          "Atlantis", "Pathfinder"
-        ],
-        "mapping": [],
-        "areaMapping": [],
-        "howMatch": "http://www.imsglobal.org/question/qti_v2p1/rptemplates/match_correct",
-        "mappingAttributes": {
-          "defaultValue": 0
-        },
-        "feedbackRules": []
-      }
-    },
-    "feedbacks": [],
-    "responseProcessing": {
-      "serial": "response_templatesdriven_546cb89e0472b442135529",
-      "qtiClass": "responseProcessing",
-      "attributes": [],
-      "processingType": "templateDriven",
-      "responseRules": [{
-        "qtiClass": "responseCondition",
-        "responseIf": {
-          "qtiClass": "responseIf",
-          "expression": {
-            "qtiClass": "match",
-            "expressions": [{
-              "qtiClass": "variable",
+        "body": {
+          "serial": "container_containeritembody_55194a1ce7e80657354236",
+          "body": "<div class=\"grid-row\">\n      <div class=\"col-12\">\n        <p>\n          <span class=\"txt-underline\">\n            <strong>Complete the following code listing:<\/strong>\n          <\/span>\n        <\/p>\n        <p>Only the variables <em>a<\/em> and<em> b<\/em> should be used.<\/p>\n        <p>\u00a0<\/p>\n        <p>var\u00a0\u00a0{{interaction_textentryinteraction_55194a1ce8a22819684241}}\u00a0 = [1, 2, 3];<\/p>\n        <p>assert.ok(a === 1) ;<\/p>\n        <p>assert.ok(b === 3) ;<\/p>\n        <p><em>assert.ok <\/em>ensure the statement is <em>true<\/em><\/p>\n      <\/div>\n    <\/div>",
+          "elements": {
+            "interaction_textentryinteraction_55194a1ce8a22819684241": {
+              "serial": "interaction_textentryinteraction_55194a1ce8a22819684241",
+              "qtiClass": "textEntryInteraction",
               "attributes": {
-                "identifier": "RESPONSE"
-              }
-            }, {
-              "qtiClass": "correct",
-              "attributes": {
-                "identifier": "RESPONSE"
-              }
-            }]
-          },
-          "responseRules": [{
-            "qtiClass": "setOutcomeValue",
-            "attributes": {
-              "identifier": "SCORE"
-            },
-            "expression": {
-              "qtiClass": "baseValue",
-              "attributes": {
-                "baseType": "float"
+                "responseIdentifier": "RESPONSE",
+                "base": 10,
+                "expectedLength": 6
               },
-              "value": "1"
+              "choices": []
             }
-          }]
+          },
+          "debug": {
+            "relatedItem": "item_55194a1ce7ebc178312779"
+          }
         },
-        "responseElse": {
-          "qtiClass": "responseElse",
-          "responseRules": [{
-            "qtiClass": "setOutcomeValue",
+        "namespaces": {
+          "xml": "http:\/\/www.w3.org\/XML\/1998\/namespace",
+          "m": "http:\/\/www.w3.org\/1998\/Math\/MathML",
+          "xsi": "http:\/\/www.w3.org\/2001\/XMLSchema-instance",
+          "": "http:\/\/www.imsglobal.org\/xsd\/imsqti_v2p1"
+        },
+        "stylesheets": [],
+        "outcomes": {
+          "outcomedeclaration_55194a1ce86ca407251628": {
+            "identifier": "SCORE",
+            "serial": "outcomedeclaration_55194a1ce86ca407251628",
+            "qtiClass": "outcomeDeclaration",
             "attributes": {
-              "identifier": "SCORE"
+              "identifier": "SCORE",
+              "cardinality": "single",
+              "baseType": "float"
             },
-            "expression": {
-              "qtiClass": "baseValue",
-              "attributes": {
-                "baseType": "float"
+            "defaultValue": null
+          }
+        },
+        "responses": {
+          "responsedeclaration_55194a1ce8087274093108": {
+            "identifier": "RESPONSE",
+            "serial": "responsedeclaration_55194a1ce8087274093108",
+            "qtiClass": "responseDeclaration",
+            "attributes": {
+              "identifier": "RESPONSE",
+              "cardinality": "single",
+              "baseType": "string"
+            },
+            "correctResponses": ["[a, ,b]"],
+            "mapping": [],
+            "areaMapping": [],
+            "howMatch": "http:\/\/www.imsglobal.org\/question\/qti_v2p1\/rptemplates\/match_correct",
+            "mappingAttributes": {
+              "defaultValue": 0
+            },
+            "feedbackRules": []
+          }
+        },
+        "feedbacks": [],
+        "responseProcessing": {
+          "serial": "response_templatesdriven_55194a1ce8f33859501143",
+          "qtiClass": "responseProcessing",
+          "attributes": [],
+          "processingType": "templateDriven",
+          "responseRules": [{
+            "qtiClass": "responseCondition",
+            "responseIf": {
+              "qtiClass": "responseIf",
+              "expression": {
+                "qtiClass": "match",
+                "expressions": [{
+                  "qtiClass": "variable",
+                  "attributes": {
+                    "identifier": "RESPONSE"
+                  }
+                }, {
+                  "qtiClass": "correct",
+                  "attributes": {
+                    "identifier": "RESPONSE"
+                  }
+                }]
               },
-              "value": "0"
+              "responseRules": [{
+                "qtiClass": "setOutcomeValue",
+                "attributes": {
+                  "identifier": "SCORE"
+                },
+                "expression": {
+                  "qtiClass": "baseValue",
+                  "attributes": {
+                    "baseType": "float"
+                  },
+                  "value": "1"
+                }
+              }]
+            },
+            "responseElse": {
+              "qtiClass": "responseElse",
+              "responseRules": [{
+                "qtiClass": "setOutcomeValue",
+                "attributes": {
+                  "identifier": "SCORE"
+                },
+                "expression": {
+                  "qtiClass": "baseValue",
+                  "attributes": {
+                    "baseType": "float"
+                  },
+                  "value": "0"
+                }
+              }]
             }
           }]
         }
-      }]
+      },
+      "assets": []
     }
-  }]
+  }
 }
 
