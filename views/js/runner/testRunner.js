@@ -34,35 +34,18 @@ define([
      * <strong>The factory is an internal mechanism to create encapsulated contexts.
      *  I suggest you to use directly the name <i>testRunner</i> when you require this module.</strong>
      *
-     * @example require(['testRunner'], function(testRunner){
-                    testRunner({testId : 12})
-     *                    .on('statechange', function(state){
-     *
-     *                    })
-     *                    .on('ready', function(){
-     *
-     *                    })
-     *                    .on('response', function(){
-     *
-     *                    })
-     *                   .init()
-     *                   .render($('.test-container'));
-     *          });
      *
      * @exports testRunner
      * @namespace testRunnerFactory
      *
-     * @param {String} [providerName] - the name of a provider previously registered see {@link testRunnerFactory#register}
-     * @param {Object} [data] - the data of the test to run
      *
      * @returns {TestRunner}
      */
-    var testRunnerFactory = function testRunnerFactory(data, options){
+    var testRunnerFactory = function testRunnerFactory(testData, options){
 
+        testData = testData || {};
 
-        data = data || {};
-
-        if(!data || !data.data || !_.isArray(data.items)){
+        if(!testData || !testData.data || !testData.items){
             throw new Error('Invalid test data structure');
         }
 
@@ -106,46 +89,65 @@ define([
                 }
 
 
-                var itemRunners = [];
+               var pageRenderers = [];
 
-                _.forEach(data.items, function(itemData){
+               var renderSectionPage = function renderSectionPage(section, done){
+                    var $sectionPage = $('<div style="page-break-after: always;border:solid 1px blue;"></div>');
+                    $sectionPage.append('<h1>' + section.title + '</h1>');
+                    _.forEach(section.rubricBlock, function(rubricBlock){
+                        $sectionPage.append('<div>' + rubricBlock + '</div>');
+                    });
+                    done(null, $sectionPage);
+               };
 
-                    var runItem = function runItem(done){
-                        var $itemContainer = $('<div style="page-break-after: always;"></div');
+                var renderItemPage = function renderItemPage(itemData, done){
+                    var $itemContainer = $('<div style="page-break-after: always;border:solid 1px red;"></div>');
 
-                        itemRunner('qtiprint', itemData.data)
-                            .on('error', function(err){
-                                done(err);
-                            })
-                            .on('render', function(){
-                                done(null, $itemContainer);
-                            })
-                            .init()
-                            .render($itemContainer);
-                    };
-                    itemRunners.push(runItem);
+                    itemRunner('qtiprint', itemData.data)
+                        .on('error', function(err){
+                            done(err);
+                        })
+                        .on('render', function(){
+                            done(null, $itemContainer);
+                        })
+                        .init()
+                        .render($itemContainer);
+                };
+
+                _.forEach(testData.data, function(testPart){
+
+                    _.forEach(testPart.sections, function(section){
+
+                        pageRenderers.push( _.partial(renderSectionPage, section));
+
+                        _.forEach(section.items, function(item){
+                            var itemData = testData.items[item.href];
+                            if(itemData){
+                                pageRenderers.push( _.partial(renderItemPage, itemData));
+                            }
+                        });
+                    });
                 });
 
-                async.parallel(itemRunners, function itemDone(err, results){
+                async.parallel(pageRenderers, function itemDone(err, $results){
                     if(err){
                         self.trigger('error', 'Unable to render items :  ' + err);
                     }
-                    self.$container.empty().append(results);
+                    self.$container.empty().append($results);
+
+                    /**
+                     * The test is rendered
+                     * @event TestRunner#render
+                     */
+                    self.trigger('render');
+
+                    /**
+                     * The test is ready.
+                     * Alias of {@link TestRunner#render}
+                     * @event TestRunner#ready
+                     */
+                    self.trigger('ready');
                 });
-
-
-                /**
-                 * The test is rendered
-                 * @event TestRunner#render
-                 */
-                self.trigger('render');
-
-                /**
-                 * The test is ready.
-                 * Alias of {@link TestRunner#render}
-                 * @event TestRunner#ready
-                 */
-                self.trigger('ready');
 
                 return this;
            },
@@ -173,11 +175,6 @@ define([
             * Calling `on` with the same eventName multiple times add callbacks: they
             * will all be executed.
             *
-            * @example testRunner()
-            *               .on('statechange', function(state){
-            *                   //state === this.getState()
-            *               });
-            *
             * @param {String} name - the name of the event to listen
             * @param {Function} handler - the callback to run once the event is triggered. It's executed with the current testRunner context (ie. this
             * @returns {TestRunner}
@@ -193,8 +190,6 @@ define([
             /**
             * Remove handlers for an event.
             *
-            * @example testRunner().off('statechange');
-            *
             * @param {String} name - the event name
             * @returns {TestRunner}
             */
@@ -207,8 +202,6 @@ define([
 
             /**
             * Trigger an event manually.
-            *
-            * @example testRunner().trigger('statechange', new State());
             *
             * @param {String} name - the name of the event to trigger
             * @param {*} data - arguments given to the handlers
@@ -224,6 +217,8 @@ define([
                 return this;
             }
         };
+
+        return testRunner;
     };
 
     return testRunnerFactory;
