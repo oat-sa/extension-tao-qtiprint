@@ -1,6 +1,6 @@
 {
 
-    "name": "oat-sa/extension-tao-itemqtiprint",
+    "name": "oat-sa/extension-tao-qtiprint",
     "description" : "Provides printable rendering for QTI Items",
     "type" : "tao-extension",
     "authors": [{
