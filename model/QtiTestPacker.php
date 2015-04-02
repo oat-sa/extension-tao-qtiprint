@@ -63,20 +63,26 @@ class QtiTestPacker implements Packable
 
         try {
 
+            //load resquired services
             $qtiTestService = taoQtiTest_models_classes_QtiTestService::singleton();
             $itemService    = taoItems_models_classes_ItemsService::singleton();
 
-            $testFilePath = $qtiTestService->getDocPath($test);
+            //load the test data
+            $testFilePath    = $qtiTestService->getDocPath($test);
+            $testData        = $this->getRoute($testFilePath);
+            $testData['uri'] = $test->getUri();
 
-            $route = $this->getRoute($testFilePath);
 
-
+            //pack each test's item
             $itemPacker     = new QtiItemPacker();
             $items          = array();
             foreach($qtiTestService->getItems($test) as $item){
                 $items[$item->getUri()] = $itemPacker->packItem($item, $itemService->getItemFolder($item));
             }
-            $testPack       = new TestPack(self::$testType, $route, $items);
+
+            //create the pack
+            $testPack = new TestPack(self::$testType, $testData, $items);
+
         } catch(common_Exception $e){
             throw new common_Exception('Unable to pack test '. $test->getUri() . ' : ' . $e->getMessage());
         }
@@ -84,7 +90,14 @@ class QtiTestPacker implements Packable
         return $testPack;
     }
 
-    protected function getRoute($testFilePath){
+    /**
+     * Get the route (the way items are delivered into a test).
+     * This method will compute the shuffling and other predefined conditions to take the test.
+     *
+     * @param string $testFilePath - the path of the QTI Test definition
+     * @return array the test structure as it should be delivered.
+     */
+    private function getRoute($testFilePath){
 
         $route = array();
 
@@ -99,6 +112,7 @@ class QtiTestPacker implements Packable
 
         $sessionManager = new SessionManager();
         $testSession = $sessionManager->createAssessmentTestSession($compactTestDef->getDocumentComponent());
+        $assessmentTest = $testSession->getAssessmentTest();
 
         $renderingEngine = new XhtmlRenderingEngine();
 
@@ -157,9 +171,21 @@ class QtiTestPacker implements Packable
                 $route = $this->addItemToRoute($route, $testPartId, $sectionId, $item);
             }
         }
-        return $route;
+
+        return array(
+            'id'        => $assessmentTest->getIdentifier(),
+            'title'     => $assessmentTest->getTitle(),
+            'testParts' => $route
+        );
     }
 
+    /**
+     * Add a section to a given test part
+     * @param array $route - the route to add the section to
+     * @param string $testPartId  - the identifier of the test part to add the section to
+     * @param array $section - the section to add
+     * @return array the route
+     */
     private function addSectionToRoute($route, $testPartId, $section){
         foreach($route as $i => $routePart){
             if($routePart['id'] == $testPartId){
@@ -170,6 +196,14 @@ class QtiTestPacker implements Packable
         return $route;
     }
 
+    /**
+     * Add an item to a given section
+     * @param array $route - the route to add the item to
+     * @param string $testPartId  - the identifier of the test part that contains the section
+     * @param string $sectionId  - the identifier of the section  to add the item to
+     * @param array $item - the item to add
+     * @return array the route
+     */
     private function addItemToRoute($route, $testPartId, $sectionId, $item){
         foreach($route as $i => $routePart){
             if($routePart['id'] == $testPartId){

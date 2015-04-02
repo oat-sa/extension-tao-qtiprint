@@ -41,7 +41,7 @@ define([
         };
 
         return {
-            attach: attach
+            attach: function(){}
         };
 
     }());
