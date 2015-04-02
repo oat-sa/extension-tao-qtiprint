@@ -1,25 +1,53 @@
-.qti-choiceInteraction {
-    ol {
-        list-style-type: none;
-    }
-    .qti-choice {
-        input[type="radio"], input[type="checkbox"] {
-            border: solid #000 2px;
-            padding: 3px;
-            float: left;
+.qti-item{
+    .qti-choiceInteraction {
+        ol {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
-
+        .qti-choice {
+            clear: both;
+            margin-bottom: 3px;
+            input[type="radio"], input[type="checkbox"] {
+                display: none;
+           }
+           input[type="checkbox"] + label,
+           input[type="radio"] + label {
+                display: block;
+                &:before {
+                    content: ' ';
+                    float: left;
+                    width: 14px;
+                    height: 14px;
+                    margin: 0 6px 0 3px;
+                    border: solid #000 2px;
+                    background-color: #ddd;
+                    border-radius: 2px;
+                    font-size: 14px;
+                    line-height: 14px;
+                    text-align: center;
+                }
+           }
+           input[type="checkbox"]:checked + label,
+           input[type="radio"]:checked + label {
+                &:before {
+                    content: 'X';
+                }
+           }
+        }
     }
-}
 
-.qti-extendedTextInteraction {
-    textarea {
-        border: solid #000 2px;
+    .qti-extendedTextInteraction {
+        textarea {
+            border: solid #000 2px;
+        }
     }
-}
 
 
-input.qti-textEntryInteraction {
-    border: solid #000 2px;
-    width: 200px;
+    input.qti-textEntryInteraction {
+        border: none;
+        border-bottom: solid #000 2px;
+        background-color: #ddd;
+        border-radius: 2px;
+    }
 }
