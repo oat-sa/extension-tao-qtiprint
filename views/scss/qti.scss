@@ -2,3 +2,18 @@
 @import "reset";
 @import "layout";
 @import "interactions";
+
+@media screen {
+    body {
+        margin : 10px;
+        background-color: #ddd;
+
+        & > main {
+            border: solid 1px #ccc;
+            border-radius: 6px;
+            box-shadow: 0 0 3px 0 #444 !important;
+            background-color: white;
+            padding: 15px;
+        }
+    }
+}
