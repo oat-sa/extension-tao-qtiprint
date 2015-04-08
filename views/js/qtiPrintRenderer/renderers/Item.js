@@ -23,8 +23,7 @@
  */
 define([
     'tpl!taoQtiPrint/qtiPrintRenderer/tpl/item',
-    'taoQtiPrint/qtiPrintRenderer/helpers/container',
-    'taoQtiPrint/qtiPrintRenderer/helpers/itemStylesheetHandler'
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'
 ], function(tpl, getContainer, itemStylesheetHandler) {
     'use strict';
 
@@ -35,10 +34,6 @@ define([
     return {
         qtiClass:     'assessmentItem',
         template:     tpl,
-        getContainer: getContainer,
-        render:       function(item) {
-            //add stylesheets
-            itemStylesheetHandler.attach(item.stylesheets);
-        }
+        getContainer: getContainer
     };
 });
