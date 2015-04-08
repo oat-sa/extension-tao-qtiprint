@@ -1,1 +1,3 @@
-<p class="qti-interaction-prompt" data-serial="{{serial}}">{{{body}}}</p>
+<div class="qti-prompt-container">
+    <p class="qti-prompt" data-serial="{{serial}}">{{{body}}}</p>
+</div>
