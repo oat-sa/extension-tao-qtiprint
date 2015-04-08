@@ -72,7 +72,6 @@ class QtiTestPacker implements Packable
             $testData        = $this->getRoute($testFilePath);
             $testData['uri'] = $test->getUri();
 
-
             //pack each test's item
             $itemPacker     = new QtiItemPacker();
             $items          = array();
@@ -133,7 +132,7 @@ class QtiTestPacker implements Packable
             if($sectionId != $lastSection->getIdentifier() || $testPartId != $routeItem->getTestPart()->getIdentifier()){
                 $sectionId = $lastSection->getIdentifier();
 
-                $rubricBlocks = array();
+                           $rubricBlocks = array();
                 foreach ($routeItem->getAssessmentSections() as $section) {
 
                     foreach ($section->getRubricBlocks() as $rubricBlock) {
@@ -164,7 +163,7 @@ class QtiTestPacker implements Packable
                     );
 
                 } else {
-                    $this->addSectionToRoute($route, $testPartId, $section);
+                    $route = $this->addSectionToRoute($route, $testPartId, $section);
                 }
 
             } else {

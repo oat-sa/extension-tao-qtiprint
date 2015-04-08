@@ -23,27 +23,28 @@ define([
     'jquery',
     'lodash',
     'async',
+    'helpers',
     'taoQtiPrint/runner/itemRunner',
     'taoQtiPrint/lib/qrcode'
-], function($, _, async, itemRunner, QRCode) {
+], function($, _, async, helpers, itemRunner, QRCode) {
     'use str11ict';
 
     //TODO find him his own place. Waiting is own house, the testRenderer squats the runner flat.
     var testRenderer = {
 
-        createPage: function createPage() {
-            return $('<section></section>');
+        createPage: function createPage(type) {
+            return $('<section></section>').addClass(type);
         },
 
         //TODO replace by a template
         testPage: function rendertestPage(test, done) {
 
-            var $testPage = this.createPage();
+            var $testPage = this.createPage('title');
             var $codeElt = $('<div class="qr-code">');
             var qrCode = new QRCode($codeElt[0], {
-                text:         test.uri,
-                width:        128,
-                height:       128,
+                text:         helpers._url('render', 'PrintTest', 'taoBooklet', { uri :  test.uri}),
+                width:        192,
+                height:       192,
                 colorDark:    "#000000",
                 colorLight:   "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
@@ -58,7 +59,8 @@ define([
         //TODO replace by a template
         sectionPage: function renderSectionPage(section, pageNum, done) {
 
-            var $sectionPage = this.createPage();
+
+            var $sectionPage = this.createPage('section');
 
             $sectionPage.append('<h2>' + section.title + '</h2>');
 
@@ -68,10 +70,10 @@ define([
             done(null, $sectionPage);
         },
 
-        itemPage: function renderItemPage(item, pageNum, done) {
-            var $itemContainer = this.createPage();
+        itemPage: function renderItemPage(item, uri, pageNum, done) {
+            var $itemContainer = this.createPage('item');
 
-            itemRunner('qtiprint', item)
+            itemRunner('qtiprint', item, { uri : uri})
                 .on('error', function(err) {
                     done(err);
                 })
@@ -171,7 +173,7 @@ define([
                                 //transform the function of the renderer to fit the format required by async (partial with data and binding)
                                 pageRenderers.push(
                                     _.bind(
-                                        _.partial(testRenderer.itemPage, testData.items[item.href].data, pageRenderers.length),
+                                        _.partial(testRenderer.itemPage, testData.items[item.href].data, item.href, pageRenderers.length),
                                         testRenderer
                                    )
                                 );

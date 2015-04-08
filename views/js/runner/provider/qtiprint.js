@@ -22,9 +22,10 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
+    'helpers',
     'taoQtiItem/qtiItem/core/Loader',
     'taoQtiPrint/qtiPrintRenderer/renderers/Renderer'],
-function(QtiLoader, QtiRenderer){
+function(helpers, QtiLoader, QtiRenderer){
     'use strict';
 
     /**
@@ -37,7 +38,7 @@ function(QtiLoader, QtiRenderer){
 
             //TODO configure the renderer URLs using an AssetManager
             this._renderer = new QtiRenderer({
-                baseUrl : './'
+                baseUrl : helpers._url('getFile', 'QtiCreator', 'taoQtiItem', {uri : this.options.uri, lang : 'en-US'}) + '&relPath='
             });
 
             new QtiLoader().loadItemData(itemData, function(item){
