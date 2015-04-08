@@ -1,6 +1,6 @@
 {
 
-    "name": "oat-sa/extension-tao-itemqtiprint",
+    "name": "oat-sa/extension-tao-qtiprint",
     "description" : "Provides printable rendering for QTI Items",
     "type" : "tao-extension",
     "authors": [{
@@ -26,7 +26,7 @@
         "paper-based-assessment"
     ],
     "extra" : {
-        "tao-extension-name" : "taoQtiItemPrint"
+        "tao-extension-name" : "taoQtiPrint"
     },
     "minimum-stability" : "dev",
     "require": {
