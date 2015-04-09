@@ -1,0 +1,120 @@
+@import "inc/bootstrap";
+
+
+html {
+    box-sizing: border-box;
+    height: auto;
+    background: white;
+    color:black;
+    body {
+        font: 12pt/1.2 Cambria, 'Hoefler Text', Utopia, 'Liberation Serif', 'Nimbus Roman No9 L Regular', Times, 'Times New Roman', serif;
+        height: auto;
+        background: white;
+    }
+    h1,h2,h3,h4,h5,h6 {
+      font-weight: bold;
+    }
+
+    h1 {
+        font-size: 22pt;
+        margin: 12pt 0;
+    }
+
+    h2 {
+        font-size: 20pt;
+        margin: 10pt 0;
+    }
+
+    h3 {
+        font-size: 18pt;
+        margin: 10pt 0;
+    }
+
+    h4 {
+        font-size: 16pt;
+        margin: 9pt 0;
+    }
+
+    h5 {
+        font-size: 14pt;
+        margin: 9pt 0;
+    }
+
+    h6 {
+        font-size: 12pt;
+        margin: 8pt 0;
+    }
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+[dir="rtl"], .rtl {
+    direction: rtl;
+    menu, ol, ul {
+        padding: 0px 40px 0px 0px;
+    }
+}
+
+
+
+main > section {
+    page-break-after: always;
+}
+
+article {
+    h1 {
+        font-size: 20pt;
+    }
+
+    h2 {
+        font-size: 18pt;
+    }
+
+    h3 {
+        font-size: 16pt;
+    }
+
+    h4 {
+        font-size: 14pt;
+    }
+
+    h5 {
+        font-size: 13pt;
+    }
+
+    h6 {
+        font-size: 12pt;
+    }
+}
+
+.qti-item{
+
+    padding: 0;
+    background: transparent;
+    max-width: none;
+
+    .qti-blockInteraction{
+        padding: 10pt;
+        border: 1px dashed grey;
+    }
+
+    .qti-interaction-answer{
+        width: 100%;
+        border: 10px solid grey;
+        padding:20px;
+    }
+
+    pre {
+        padding: 10pt;
+        font-size: 12pt;
+        border-style: dashed;
+        font-family: $monospaceFont;
+     }
+
+    input[type="text"] {
+        padding: 5pt
+    }
+}
+
