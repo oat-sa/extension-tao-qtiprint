@@ -1,5 +1,4 @@
-<?php
-/**
+/*
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; under version 2
@@ -14,13 +13,23 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015 (original work) Open Assessment Technologies SA;
- *
- *
+ * Copyright (c) 2015 (original work) Open Assessment Technologies SA ;
  */
 
-require_once dirname(__FILE__). '/../tao/includes/class.Bootstrap.php';
+/**
+ * The container renderer
+ *
+ * @author Bertrand Chevrier <bertrand@taotesting.com>
+ */
+define(['tpl!taoQtiPrint/qtiPrintRenderer/tpl/container'], function(tpl){
+    'use strict';
 
-$bootStrap = new BootStrap('taoQtiPrint');
-$bootStrap->start();
-$bootStrap->dispatch();
+    /**
+     * Expose the renderer
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Container
+     */
+    return {
+        qtiClass : '_container',
+        template : tpl
+    };
+});
