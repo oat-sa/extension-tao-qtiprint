@@ -185,11 +185,17 @@ define([
                 //then we call all the renderers in parallel
                 async.parallel(pageRenderers, function renderingDone(err, $results) {
                     if (err) {
-                        self.trigger('error', 'Unable to render a page :  ' + err);
+                        self.trigger('error', 'An error occurred while rendering a page :  ' + err);
+                    }
+
+                    //dummy rtl support from options
+                    if(options && options.rtl === true){
+                        self.$container.addClass('rtl').attr('dir', 'rtl');
                     }
 
                     //once they are all done, we insert the content to the container
                     self.$container.empty().append($results);
+
 
                     /**
                      * The test is rendered
