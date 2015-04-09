@@ -47,12 +47,17 @@ function(helpers, QtiLoader, QtiRenderer){
                 }
 
                 self._item = item;
-                self._renderer.load(function(){
-                    self._item.setRenderer(this);
+                try{
+                    self._renderer.load(function(){
+                        self._item.setRenderer(this);
 
-                    done();
-                }, this.getLoadedClasses());
+                        done();
+                    }, this.getLoadedClasses());
+                } catch(e){
+                    self.trigger('error', 'Unable to render the item : ' + e);
+                }
             });
+
         },
 
         render : function render (elt, done){
