@@ -7,9 +7,8 @@
 
 /* preview */
 @media screen {
-    body {
+   html body {
         margin : 10px;
-        background-color: #ddd;
 
         & > main {
             border: solid 1px #ccc;

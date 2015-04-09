@@ -60,7 +60,15 @@ html {
 
 
 main > section {
-    font-family: Optima !important;
+    &.title {
+        h1 {
+            font-size: 24pt;
+            text-align: center;
+        }
+        .qr-code img{
+            margin: auto;
+        }
+    }
     &.intro{
         page-break-after: always;
     }
