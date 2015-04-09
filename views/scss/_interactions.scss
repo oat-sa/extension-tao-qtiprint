@@ -1,57 +1,84 @@
+
+$iaBackground: #eee;
 .qti-item{
-    .qti-choiceInteraction {
-        ol {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .qti-choice {
-            clear: both;
-            margin-bottom: 3px;
-            input[type="radio"], input[type="checkbox"] {
-                display: none;
-           }
-           input[type="checkbox"] + label,
-           input[type="radio"] + label {
-                display: block;
-                &:before {
-                    content: ' ';
-                    float: left;
-                    width: 14px;
-                    height: 14px;
-                    margin: 0 6px 0 3px;
-                    border: solid #000 2px;
-                    background-color: #eee;
-                    border-radius: 2px;
-                    font-size: 14px;
-                    line-height: 14px;
-                    text-align: center;
-                }
-           }
-           input[type="checkbox"]:checked + label,
-           input[type="radio"]:checked + label {
-                &:before {
-                    content: 'x';
-                }
-           }
-        }
-    }
 
     .qti-extendedTextInteraction {
         textarea {
-            border: solid #000 2px;
-            background-color: #eee;
-            border-radius: 2px;
+            display:block;
+            padding: 10pt;
+            font-size: 12pt;
+            border: 1px dashed #000;
+            font-family: $monospaceFont;
             width: 100%;
-            height: 250px;
+            min-height: 150px;
+            background:$iaBackground;
         }
     }
 
 
     input.qti-textEntryInteraction {
         border: none;
-        border-bottom: solid #000 2px;
-        background-color: #eee;
+        border-bottom: dashed #000 1px;
+        background-color: $iaBackground;
         border-radius: 2px;
+    }
+}
+
+
+.qti-choiceInteraction {
+    ol {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .qti-choice {
+        clear: both;
+        margin-bottom: 3px;
+        input[type="radio"], input[type="checkbox"] {
+            display: none;
+        }
+        input[type="checkbox"] + label,
+        input[type="radio"] + label {
+            display: block;
+            &:before {
+                content: ' ';
+                float: left;
+                width: 14px;
+                height: 14px;
+                margin: 0 6px 0 3px;
+                border: solid #000 1px;
+                background-color: $iaBackground;
+                border-radius: 2px;
+                font-size: 14px;
+                line-height: 14px;
+                text-align: center;
+                position: relative;
+                top: 3px;
+            }
+        }
+        input[type="checkbox"]:checked + label,
+        input[type="radio"]:checked + label {
+            &:before {
+                content: '\00d7';
+            }
+        }
+    }
+}
+
+
+.rtl{
+    .qti-choiceInteraction {
+        .qti-choice {
+            input[type="checkbox"] + label,
+            input[type="radio"] + label {
+                display: block;
+                &:before {
+                    content: ' ';
+                    float: right;
+                    margin: 0 3px 0 6px;
+                    border: solid #000 1px;
+                }
+            }
+        }
     }
 }

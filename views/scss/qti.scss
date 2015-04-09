@@ -1,12 +1,14 @@
-@import "inc/normalize";
-@import "reset";
+@import "inc/bootstrap";
+@import "inc/base";
+@import "print-reset";
+@import "inc/grid";
 @import "layout";
 @import "interactions";
 
+/* preview */
 @media screen {
-    body {
+   html body {
         margin : 10px;
-        background-color: #ddd;
 
         & > main {
             border: solid 1px #ccc;
