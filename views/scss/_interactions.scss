@@ -31,37 +31,64 @@ $iaBackground: #eee;
         padding: 0;
         margin: 0;
     }
+
+
+
     .qti-choice {
         clear: both;
-        margin-bottom: 3px;
+        margin: 10px 0;
+
+
+        input[type="checkbox"] +  .choice-id {
+            display: inline-block;
+            padding: 2px 8px;
+            border: solid 2px #000;
+            border-radius: 50%;
+            vertical-align: top;
+        }
+
+        input[type="checkbox"]:checked + .choice-id {
+            background-color: #000;
+            color: #fff;
+        }
+
+        & > label {
+            display: inline-block;
+        }
+
         input[type="radio"], input[type="checkbox"] {
             display: none;
         }
-        input[type="checkbox"] + label,
-        input[type="radio"] + label {
-            display: block;
-            &:before {
-                content: ' ';
-                float: left;
-                width: 14px;
-                height: 14px;
-                margin: 0 6px 0 3px;
-                border: solid #000 1px;
-                background-color: $iaBackground;
-                border-radius: 2px;
-                font-size: 14px;
-                line-height: 14px;
-                text-align: center;
-                position: relative;
-                top: 3px;
-            }
-        }
-        input[type="checkbox"]:checked + label,
-        input[type="radio"]:checked + label {
-            &:before {
-                content: '\00d7';
-            }
-        }
+
+
+
+
+
+        /*input[type="checkbox"] + label,*/
+        /*input[type="radio"] + label {*/
+            /*display: block;*/
+            /*&:before {*/
+                /*content: ' ';*/
+                /*float: left;*/
+                /*width: 14px;*/
+                /*height: 14px;*/
+                /*margin: 0 6px 0 3px;*/
+                /*border: solid #000 1px;*/
+                /*background-color: $iaBackground;*/
+                /*border-radius: 2px;*/
+                /*font-size: 14px;*/
+                /*line-height: 14px;*/
+                /*text-align: center;*/
+                /*position: relative;*/
+                /*top: 3px;*/
+            /*}*/
+        /*}*/
+        /*input[type="checkbox"]:checked + label,*/
+        /*input[type="radio"]:checked + label {*/
+            /*&:before {*/
+                /*content: '\00d7';*/
+            /*}*/
+        /*}*/
     }
 }
 
