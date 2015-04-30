@@ -39,15 +39,18 @@ $iaBackground: #eee;
         margin: 10px 0;
 
 
-        input[type="checkbox"] +  .choice-id {
+        input[type="checkbox"] +  .choice-id,
+        input[type="radio"] +  .choice-id {
             display: inline-block;
             padding: 2px 8px;
-            border: solid 2px #000;
-            border-radius: 50%;
+            border: 1px dashed #000;
+            font-family: $monospaceFont;
+            background:$iaBackground;
             vertical-align: top;
         }
 
-        input[type="checkbox"]:checked + .choice-id {
+        input[type="checkbox"]:checked + .choice-id,
+        input[type="radio"]:checked + .choice-id {
             background-color: #000;
             color: #fff;
         }
@@ -59,36 +62,6 @@ $iaBackground: #eee;
         input[type="radio"], input[type="checkbox"] {
             display: none;
         }
-
-
-
-
-
-        /*input[type="checkbox"] + label,*/
-        /*input[type="radio"] + label {*/
-            /*display: block;*/
-            /*&:before {*/
-                /*content: ' ';*/
-                /*float: left;*/
-                /*width: 14px;*/
-                /*height: 14px;*/
-                /*margin: 0 6px 0 3px;*/
-                /*border: solid #000 1px;*/
-                /*background-color: $iaBackground;*/
-                /*border-radius: 2px;*/
-                /*font-size: 14px;*/
-                /*line-height: 14px;*/
-                /*text-align: center;*/
-                /*position: relative;*/
-                /*top: 3px;*/
-            /*}*/
-        /*}*/
-        /*input[type="checkbox"]:checked + label,*/
-        /*input[type="radio"]:checked + label {*/
-            /*&:before {*/
-                /*content: '\00d7';*/
-            /*}*/
-        /*}*/
     }
 }
 
