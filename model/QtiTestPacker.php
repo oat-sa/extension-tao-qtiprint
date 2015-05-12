@@ -76,7 +76,7 @@ class QtiTestPacker implements Packable
             $itemPacker     = new QtiItemPacker();
             $items          = array();
             foreach($qtiTestService->getItems($test) as $item){
-                $items[$item->getUri()] = $itemPacker->packItem($item, $itemService->getItemFolder($item));
+                $items[$item->getUri()] = $itemPacker->packItem($item);
             }
 
             //create the pack
