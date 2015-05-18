@@ -25,8 +25,9 @@ define([
     'async',
     'helpers',
     'taoQtiPrint/runner/itemRunner',
+    'taoItems/assets/strategies',
     'taoQtiPrint/lib/qrcode'
-], function($, _, async, helpers, itemRunner, QRCode) {
+], function($, _, async, helpers, itemRunner, assetStrategies, QRCode) {
     'use str11ict';
 
     //TODO find him his own place. Waiting is own house, the testRenderer squats the runner flat.
@@ -73,12 +74,19 @@ define([
         itemPage: function renderItemPage(item, uri, pageNum, done) {
             var $itemContainer = this.createPage('item');
 
-            itemRunner('qtiprint', item, { uri : uri})
+            itemRunner('qtiprint', item)
                 .on('error', function(err) {
                     done(err);
                 })
                 .on('render', function() {
                     done(null, $itemContainer);
+                })
+                .assets([
+                    assetStrategies.external,
+                    assetStrategies.base64,
+                    assetStrategies.baseUrl
+                ], {
+                    baseUrl : helpers._url('getFile', 'QtiCreator', 'taoQtiItem', {uri : uri, lang : 'en-US'}) + '&relPath='
                 })
                 .init()
                 .render($itemContainer);

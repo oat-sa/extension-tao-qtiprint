@@ -22,8 +22,20 @@
  *
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
-define([], function(){
+define([
+    'taoItems/assets/manager',
+    'taoItems/assets/strategies',
+], function(assetManagerFactory, assetStrategies){
     'use strict';
+
+
+    //asset manager using base url
+    var assetManager = assetManagerFactory([
+        assetStrategies.taomedia,
+        assetStrategies.external,
+        assetStrategies.base64,
+        assetStrategies.baseUrl
+    ], {baseUrl : ''});
 
     /**
      * @exports taoQtiPrint/qtiPrintRenderer/renderers/config
@@ -76,6 +88,9 @@ define([], function(){
             'customInteraction':                           false,
             'infoControl':                                 false,
             'endAttemptInteraction':                       false,
+        },
+        options:   {
+            assetManager: assetManager
         }
     };
 });

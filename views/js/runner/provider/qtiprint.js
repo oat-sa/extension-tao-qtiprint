@@ -36,9 +36,8 @@ function(helpers, QtiLoader, QtiRenderer){
         init : function init (itemData, done){
             var self = this;
 
-            //TODO configure the renderer URLs using an AssetManager
             this._renderer = new QtiRenderer({
-                baseUrl : helpers._url('getFile', 'QtiCreator', 'taoQtiItem', {uri : this.options.uri, lang : 'en-US'}) + '&relPath='
+                assetManager : this.assetManager
             });
 
             new QtiLoader().loadItemData(itemData, function(item){
