@@ -32,5 +32,5 @@ define([
      * Build and expost the printRenderer
      * @exports taoQtiPrint/qtiPrintRenderer/renderers/config
      */
-    return Renderer.build(config.locations, config.name);
+    return Renderer.build(config.locations, config.name, config.options);
 });
