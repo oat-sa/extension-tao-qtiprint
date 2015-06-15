@@ -73,7 +73,7 @@ class QtiTestPacker implements Packable
             $testData['uri'] = $test->getUri();
 
             //pack each test's item
-            $itemPacker     = new QtiItemPacker();
+            $itemPacker     = new QtiItemPacker(array('img' => 'base64file'));
             $items          = array();
             foreach($qtiTestService->getItems($test) as $item){
                 $items[$item->getUri()] = $itemPacker->packItem($item);

@@ -44,6 +44,7 @@ function(helpers, QtiLoader, QtiRenderer){
                 if(!item){
                     return self.trigger('error', 'Unable to load item from the given data.');
                 }
+                item.assets = itemData.assets
 
                 self._item = item;
                 try{

@@ -71,8 +71,12 @@ define([
             done(null, $sectionPage);
         },
 
-        itemPage: function renderItemPage(item, uri, pageNum, done) {
+        itemPage: function renderItemPage(item, uri, pageNum, assets,  done) {
             var $itemContainer = this.createPage('item');
+
+            if(typeof assets !== 'undefined'){
+                item.assets = assets;
+            }
 
             itemRunner('qtiprint', item)
                 .on('error', function(err) {
@@ -181,7 +185,7 @@ define([
                                 //transform the function of the renderer to fit the format required by async (partial with data and binding)
                                 pageRenderers.push(
                                     _.bind(
-                                        _.partial(testRenderer.itemPage, testData.items[item.href].data, item.href, pageRenderers.length),
+                                        _.partial(testRenderer.itemPage, testData.items[item.href].data, item.href, pageRenderers.length, testData.items[item.href].assets),
                                         testRenderer
                                    )
                                 );
