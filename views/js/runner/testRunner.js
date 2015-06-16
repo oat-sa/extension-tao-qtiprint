@@ -74,10 +74,6 @@ define([
         itemPage: function renderItemPage(item, uri, pageNum, assets,  done) {
             var $itemContainer = this.createPage('item');
 
-            if(typeof assets !== 'undefined'){
-                item.assets = assets;
-            }
-
             itemRunner('qtiprint', item)
                 .on('error', function(err) {
                     done(err);
@@ -86,9 +82,15 @@ define([
                     done(null, $itemContainer);
                 })
                 .assets([
+                    assetStrategies.taomedia,
                     assetStrategies.external,
-                    assetStrategies.base64,
-                    assetStrategies.baseUrl
+                    {name : 'assetHandler', handle : function(url){
+                        for( var type in assets){
+                            if(assets[type][url.toString()]){
+                                return assets[type][url.toString()]
+                            }
+                        }
+                    }}
                 ], {
                     baseUrl : helpers._url('getFile', 'QtiCreator', 'taoQtiItem', {uri : uri, lang : 'en-US'}) + '&relPath='
                 })
