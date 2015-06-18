@@ -84,13 +84,16 @@ define([
                 .assets([
                     assetStrategies.taomedia,
                     assetStrategies.external,
-                    {name : 'assetHandler', handle : function(url){
-                        for( var type in assets){
-                            if(assets[type][url.toString()]){
-                                return assets[type][url.toString()]
+                    {
+                        name: 'packageAssetHandler',
+                        handle: function handleAssetFromPackage(url) {
+                            for (var type in assets) {
+                                if (assets[type][url.toString()]) {
+                                    return assets[type][url.toString()];
+                                }
                             }
                         }
-                    }}
+                    }
                 ], {
                     baseUrl : helpers._url('getFile', 'QtiCreator', 'taoQtiItem', {uri : uri, lang : 'en-US'}) + '&relPath='
                 })
