@@ -23,8 +23,9 @@
  */
 define([
     'tpl!taoQtiPrint/qtiPrintRenderer/tpl/math',
-    'taoQtiPrint/qtiPrintRenderer/helpers/container'
-], function(tpl, getContainer){
+    'taoQtiPrint/qtiPrintRenderer/helpers/container',
+    'mathJax'
+], function(tpl, getContainer, MathJax){
     'use strict';
 
     /**
@@ -35,5 +36,12 @@ define([
         qtiClass:     'math',
         template:     tpl,
         getContainer: getContainer,
+        render: function(math, data){
+            if(typeof(MathJax) !== 'undefined' && MathJax){
+                _.delay(function(){//defer execution fix some rendering issue in chrome
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, getContainer(math).parent()[0]]);
+                },60);
+            }
+        }
     };
 });
