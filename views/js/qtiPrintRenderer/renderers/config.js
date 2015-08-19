@@ -54,6 +54,7 @@ define([
             'extendedTextInteraction':                     'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ExtendedTextInteraction',
             'textEntryInteraction':                        'taoQtiPrint/qtiPrintRenderer/renderers/interactions/TextEntryInteraction',
             'simpleChoice.choiceInteraction':              'taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteraction',
+            'math' :                                       'taoQtiPrint/qtiPrintRenderer/renderers/Math',
 
 //do not print
             '_simpleFeedbackRule':                         false,
