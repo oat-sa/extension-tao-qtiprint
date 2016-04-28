@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                 'taoQtiPrintCss': root + '/taoQtiPrint/views/css',
                 'taoItems':           root + '/taoItems/views/js'
             },
-            excludeShallow : ['mathJax', 'mediaElement', 'ckeditor'],
+            excludeShallow : ['mathJax', 'ckeditor'],
             include: qtiCore.concat(qtiPrintLibs).concat([ 'tpl', 'json']),
             name: "taoQtiPrint/runner/qtiItemPrintRunner",
             out: out + "/qtiItemPrintRunner.min.js"
