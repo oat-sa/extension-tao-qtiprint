@@ -22,7 +22,6 @@ namespace oat\taoQtiPrint\model;
 use common_Exception;
 use core_kernel_classes_Resource;
 use InvalidArgumentException;
-use oat\oatbox\service\ServiceManager;
 use oat\taoItems\model\pack\Packer;
 use oat\taoQtiItem\model\qti\Service;
 use oat\taoTests\models\pack\Packable;
@@ -33,6 +32,8 @@ use qtism\runtime\rendering\markup\xhtml\XhtmlRenderingEngine;
 use qtism\runtime\tests\SessionManager;
 use taoQtiTest_helpers_ItemResolver;
 use taoQtiTest_models_classes_QtiTestService;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 /**
  * This class pack a QTI Test. Packing instead of compiling, aims
@@ -42,8 +43,9 @@ use taoQtiTest_models_classes_QtiTestService;
  * @package taoQtiTest
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
-class QtiTestPacker implements Packable
+class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
 {
+    use ServiceLocatorAwareTrait;
 
     /**
      * The test type identifier
@@ -76,9 +78,9 @@ class QtiTestPacker implements Packable
             //pack each test's item
             $items = [];
             foreach ($qtiTestService->getItems($test) as $item) {
-                $items[$item->getUri()] = (new Packer($item, ''))
-                    ->setServiceLocator(ServiceManager::getServiceManager())
-                    ->pack(array('img' => 'base64file'));
+                $itemPacker = new Packer($item, '');
+                $this->getServiceLocator()->propagate($itemPacker);
+                $items[$item->getUri()] = $itemPacker->pack(array('img' => 'base64file'));
             }
 
             //create the pack
