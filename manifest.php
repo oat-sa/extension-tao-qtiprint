@@ -35,6 +35,9 @@ return array(
     ),
     'uninstall' => array(
     ),
+    'install' => array(
+    ),
+    'update' => 'oat\\taoQtiPrint\\scripts\\update\\Updater',
     'autoload' => array (
         'psr-4' => array(
             'oat\\taoQtiPrint\\' => dirname(__FILE__).DIRECTORY_SEPARATOR
