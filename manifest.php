@@ -24,7 +24,7 @@ return array(
 	'label' => 'qti',
 	'description' => 'Provides printable rendering for QTI Items',
     'license' => 'GPL-2.0',
-    'version' => '0.1.0',
+    'version' => '0.2.0',
 	'author' => 'Open Assessment Technologies SA',
 	'requires' => array('tao' => '>=2.7.10','taoQtiItem' => '>=2.7.4', 'taoQtiTest' => '>=2.6'),
 	// for compatibility
@@ -35,6 +35,9 @@ return array(
     ),
     'uninstall' => array(
     ),
+    'install' => array(
+    ),
+    'update' => 'oat\\taoQtiPrint\\scripts\\update\\Updater',
     'autoload' => array (
         'psr-4' => array(
             'oat\\taoQtiPrint\\' => dirname(__FILE__).DIRECTORY_SEPARATOR
