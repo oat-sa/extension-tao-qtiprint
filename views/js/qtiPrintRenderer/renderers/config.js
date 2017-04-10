@@ -24,7 +24,7 @@
  */
 define([
     'taoItems/assets/manager',
-    'taoItems/assets/strategies',
+    'taoItems/assets/strategies'
 ], function(assetManagerFactory, assetStrategies){
     'use strict';
 
@@ -51,9 +51,11 @@ define([
             'object':                                      'taoQtiPrint/qtiPrintRenderer/renderers/Object',
             'prompt':                                      'taoQtiPrint/qtiPrintRenderer/renderers/interactions/Prompt',
             'choiceInteraction':                           'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ChoiceInteraction',
+            'inlineChoiceInteraction':                     'taoQtiPrint/qtiPrintRenderer/renderers/interactions/InlineChoiceInteraction',
             'extendedTextInteraction':                     'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ExtendedTextInteraction',
             'textEntryInteraction':                        'taoQtiPrint/qtiPrintRenderer/renderers/interactions/TextEntryInteraction',
             'simpleChoice.choiceInteraction':              'taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteraction',
+            'inlineChoice':                                'taoQtiPrint/qtiPrintRenderer/renderers/choices/InlineChoice',
             'math' :                                       'taoQtiPrint/qtiPrintRenderer/renderers/Math',
 
 //do not print
@@ -77,8 +79,6 @@ define([
             'hottextInteraction':                          false,
             'hotspotInteraction':                          false,
             'gapMatchInteraction':                         false,
-            'inlineChoiceInteraction':                     false,
-            'inlineChoice':                                false,
             'selectPointInteraction':                      false,
             'graphicOrderInteraction':                     false,
             'mediaInteraction':                            false,
