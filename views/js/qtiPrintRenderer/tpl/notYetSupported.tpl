@@ -1,4 +1,4 @@
-<div class="render-error feedback-error">
+<article class="render-error feedback-error">
     <span class="icon-error"></span>
     <p class="message">{{{message}}}</p>
 {{#if additional}}
@@ -7,4 +7,4 @@
         <p class="info">{{{additional}}}</p>
     </div>
 {{/if}}
-</div>
+</article>
