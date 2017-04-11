@@ -24,7 +24,7 @@
  */
 define([
     'taoItems/assets/manager',
-    'taoItems/assets/strategies',
+    'taoItems/assets/strategies'
 ], function(assetManagerFactory, assetStrategies){
     'use strict';
 
@@ -51,10 +51,14 @@ define([
             'object':                                      'taoQtiPrint/qtiPrintRenderer/renderers/Object',
             'prompt':                                      'taoQtiPrint/qtiPrintRenderer/renderers/interactions/Prompt',
             'choiceInteraction':                           'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ChoiceInteraction',
+            'matchInteraction':                            'taoQtiPrint/qtiPrintRenderer/renderers/interactions/MatchInteraction',
+            'inlineChoiceInteraction':                     'taoQtiPrint/qtiPrintRenderer/renderers/interactions/InlineChoiceInteraction',
             'extendedTextInteraction':                     'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ExtendedTextInteraction',
             'textEntryInteraction':                        'taoQtiPrint/qtiPrintRenderer/renderers/interactions/TextEntryInteraction',
             'simpleChoice.choiceInteraction':              'taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteraction',
-            'math' :                                       'taoQtiPrint/qtiPrintRenderer/renderers/Math',
+            'simpleAssociableChoice.matchInteraction':     'taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleAssociableChoice.MatchInteraction',
+            'inlineChoice':                                'taoQtiPrint/qtiPrintRenderer/renderers/choices/InlineChoice',
+            'math':                                        'taoQtiPrint/qtiPrintRenderer/renderers/Math',
 
 //do not print
             '_simpleFeedbackRule':                         false,
@@ -66,19 +70,15 @@ define([
 //not implemented
             'orderInteraction':                            false,
             'associateInteraction':                        false,
-            'matchInteraction':                            false,
             'sliderInteraction':                           false,
             'simpleChoice.orderInteraction':               false,
             'hottext':                                     false,
             'gap':                                         false,
             'gapText':                                     false,
-            'simpleAssociableChoice.matchInteraction':     false,
             'simpleAssociableChoice.associateInteraction': false,
             'hottextInteraction':                          false,
             'hotspotInteraction':                          false,
             'gapMatchInteraction':                         false,
-            'inlineChoiceInteraction':                     false,
-            'inlineChoice':                                false,
             'selectPointInteraction':                      false,
             'graphicOrderInteraction':                     false,
             'mediaInteraction':                            false,

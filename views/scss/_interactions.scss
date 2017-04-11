@@ -15,15 +15,96 @@ $iaBackground: #eee;
         }
     }
 
-
     input.qti-textEntryInteraction {
         border: none;
         border-bottom: dashed #000 1px;
         background-color: $iaBackground;
         border-radius: 2px;
     }
+
+    .qti-inlineChoice {
+        border: dashed #000 1px;
+        background-color: $iaBackground;
+        border-radius: 2px;
+        margin-left: 1rem;
+        &:first-child {
+            margin-left: 0;
+        }
+    }
 }
 
+@mixin qtiChoiceBox {
+    content: ' ';
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin: 0 6px 0 3px;
+    border: solid #000 1px;
+    background-color: $iaBackground;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    position: relative;
+    top: 3px;
+}
+@mixin qtiChoiceBoxRtl {
+    content: ' ';
+    float: right;
+    margin: 0 3px 0 6px;
+    border: solid #000 1px;
+}
+@mixin qtiChoiceBoxAnswered {
+    content: '\00d7';
+}
+
+.qti-choiceInteraction, .qti-inlineChoiceInteraction {
+    .qti-choice {
+        input[type="radio"], input[type="checkbox"] {
+            display: none;
+        }
+        input[type="checkbox"] + label,
+        input[type="radio"] + label {
+            display: inline-block;
+            &:before {
+                @include qtiChoiceBox();
+            }
+        }
+        input[type="checkbox"]:checked + label,
+        input[type="radio"]:checked + label {
+            &:before {
+                @include qtiChoiceBoxAnswered();
+            }
+        }
+    }
+}
+
+.qti-matchInteraction {
+    label {
+        input[type="radio"], input[type="checkbox"] {
+            display: none;
+        }
+
+        display: inline-block;
+        &:before {
+            @include qtiChoiceBox();
+        }
+    }
+}
+
+.rtl{
+    .qti-choiceInteraction, .qti-inlineChoiceInteraction {
+        .qti-choice {
+            input[type="checkbox"] + label,
+            input[type="radio"] + label {
+                display: inline-block;
+                &:before {
+                    @include qtiChoiceBoxRtl();
+                }
+            }
+        }
+    }
+}
 
 .qti-choiceInteraction {
     ol {
@@ -34,37 +115,12 @@ $iaBackground: #eee;
     .qti-choice {
         clear: both;
         margin-bottom: 3px;
-        input[type="radio"], input[type="checkbox"] {
-            display: none;
-        }
         input[type="checkbox"] + label,
         input[type="radio"] + label {
             display: block;
-            &:before {
-                content: ' ';
-                float: left;
-                width: 14px;
-                height: 14px;
-                margin: 0 6px 0 3px;
-                border: solid #000 1px;
-                background-color: $iaBackground;
-                border-radius: 2px;
-                font-size: 14px;
-                line-height: 14px;
-                text-align: center;
-                position: relative;
-                top: 3px;
-            }
-        }
-        input[type="checkbox"]:checked + label,
-        input[type="radio"]:checked + label {
-            &:before {
-                content: '\00d7';
-            }
         }
     }
 }
-
 
 .rtl{
     .qti-choiceInteraction {
@@ -72,13 +128,26 @@ $iaBackground: #eee;
             input[type="checkbox"] + label,
             input[type="radio"] + label {
                 display: block;
-                &:before {
-                    content: ' ';
-                    float: right;
-                    margin: 0 3px 0 6px;
-                    border: solid #000 1px;
-                }
             }
+        }
+    }
+}
+
+.render-error {
+    .icon {}
+    .message {}
+    .additional {
+        font-size: 1.2rem;
+    }
+    .title {
+        font-weight: bold;
+        margin: 6px 0;
+    }
+    .info {
+        margin: 4px 10px 4px 20px;
+
+        &:before {
+            content: "- ";
         }
     }
 }
