@@ -83,6 +83,9 @@ main > section {
         margin-bottom: 10px;
     }
 }
+.one-item-per-page main > section.item {
+    page-break-before: always;
+}
 main > .breaker{
     page-break-before: always;
     page-break-after: always;
