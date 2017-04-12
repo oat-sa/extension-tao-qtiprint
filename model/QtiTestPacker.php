@@ -22,7 +22,6 @@ namespace oat\taoQtiPrint\model;
 use common_Exception;
 use core_kernel_classes_Resource;
 use InvalidArgumentException;
-use oat\taoItems\model\pack\Packer;
 use oat\taoQtiItem\model\qti\Service;
 use oat\taoTests\models\pack\Packable;
 use oat\taoTests\models\pack\TestPack;

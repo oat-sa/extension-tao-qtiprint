@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -14,26 +15,29 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2017 (original work) Open Assessment Technologies SA;
- *
- *
+ * Copyright (c) 2017 (original work) Open Assessment Technologies SA (under the project TAO-PRODUCT);
  */
-namespace oat\taoQtiPrint\scripts\update;
+
+namespace oat\taoQtiPrint\model;
+
+use oat\taoItems\model\pack\Packer as ItemPacker;
 
 /**
- * Class Updater
- * @package oat\taoQtiPrint\scripts\update
+ * The Item Pack represents the item package data produced by the compilation.
+ *
+ * Class Packer
+ * @package oat\taoQtiPrint\model
+ * @author Jean-Sebastien CONAN <jean-sebastien@taotesting.com>
  */
-class Updater extends \common_ext_ExtensionUpdater {
-
+class Packer extends ItemPacker
+{
     /**
+     * Get the packer for the item regarding it's implementation.
      *
-     * @param string $initialVersion
-     * @return string $versionUpdatedTo
+     * @return ItemPacker the item packer implementation
      */
-    public function update($initialVersion) {
-
-        $this->skip('0.1.0','0.2.1');
-
+    protected function getItemPacker()
+    {
+        return new QtiItemPacker();
     }
 }
