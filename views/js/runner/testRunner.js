@@ -25,8 +25,9 @@ define([
     'async',
     'helpers',
     'taoQtiPrint/runner/itemRunner',
+    'taoItems/assets/strategies',
     'taoQtiPrint/lib/qrcode'
-], function($, _, async, helpers, itemRunner, QRCode) {
+], function($, _, async, helpers, itemRunner, assetStrategies, QRCode) {
     'use str11ict';
 
     //TODO find him his own place. Waiting is own house, the testRenderer squats the runner flat.
@@ -70,15 +71,31 @@ define([
             done(null, $sectionPage);
         },
 
-        itemPage: function renderItemPage(item, uri, pageNum, done) {
+        itemPage: function renderItemPage(item, uri, pageNum, assets,  done) {
             var $itemContainer = this.createPage('item');
 
-            itemRunner('qtiprint', item, { uri : uri})
+            itemRunner('qtiprint', item)
                 .on('error', function(err) {
                     done(err);
                 })
                 .on('render', function() {
                     done(null, $itemContainer);
+                })
+                .assets([
+                    assetStrategies.taomedia,
+                    assetStrategies.external,
+                    {
+                        name: 'packageAssetHandler',
+                        handle: function handleAssetFromPackage(url) {
+                            for (var type in assets) {
+                                if (assets[type][url.toString()]) {
+                                    return assets[type][url.toString()];
+                                }
+                            }
+                        }
+                    }
+                ], {
+                    baseUrl : helpers._url('getFile', 'QtiCreator', 'taoQtiItem', {uri : uri, lang : 'en-US'}) + '&relPath='
                 })
                 .init()
                 .render($itemContainer);
@@ -173,7 +190,7 @@ define([
                                 //transform the function of the renderer to fit the format required by async (partial with data and binding)
                                 pageRenderers.push(
                                     _.bind(
-                                        _.partial(testRenderer.itemPage, testData.items[item.href].data, item.href, pageRenderers.length),
+                                        _.partial(testRenderer.itemPage, testData.items[item.href].data, item.href, pageRenderers.length, testData.items[item.href].assets),
                                         testRenderer
                                    )
                                 );

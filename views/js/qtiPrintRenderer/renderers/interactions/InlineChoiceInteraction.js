@@ -13,35 +13,27 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015 (original work) Open Assessment Technologies SA ;
+ * Copyright (c) 2017 (original work) Open Assessment Technlogies SA (under the project TAO-PRODUCT);
  */
 
 /**
- * The math renderer
+ * The inline choice interaction renderer
  *
- * @author Bertrand Chevrier <bertrand@taotesting.com>
+ * @author Jean-Sebastien CONAN <jean-sebastien@taotesting.com>
  */
 define([
-    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/math',
-    'taoQtiPrint/qtiPrintRenderer/helpers/container',
-    'mathJax'
-], function(tpl, getContainer, MathJax){
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/interactions/inlineChoiceInteraction',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'
+], function(tpl, getContainer){
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Math
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/interactions/InlineChoiceInteraction
      */
     return {
-        qtiClass:     'math',
-        template:     tpl,
-        getContainer: getContainer,
-        render: function(math, data){
-            if(typeof(MathJax) !== 'undefined' && MathJax){
-                _.delay(function(){//defer execution fix some rendering issue in chrome
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, getContainer(math).parent()[0]]);
-                },60);
-            }
-        }
+        qtiClass : 'inlineChoiceInteraction',
+        template : tpl,
+        getContainer: getContainer
     };
 });

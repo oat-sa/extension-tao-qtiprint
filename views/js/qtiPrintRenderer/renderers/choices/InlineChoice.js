@@ -13,35 +13,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015 (original work) Open Assessment Technologies SA ;
+ * Copyright (c) 2017 (original work) Open Assessment Technlogies SA (under the project TAO-PRODUCT);
  */
 
 /**
- * The math renderer
+ * The inline choice renderer
  *
- * @author Bertrand Chevrier <bertrand@taotesting.com>
+ * @author Jean-Sebastien CONAN <jean-sebastien@taotesting.com>
  */
 define([
-    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/math',
-    'taoQtiPrint/qtiPrintRenderer/helpers/container',
-    'mathJax'
-], function(tpl, getContainer, MathJax){
+    'lodash',
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/choices/inlineChoice',
+    'taoQtiPrint/qtiPrintRenderer/helpers/container'
+], function (_, tpl, getContainer) {
     'use strict';
 
     /**
      * Expose the renderer
-     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Math
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/choices/inlineChoice
      */
     return {
-        qtiClass:     'math',
-        template:     tpl,
+        qtiClass: 'inlineChoice',
         getContainer: getContainer,
-        render: function(math, data){
-            if(typeof(MathJax) !== 'undefined' && MathJax){
-                _.delay(function(){//defer execution fix some rendering issue in chrome
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, getContainer(math).parent()[0]]);
-                },60);
-            }
+        template: tpl,
+        getData: function getData(choice, data) {
+            data.body = _.unescape(data.body);
+            return data;
         }
     };
 });

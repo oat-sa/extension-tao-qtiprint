@@ -1,4 +1,6 @@
-/*
+<?php
+
+/**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; under version 2
@@ -13,24 +15,29 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015 (original work) Open Assessment Technologies SA ;
+ * Copyright (c) 2017 (original work) Open Assessment Technologies SA (under the project TAO-PRODUCT);
  */
+
+namespace oat\taoQtiPrint\model;
+
+use oat\taoItems\model\pack\Packer as ItemPacker;
 
 /**
- * The QTI Print renderer built using the print config
+ * The Item Pack represents the item package data produced by the compilation.
  *
- * @author Bertrand Chevrier <bertrand@taotesting.com>
+ * Class Packer
+ * @package oat\taoQtiPrint\model
+ * @author Jean-Sebastien CONAN <jean-sebastien@taotesting.com>
  */
-define([
-    'taoQtiItem/qtiRunner/core/Renderer',
-    'taoQtiPrint/qtiPrintRenderer/renderers/config',
-    'css!taoQtiPrintCss/qti.css'
-], function(Renderer, config){
-    'use strict';
-
+class Packer extends ItemPacker
+{
     /**
-     * Build and expost the printRenderer
-     * @exports taoQtiPrint/qtiPrintRenderer/renderers/config
+     * Get the packer for the item regarding it's implementation.
+     *
+     * @return ItemPacker the item packer implementation
      */
-    return Renderer.build(config.locations, config.name, config.options);
-});
+    protected function getItemPacker()
+    {
+        return new QtiItemPacker();
+    }
+}

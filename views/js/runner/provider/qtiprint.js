@@ -22,11 +22,16 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
+    'i18n',
     'helpers',
+    'core/logger',
     'taoQtiItem/qtiItem/core/Loader',
-    'taoQtiPrint/qtiPrintRenderer/renderers/Renderer'],
-function(helpers, QtiLoader, QtiRenderer){
+    'taoQtiPrint/qtiPrintRenderer/renderers/Renderer',
+    'tpl!taoQtiPrint/qtiPrintRenderer/tpl/notYetSupported'],
+function(__, helpers, loggerFactory, QtiLoader, QtiRenderer, notYetSupportedTpl){
     'use strict';
+
+    var logger = loggerFactory('runner/provider/qtiPrint');
 
     /**
      * @exports taoQtiPrint/runner/provider/qtiprint
@@ -36,9 +41,8 @@ function(helpers, QtiLoader, QtiRenderer){
         init : function init (itemData, done){
             var self = this;
 
-            //TODO configure the renderer URLs using an AssetManager
             this._renderer = new QtiRenderer({
-                baseUrl : helpers._url('getFile', 'QtiCreator', 'taoQtiItem', {uri : this.options.uri, lang : 'en-US'}) + '&relPath='
+                assetManager : this.assetManager
             });
 
             new QtiLoader().loadItemData(itemData, function(item){
@@ -46,6 +50,7 @@ function(helpers, QtiLoader, QtiRenderer){
                     return self.trigger('error', 'Unable to load item from the given data.');
                 }
 
+                self._itemData = itemData;
                 self._item = item;
                 try{
                     self._renderer.load(function(){
@@ -66,13 +71,14 @@ function(helpers, QtiLoader, QtiRenderer){
                 try {
                     elt.innerHTML = this._item.render({});
                 } catch(e){
-                    console.error(e);
-                    self.trigger('error', 'Error in template rendering : ' +  e);
+                    logger.trace(e);
+                    elt.innerHTML = missingSupport(this._itemData, e);
+                    self.trigger('warning', 'Error in template rendering : ' +  e);
                 }
                 try {
                     this._item.postRender();
                 } catch(e){
-                    console.error(e);
+                    logger.error(e);
                     self.trigger('error', 'Error in post rendering : ' +  e);
                 }
                 done();
@@ -93,6 +99,17 @@ function(helpers, QtiLoader, QtiRenderer){
             return [];
         }
     };
+
+    function missingSupport(item, additional) {
+        var label = item.identifier;
+        if (item.attributes && item.attributes.label) {
+            label = item.attributes.label;
+        }
+        return notYetSupportedTpl({
+            message: __("The item &laquo;%s&raquo; contains an interaction that is not yet supported for printing purpose", label),
+            additional: additional
+        });
+    }
 
     return qtiItemRuntimeProvider;
 });

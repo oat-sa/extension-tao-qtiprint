@@ -22,8 +22,20 @@
  *
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
-define([], function(){
+define([
+    'taoItems/assets/manager',
+    'taoItems/assets/strategies'
+], function(assetManagerFactory, assetStrategies){
     'use strict';
+
+
+    //asset manager using base url
+    var assetManager = assetManagerFactory([
+        assetStrategies.taomedia,
+        assetStrategies.external,
+        assetStrategies.base64,
+        assetStrategies.baseUrl
+    ], {baseUrl : ''});
 
     /**
      * @exports taoQtiPrint/qtiPrintRenderer/renderers/config
@@ -39,9 +51,14 @@ define([], function(){
             'object':                                      'taoQtiPrint/qtiPrintRenderer/renderers/Object',
             'prompt':                                      'taoQtiPrint/qtiPrintRenderer/renderers/interactions/Prompt',
             'choiceInteraction':                           'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ChoiceInteraction',
+            'matchInteraction':                            'taoQtiPrint/qtiPrintRenderer/renderers/interactions/MatchInteraction',
+            'inlineChoiceInteraction':                     'taoQtiPrint/qtiPrintRenderer/renderers/interactions/InlineChoiceInteraction',
             'extendedTextInteraction':                     'taoQtiPrint/qtiPrintRenderer/renderers/interactions/ExtendedTextInteraction',
             'textEntryInteraction':                        'taoQtiPrint/qtiPrintRenderer/renderers/interactions/TextEntryInteraction',
             'simpleChoice.choiceInteraction':              'taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteraction',
+            'simpleAssociableChoice.matchInteraction':     'taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleAssociableChoice.MatchInteraction',
+            'inlineChoice':                                'taoQtiPrint/qtiPrintRenderer/renderers/choices/InlineChoice',
+            'math':                                        'taoQtiPrint/qtiPrintRenderer/renderers/Math',
 
 //do not print
             '_simpleFeedbackRule':                         false,
@@ -53,19 +70,15 @@ define([], function(){
 //not implemented
             'orderInteraction':                            false,
             'associateInteraction':                        false,
-            'matchInteraction':                            false,
             'sliderInteraction':                           false,
             'simpleChoice.orderInteraction':               false,
             'hottext':                                     false,
             'gap':                                         false,
             'gapText':                                     false,
-            'simpleAssociableChoice.matchInteraction':     false,
             'simpleAssociableChoice.associateInteraction': false,
             'hottextInteraction':                          false,
             'hotspotInteraction':                          false,
             'gapMatchInteraction':                         false,
-            'inlineChoiceInteraction':                     false,
-            'inlineChoice':                                false,
             'selectPointInteraction':                      false,
             'graphicOrderInteraction':                     false,
             'mediaInteraction':                            false,
@@ -76,6 +89,9 @@ define([], function(){
             'customInteraction':                           false,
             'infoControl':                                 false,
             'endAttemptInteraction':                       false,
+        },
+        options:   {
+            assetManager: assetManager
         }
     };
 });
