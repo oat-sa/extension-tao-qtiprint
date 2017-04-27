@@ -24,10 +24,10 @@ return array(
 	'label' => 'qti',
 	'description' => 'Provides printable rendering for QTI Items',
     'license' => 'GPL-2.0',
-    'version' => '0.3.0',
+    'version' => '1.1.0',
 	'author' => 'Open Assessment Technologies SA',
 	'requires' => array(
-	    'tao' => '>=2.7.10',
+	    'tao' => '>=9.0.0',
         'taoQtiItem' => '>=7.0.4',
         'taoQtiTest' => '>=7.0.0'
     ),
@@ -56,8 +56,5 @@ return array(
 
 		#BASE URL (usually the domain root)
 		'BASE_URL' => ROOT_URL.'taoQtiPrint/',
-
-	    #BASE WWW required by JS
-	    'BASE_WWW' => ROOT_URL.'taoQtiPrint/views/'
 	)
 );
