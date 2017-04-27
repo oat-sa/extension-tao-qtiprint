@@ -51,19 +51,26 @@ define([
             return $('<section></section>').addClass(type);
         },
 
-        testPage: function rendertestPage(test, done) {
+        testPage: function rendertestPage(test, options, done) {
+            var coverPageOptions = options && options.cover_page || {};
             var $content = $(pageTestTpl({
-                title: test.title
+                title: coverPageOptions['title'] && test.title,
+                subtitle: coverPageOptions['description'] && options.description,
+                qrcode: coverPageOptions['qr_code'],
+                logo: coverPageOptions['logo'] && options.logo,
+                date: coverPageOptions['date'] && options.date
             }));
 
-            new QRCode($('.qr-code', $content).get(0), {
-                text:         urlHelper.route('render', 'PrintTest', 'taoBooklet', { uri :  test.uri}),
-                width:        192,
-                height:       192,
-                colorDark:    "#000000",
-                colorLight:   "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
+            if (coverPageOptions['qr_code']) {
+                new QRCode($('.qr-code', $content).get(0), {
+                    text:         urlHelper.route('render', 'PrintTest', 'taoBooklet', { uri :  test.uri}),
+                    width:        192,
+                    height:       192,
+                    colorDark:    "#000000",
+                    colorLight:   "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
 
             done(null, $content);
         },
@@ -123,13 +130,7 @@ define([
      * @returns {TestRunner}
      */
     var testRunnerFactory = function testRunnerFactory(testData, options) {
-
-        testData = testData || {};
-
-        if (!testData || !testData.data || !testData.items) {
-            throw new Error('Invalid test data structure');
-        }
-
+        var layoutOptions = options && options.layout || {};
         var testRunner = eventifier({
 
             /**
@@ -170,12 +171,14 @@ define([
                 //Build the pageRenderers array that contains each page to render
 
                 //transform the function of the renderer to fit the format required by async (partial with data and binding)
-                pageRenderers.push(
-                    _.bind(
-                        _.partial(testRenderer.testPage, testData.data),
-                        testRenderer
-                    )
-                );
+                if (layoutOptions['cover_page']) {
+                    pageRenderers.push(
+                        _.bind(
+                            _.partial(testRenderer.testPage, testData.data, options),
+                            testRenderer
+                        )
+                    );
+                }
 
                 _.forEach(testData.data.testParts, function(testPart) {
                     _.forEach(testPart.sections, function(section) {
@@ -253,6 +256,12 @@ define([
                 return this;
             }
         });
+
+        testData = testData || {};
+
+        if (!testData || !testData.data || !testData.items) {
+            throw new Error('Invalid test data structure');
+        }
 
         return testRunner;
     };
