@@ -78,6 +78,8 @@ define([
             'simpleAssociableChoice.associateInteraction': false,
             'hottextInteraction':                          false,
             'hotspotInteraction':                          false,
+            'hotspotChoice':                               false,
+            'associableHotspot':                           false,
             'gapMatchInteraction':                         false,
             'selectPointInteraction':                      false,
             'graphicOrderInteraction':                     false,
@@ -88,7 +90,7 @@ define([
             'graphicAssociateInteraction':                 false,
             'customInteraction':                           false,
             'infoControl':                                 false,
-            'endAttemptInteraction':                       false,
+            'endAttemptInteraction':                       false
         },
         options:   {
             assetManager: assetManager

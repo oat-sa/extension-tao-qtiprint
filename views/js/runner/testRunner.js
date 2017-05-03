@@ -23,12 +23,26 @@ define([
     'jquery',
     'lodash',
     'async',
-    'helpers',
+    'util/url',
+    'core/eventifier',
     'taoQtiPrint/runner/itemRunner',
     'taoItems/assets/strategies',
-    'taoQtiPrint/lib/qrcode'
-], function($, _, async, helpers, itemRunner, assetStrategies, QRCode) {
-    'use str11ict';
+    'taoQtiPrint/lib/qrcode',
+    'tpl!taoQtiPrint/runner/tpl/pageTest',
+    'tpl!taoQtiPrint/runner/tpl/pageSection',
+    'tpl!taoQtiPrint/runner/tpl/pageItem'
+], function ($,
+             _,
+             asyncLib,
+             urlHelper,
+             eventifier,
+             itemRunner,
+             assetStrategies,
+             QRCode,
+             pageTestTpl,
+             pageSectionTpl,
+             pageItemTpl) {
+    'use strict';
 
     //TODO find him his own place. Waiting is own house, the testRenderer squats the runner flat.
     var testRenderer = {
@@ -37,49 +51,48 @@ define([
             return $('<section></section>').addClass(type);
         },
 
-        //TODO replace by a template
-        testPage: function rendertestPage(test, done) {
+        testPage: function rendertestPage(test, options, done) {
+            var coverPageOptions = options && options.cover_page || {};
+            var $content = $(pageTestTpl({
+                title: coverPageOptions['title'] && test.title,
+                subtitle: coverPageOptions['description'] && options.description,
+                qrcode: coverPageOptions['qr_code'],
+                logo: coverPageOptions['logo'] && options.logo,
+                date: coverPageOptions['date'] && options.date
+            }));
 
-            var $testPage = this.createPage('title');
-            var $codeElt = $('<div class="qr-code">');
-            var qrCode = new QRCode($codeElt[0], {
-                text:         helpers._url('render', 'PrintTest', 'taoBooklet', { uri :  test.uri}),
-                width:        192,
-                height:       192,
-                colorDark:    "#000000",
-                colorLight:   "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
+            if (coverPageOptions['qr_code']) {
+                new QRCode($('.qr-code', $content).get(0), {
+                    text:         urlHelper.route('render', 'PrintTest', 'taoBooklet', { uri :  test.uri}),
+                    width:        192,
+                    height:       192,
+                    colorDark:    "#000000",
+                    colorLight:   "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
 
-            $testPage.append('<h1>' + test.title + '</h1>')
-                     .append($codeElt);
-
-            done(null, $testPage);
+            done(null, $content);
         },
 
-        //TODO replace by a template
         sectionPage: function renderSectionPage(section, pageNum, done) {
+            var $content = $(pageSectionTpl({
+                title: section.title,
+                rubricBlock: section.rubricBlock
+            }));
 
-
-            var $sectionPage = this.createPage('section');
-
-            $sectionPage.append('<h2>' + section.title + '</h2>');
-
-            _.forEach(section.rubricBlock, function(rubricBlock) {
-                $sectionPage.append('<div>' + rubricBlock + '</div>');
-            });
-            done(null, $sectionPage);
+            done(null, $content);
         },
 
         itemPage: function renderItemPage(item, uri, pageNum, assets,  done) {
-            var $itemContainer = this.createPage('item');
+            var $content = $(pageItemTpl());
 
             itemRunner('qtiprint', item)
                 .on('error', function(err) {
                     done(err);
                 })
                 .on('render', function() {
-                    done(null, $itemContainer);
+                    done(null, $content);
                 })
                 .assets([
                     assetStrategies.taomedia,
@@ -95,10 +108,10 @@ define([
                         }
                     }
                 ], {
-                    baseUrl : helpers._url('getFile', 'QtiCreator', 'taoQtiItem', {uri : uri, lang : 'en-US'}) + '&relPath='
+                    baseUrl : urlHelper.route('getFile', 'QtiCreator', 'taoQtiItem', {uri : uri, lang : 'en-US'}) + '&relPath='
                 })
                 .init()
-                .render($itemContainer);
+                .render($content);
         }
     };
 
@@ -117,17 +130,8 @@ define([
      * @returns {TestRunner}
      */
     var testRunnerFactory = function testRunnerFactory(testData, options) {
-
-        testData = testData || {};
-
-        if (!testData || !testData.data || !testData.items) {
-            throw new Error('Invalid test data structure');
-        }
-
-        //contains the bound events.
-        var events = {};
-
-        var testRunner = {
+        var layoutOptions = options && options.layout || {};
+        var testRunner = eventifier({
 
             /**
              * Test container
@@ -167,12 +171,14 @@ define([
                 //Build the pageRenderers array that contains each page to render
 
                 //transform the function of the renderer to fit the format required by async (partial with data and binding)
-                pageRenderers.push(
-                    _.bind(
-                        _.partial(testRenderer.testPage, testData.data),
-                        testRenderer
-                    )
-                );
+                if (layoutOptions['cover_page']) {
+                    pageRenderers.push(
+                        _.bind(
+                            _.partial(testRenderer.testPage, testData.data, options),
+                            testRenderer
+                        )
+                    );
+                }
 
                 _.forEach(testData.data.testParts, function(testPart) {
                     _.forEach(testPart.sections, function(section) {
@@ -200,7 +206,7 @@ define([
                 });
 
                 //then we call all the renderers in parallel
-                async.parallel(pageRenderers, function renderingDone(err, $results) {
+                asyncLib.parallel(pageRenderers, function renderingDone(err, $results) {
                     if (err) {
                         self.trigger('error', 'An error occurred while rendering a page :  ' + err);
                     }
@@ -248,54 +254,14 @@ define([
                 this.trigger('clear');
 
                 return this;
-            },
-            /**
-             * Attach an event handler.
-             * Calling `on` with the same eventName multiple times add callbacks: they
-             * will all be executed.
-             *
-             * @param {String} name - the name of the event to listen
-             * @param {Function} handler - the callback to run once the event is triggered. It's executed with the current testRunner context (ie. this
-             * @returns {TestRunner}
-             */
-            on: function(name, handler) {
-                if (_.isString(name) && _.isFunction(handler)) {
-                    events[name] = events[name] || [];
-                    events[name].push(handler);
-                }
-                return this;
-            },
-
-            /**
-             * Remove handlers for an event.
-             *
-             * @param {String} name - the event name
-             * @returns {TestRunner}
-             */
-            off: function(name) {
-                if (_.isString(name)) {
-                    events[name] = [];
-                }
-                return this;
-            },
-
-            /**
-             * Trigger an event manually.
-             *
-             * @param {String} name - the name of the event to trigger
-             * @param {*} data - arguments given to the handlers
-             * @returns {TestRunner}
-             */
-            trigger: function(name, data) {
-                var self = this;
-                if (_.isString(name) && _.isArray(events[name])) {
-                    _.forEach(events[name], function(event) {
-                        event.call(self, data);
-                    });
-                }
-                return this;
             }
-        };
+        });
+
+        testData = testData || {};
+
+        if (!testData || !testData.data || !testData.items) {
+            throw new Error('Invalid test data structure');
+        }
 
         return testRunner;
     };

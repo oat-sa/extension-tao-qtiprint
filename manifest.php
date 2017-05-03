@@ -24,7 +24,7 @@ return array(
 	'label' => 'qti',
 	'description' => 'Provides printable rendering for QTI Items',
     'license' => 'GPL-2.0',
-    'version' => '1.0.0',
+    'version' => '1.1.0',
 	'author' => 'Open Assessment Technologies SA',
 	'requires' => array(
 	    'tao' => '>=9.0.0',
