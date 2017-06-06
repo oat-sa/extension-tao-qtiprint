@@ -95,6 +95,19 @@ define([
                     done(null, $content);
                 })
                 .assets([
+                    {
+                        name: 'base64package',
+                        handle: function handleBase64(url) {
+                            var id = url.file;
+                            var found = _.find(assets,  function (assetsList) {
+                                var asset = assetsList[id];
+                                return !!(asset && urlHelper.isBase64(asset));
+                            });
+                            if (found) {
+                                return found[id];
+                            }
+                        }
+                    },
                     assetStrategies.taomedia,
                     assetStrategies.external,
                     {
