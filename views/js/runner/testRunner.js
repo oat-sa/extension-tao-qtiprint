@@ -84,12 +84,20 @@ define([
             done(null, $content);
         },
 
-        itemPage: function renderItemPage(item, uri, pageNum, assets,  done) {
+        itemPage: function renderItemPage(itemRef, itemState, uri, pageNum, done) {
             var $content = $(pageItemTpl());
+            var item = itemRef.data;
+            var assets = itemRef.assets;
 
-            itemRunner('qtiprint', item)
+            itemRunner('qtiprint', item, {renderer: itemRef.renderer})
                 .on('error', function(err) {
                     done(err);
+                })
+                .on('init', function(){
+                    if(itemState){
+                        this.setState(itemState);
+                    }
+                    this.render($content);
                 })
                 .on('render', function() {
                     done(null, $content);
@@ -123,8 +131,7 @@ define([
                 ], {
                     baseUrl : urlHelper.route('getFile', 'QtiCreator', 'taoQtiItem', {uri : uri, lang : 'en-US'}) + '&relPath='
                 })
-                .init()
-                .render($content);
+                .init();
         }
     };
 
@@ -182,8 +189,8 @@ define([
                 }
 
                 //Build the pageRenderers array that contains each page to render
+                //Transform the functions of the renderer to fit the format required by async (partial with data and binding)
 
-                //transform the function of the renderer to fit the format required by async (partial with data and binding)
                 if (layoutOptions['cover_page']) {
                     pageRenderers.push(
                         _.bind(
@@ -204,12 +211,14 @@ define([
                         );
 
                         _.forEach(section.items, function(item) {
-                            //
-                            if (testData.items[item.href] && testData.items[item.href].data) {
-                                //transform the function of the renderer to fit the format required by async (partial with data and binding)
+                            var itemRef = testData.items[item.href];
+                            var itemState = testData.states && testData.states[item.href];
+
+                            if (itemRef && itemRef.data) {
+                                itemRef.renderer = options.regular ? 'taoQtiItem' : 'taoQtiPrint';
                                 pageRenderers.push(
                                     _.bind(
-                                        _.partial(testRenderer.itemPage, testData.items[item.href].data, item.href, pageRenderers.length, testData.items[item.href].assets),
+                                        _.partial(testRenderer.itemPage, itemRef, itemState, item.href, pageRenderers.length),
                                         testRenderer
                                    )
                                 );
