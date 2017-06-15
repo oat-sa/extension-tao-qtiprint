@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AA+BQ,sBAAa,CACT,0BAA0B,CAAE,KAAK",
+"sources": ["../../../../scss/themes/platform/_common/base-theme.scss"],
+"names": [],
+"file": "theme.css"
+}

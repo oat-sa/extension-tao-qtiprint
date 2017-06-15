@@ -1,0 +1,33 @@
+////
+/// TAO CSS SDK
+/// Generic item theme
+/// @group Item themes
+////
+
+@import './inc/bootstrap';
+
+$bodySelector: 'body';
+
+/// include @font-face declarations here
+@import './inc/font-face';
+
+
+/// The cascade html body div.qti-item is meant to make sure that all style modifications affect
+/// the item only.
+/// Warning: Any style that is applied outside the item scope can influence the look of the whole
+/// platform! Handle those cases with great care and test them well!
+@import './inc/html';
+
+/// Everything below here is outside the item scope - read the warning above!
+
+/// Select2 and maybe other frameworks have some parts that are outside the item,
+/// usually directly attached to the document body
+@import './inc/select2/outside-item-scope';
+
+/// Media queries also need to be done outside the item scope.
+/// @see ./inc/mediaqueries/template.scss
+/// This example targets IE 10+
+
+// Media queries are not supported in print setup (nested queries). Should they be required
+// a way to combine them with the query in the 'media-print theme'
+//@import './inc/mediaqueries/ie10+';

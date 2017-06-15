@@ -1,0 +1,43 @@
+////
+/// TAO CSS SDK
+/// Mixins for interactions only
+/// @group Item Themes
+////
+
+
+@mixin checkbox($checked: false) {
+    border: 1px black solid;
+    background: $interactable;
+    display: inline-block;
+    width: 12pt;
+    height: 9pt;
+    font-size: 10pt;
+    text-indent: 2pt;
+    padding-bottom: 11pt;
+    border-radius:1pt;
+    transform: scale(.9);
+    @if($checked == true) {
+        content: " ";
+    }
+    @else {
+        content: "\2713";
+    }
+}
+
+
+@mixin qtiChoiceBox {
+    content: ' ';
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin: 0 6px 0 3px;
+    border: solid #000 1px;
+    background-color: $interactable;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    position: relative;
+    top: 3px;
+}
+

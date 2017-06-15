@@ -1,0 +1,153 @@
+$main: '.tao-scope'; // .tao-scope | main
+$section: '.grid-row'; // .grid-row | section
+
+html {
+    #{$bodySelector} {
+        height: auto;
+        background: white;
+
+        &.tao-item-scope {
+            /// Outside the item scope - read the warning above!
+        }
+
+        &.one-section-per-page {
+            & > #{$main} {
+                & > #{$section} {
+                    &.item {
+                        page-break-after: always;
+                    }
+                }
+            }
+        }
+        &.one-item-per-page {
+            & > #{$main} {
+                & > #{$section} {
+                    &.item {
+                        page-break-before: always;
+                    }
+                }
+            }
+        }
+
+        & /*>*/ #{$main} {
+            font: 12pt/1.2 $regularFont;
+
+            // print specific
+            @import './print-reset';
+
+            // Generic HTML elements, CSS classes and such
+            @import './generic';
+
+            padding: 0;
+            max-width: none;
+
+            & /*>*/ #{$section} {
+
+                /// Generic imports
+                /// These files will cover the most common scenarios. If you need to take your modifications even
+                /// further browse through https://github.com/oat-sa/tao-core/tree/develop/views/scss/inc.
+                /// Essentially you can copy each file from there to here and modify it as needed.
+                @import './select2/inside-item-scope';
+                @import './table';
+                @import './feedback';
+                @import './buttons';
+
+                /// These files are already pre-filled with values. Comment them in only if you really need them.
+                @import './forms';
+
+                /// This applies to all interactions
+                @import './interactions/all-interactions';
+
+                /// These apply to specific interactions
+                @import './interactions/associate';
+                @import './interactions/choice';
+                @import './interactions/extended-text';
+                @import './interactions/gap-match';
+                @import './interactions/graphic';
+                @import './interactions/graphic-gap';
+                @import './interactions/graphic-order';
+                @import './interactions/hottext';
+                @import './interactions/inline-choice';
+                @import './interactions/match';
+                @import './interactions/media';
+                @import './interactions/order';
+                @import './interactions/rubric-block';
+                @import './interactions/slider';
+                @import './interactions/text-entry';
+                @import './interactions/upload';
+
+                &.runtime {
+                    /// styles/imports not used in authoring
+                }
+                &.title {
+                    h1, h2, h3 {
+                        text-align: center;
+                    }
+                    h1 {
+                        font-size: 36pt;
+                        margin: 36pt;
+                    }
+                    h2 {
+                        font-size: 20pt;
+                        margin: 20pt;
+                    }
+                    h3 {
+                        font-size: 16pt;
+                        margin: 16pt;
+                    }
+                    .logo {
+                        text-align: center;
+                        padding: 40pt 0;
+                        img {
+                            min-height: 200px;
+                            max-height: 500px;
+                            width: auto;
+                            margin: auto;
+                        }
+                    }
+                    .qr-code {
+                        text-align: center;
+                        padding: 40pt 0;
+                        img {
+                            height: 128px;
+                            width: 128px;
+                            margin: auto;
+                        }
+                    }
+                }
+                &.intro {
+                    page-break-after: always;
+                }
+                &.section {
+                    page-break-before: always;
+                }
+                &.item {
+                    page-break-inside: avoid;
+                    page-break-after: auto;
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+            & > .breaker {
+                page-break-before: always;
+                page-break-after: always;
+                height: 1px;
+            }
+
+            // @todo move these two to a better file
+            .qti-interaction-answer {
+                width: 100%;
+                border: 10px solid grey;
+                padding: 20px;
+            }
+            input[type="text"] {
+                padding: 5pt
+            }
+
+            .instruction-container {
+                display:none;
+            }
+        }
+
+    }
+}
