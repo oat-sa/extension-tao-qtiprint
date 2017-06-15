@@ -13,7 +13,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
- * Copyright (c) 2015 (original work) Open Assessment Technologies SA;
+ * Copyright (c) 2015-2017 (original work) Open Assessment Technologies SA;
  */
 
 /**
@@ -23,117 +23,18 @@ define([
     'jquery',
     'lodash',
     'async',
-    'util/url',
     'core/eventifier',
-    'taoQtiPrint/runner/itemRunner',
-    'taoItems/assets/strategies',
-    'taoQtiPrint/lib/qrcode',
-    'tpl!taoQtiPrint/runner/tpl/pageTest',
-    'tpl!taoQtiPrint/runner/tpl/pageSection',
-    'tpl!taoQtiPrint/runner/tpl/pageItem'
+    'taoQtiPrint/runner/testIterator',
+    'taoQtiPrint/runner/testRenderers',
+    'tpl!taoQtiPrint/runner/tpl/pageBlock'
 ], function ($,
              _,
              asyncLib,
-             urlHelper,
              eventifier,
-             itemRunner,
-             assetStrategies,
-             QRCode,
-             pageTestTpl,
-             pageSectionTpl,
-             pageItemTpl) {
+             testIteratorFactory,
+             testRenderers,
+             pageBlockTpl) {
     'use strict';
-
-    //TODO find him his own place. Waiting is own house, the testRenderer squats the runner flat.
-    var testRenderer = {
-
-        createPage: function createPage(type) {
-            return $('<section></section>').addClass(type);
-        },
-
-        testPage: function rendertestPage(test, options, done) {
-            var coverPageOptions = options && options.cover_page || {};
-            var $content = $(pageTestTpl({
-                title: coverPageOptions['title'] && test.title,
-                subtitle: coverPageOptions['description'] && options.description,
-                qrcode: coverPageOptions['qr_code'],
-                logo: coverPageOptions['logo'] && options.logo,
-                date: coverPageOptions['date'] && options.date
-            }));
-
-            if (coverPageOptions['qr_code']) {
-                new QRCode($('.qr-code', $content).get(0), {
-                    text:         urlHelper.route('render', 'PrintTest', 'taoBooklet', { uri :  test.uri}),
-                    width:        192,
-                    height:       192,
-                    colorDark:    "#000000",
-                    colorLight:   "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
-                });
-            }
-
-            done(null, $content);
-        },
-
-        sectionPage: function renderSectionPage(section, pageNum, done) {
-            var $content = $(pageSectionTpl({
-                title: section.title,
-                rubricBlock: section.rubricBlock
-            }));
-
-            done(null, $content);
-        },
-
-        itemPage: function renderItemPage(itemRef, itemState, uri, pageNum, done) {
-            var $content = $(pageItemTpl());
-            var item = itemRef.data;
-            var assets = itemRef.assets;
-
-            itemRunner('qtiprint', item, {renderer: itemRef.renderer})
-                .on('error', function(err) {
-                    done(err);
-                })
-                .on('init', function(){
-                    if(itemState){
-                        this.setState(itemState);
-                    }
-                    this.render($content);
-                })
-                .on('render', function() {
-                    done(null, $content);
-                })
-                .assets([
-                    {
-                        name: 'base64package',
-                        handle: function handleBase64(url) {
-                            var id = url.file;
-                            var found = _.find(assets,  function (assetsList) {
-                                var asset = assetsList[id];
-                                return !!(asset && urlHelper.isBase64(asset));
-                            });
-                            if (found) {
-                                return found[id];
-                            }
-                        }
-                    },
-                    assetStrategies.taomedia,
-                    assetStrategies.external,
-                    {
-                        name: 'packageAssetHandler',
-                        handle: function handleAssetFromPackage(url) {
-                            for (var type in assets) {
-                                if (assets[type][url.toString()]) {
-                                    return assets[type][url.toString()];
-                                }
-                            }
-                        }
-                    }
-                ], {
-                    baseUrl : urlHelper.route('getFile', 'QtiCreator', 'taoQtiItem', {uri : uri, lang : 'en-US'}) + '&relPath='
-                })
-                .init();
-        }
-    };
 
     /**
      *
@@ -147,32 +48,28 @@ define([
      * @namespace testRunnerFactory
      *
      *
-     * @returns {TestRunner}
+     * @returns {testRunner}
      */
     var testRunnerFactory = function testRunnerFactory(testData, options) {
         var layoutOptions = options && options.layout || {};
+        var testIterator = testIteratorFactory(testData);
+        var $container;
+
+        /**
+         * @typedef {testRunner}
+         */
         var testRunner = eventifier({
-
             /**
-             * Test container
-             * @type {jQueryElement}
-             */
-            $container: null,
-
-            /**
-             * Initialize the current item.
+             * Makes the rendering of the full test.
              *
              * @param {HTMLElement|jQueryElement} elt - the DOM element that is going to contain the rendered test.
-             * @returns {TestRunner} to chain calls
+             * @returns {testRunner} to chain calls
              *
-             * @fires TestRunner#ready
-             * @fires TestRunner#render
-             * @fires TestRunner#error if the elt isn't valid
-             *
-             * @fires TestRunner#statechange the provider is reponsible to trigger this event
-             * @fires TestRunner#responsechange  the provider is reponsible to trigger this event
+             * @fires testRunner#ready
+             * @fires testRunner#render
+             * @fires testRunner#error if the elt isn't valid
              */
-            render: function(elt) {
+            render: function render(elt) {
                 var self = this;
                 var pageRenderers = [];
 
@@ -183,64 +80,47 @@ define([
 
                 //we keep a reference to the container
                 if (elt instanceof $) {
-                    this.$container = elt;
+                    $container = elt;
                 } else {
-                    this.$container = $(elt);
+                    $container = $(elt);
+                }
+                $container.empty();
+
+                //dummy rtl support from options
+                if (options && options.rtl === true) {
+                    $container.addClass('rtl').attr('dir', 'rtl');
                 }
 
                 //Build the pageRenderers array that contains each page to render
                 //Transform the functions of the renderer to fit the format required by async (partial with data and binding)
-
-                if (layoutOptions['cover_page']) {
-                    pageRenderers.push(
-                        _.bind(
-                            _.partial(testRenderer.testPage, testData.data, options),
-                            testRenderer
-                        )
-                    );
-                }
-
-                _.forEach(testData.data.testParts, function(testPart) {
-                    _.forEach(testPart.sections, function(section) {
-
+                testIterator
+                    .on('test', function (test) {
+                        if (layoutOptions['cover_page']) {
+                            pageRenderers.push(
+                                _.partial(testRenderers.testPage, createPage('title'), test, options)
+                            );
+                        }
+                    })
+                    .on('section', function (section) {
                         pageRenderers.push(
-                            _.bind(
-                                _.partial(testRenderer.sectionPage, section, pageRenderers.length),
-                                testRenderer
-                            )
+                            _.partial(testRenderers.sectionPage, createPage('section'), section)
                         );
-
-                        _.forEach(section.items, function(item) {
-                            var itemRef = testData.items[item.href];
-                            var itemState = testData.states && testData.states[item.href];
-
-                            if (itemRef && itemRef.data) {
-                                itemRef.renderer = options.regular ? 'taoQtiItem' : 'taoQtiPrint';
-                                pageRenderers.push(
-                                    _.bind(
-                                        _.partial(testRenderer.itemPage, itemRef, itemState, item.href, pageRenderers.length),
-                                        testRenderer
-                                   )
-                                );
-                            }
-                        });
-                    });
-                });
+                    })
+                    .on('item', function (item, itemRef, itemState) {
+                        if (itemRef && itemRef.data) {
+                            itemRef.renderer = options.regular ? 'taoQtiItem' : 'taoQtiPrint';
+                            pageRenderers.push(
+                                _.partial(testRenderers.itemPage, createPage('item'), itemRef, itemState, item.href)
+                            );
+                        }
+                    })
+                    .iterate();
 
                 //then we call all the renderers in parallel
-                asyncLib.parallel(pageRenderers, function renderingDone(err, $results) {
+                asyncLib.parallel(pageRenderers, function renderingDone(err) {
                     if (err) {
                         self.trigger('error', 'An error occurred while rendering a page :  ' + err);
                     }
-
-                    //dummy rtl support from options
-                    if(options && options.rtl === true){
-                        self.$container.addClass('rtl').attr('dir', 'rtl');
-                    }
-
-                    //once they are all done, we insert the content to the container
-                    self.$container.empty().append($results);
-
 
                     /**
                      * The test is rendered
@@ -260,14 +140,14 @@ define([
             },
 
             /**
-             * Clear the running test.
-             * @returns {TestRunner}
+             * Clears the running test.
+             * @returns {testRunner}
              *
-             * @fires TestRunner#clear
+             * @fires testRunner#clear
              */
-            clear: function() {
+            clear: function clear() {
 
-                this.$container.empty();
+                $container.empty();
 
                 /**
                  * The test is ready.
@@ -278,6 +158,15 @@ define([
                 return this;
             }
         });
+
+        /**
+         * Creates a container for a test block
+         * @param {String} type
+         * @returns {jQuery}
+         */
+        function createPage(type) {
+            return $(pageBlockTpl({type: type})).appendTo($container);
+        }
 
         testData = testData || {};
 
