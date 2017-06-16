@@ -31,3 +31,5 @@ $bodySelector: 'body';
 // Media queries are not supported in print setup (nested queries). Should they be required
 // a way to combine them with the query in the 'media-print theme'
 //@import './inc/mediaqueries/ie10+';
+
+@import './inc/mediaqueries/print';
