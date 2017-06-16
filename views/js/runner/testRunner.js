@@ -56,9 +56,26 @@ define([
         var $container;
 
         /**
+         * Creates a container for a test block
+         * @param {String} type
+         * @returns {jQuery}
+         */
+        function createPage(type) {
+            var $pageBlock = $(pageBlockTpl({type: type}));
+            $container.append($pageBlock);
+            return $pageBlock;
+        }
+
+        testData = testData || {};
+
+        if (!testData || !testData.data || !testData.items) {
+            throw new Error('Invalid test data structure');
+        }
+
+        /**
          * @typedef {testRunner}
          */
-        var testRunner = eventifier({
+        return eventifier({
             /**
              * Makes the rendering of the full test.
              *
@@ -158,25 +175,7 @@ define([
                 return this;
             }
         });
-
-        /**
-         * Creates a container for a test block
-         * @param {String} type
-         * @returns {jQuery}
-         */
-        function createPage(type) {
-            return $(pageBlockTpl({type: type})).appendTo($container);
-        }
-
-        testData = testData || {};
-
-        if (!testData || !testData.data || !testData.items) {
-            throw new Error('Invalid test data structure');
-        }
-
-        return testRunner;
     };
 
     return testRunnerFactory;
 });
-

@@ -1,7 +1,26 @@
 {
-"version": 3,
-"mappings": "AA+BQ,sBAAa,CACT,0BAA0B,CAAE,KAAK",
-"sources": ["../../../../scss/themes/platform/_common/base-theme.scss"],
-"names": [],
-"file": "theme.css"
+	"version": 3,
+	"file": "theme.css",
+	"sources": [
+		"../../../../scss/themes/platform/default/theme.scss",
+		"../../../../scss/themes/platform/default/inc/_font-face.scss",
+		"../../../../scss/themes/platform/default/inc/_bootstrap.scss",
+		"../../../../scss/themes/platform/default/inc/colors/_varieties.scss",
+		"../../../../scss/themes/platform/_common/inc/_bootstrap.scss",
+		"../../../../scss/themes/platform/_common/inc/colors/_base.scss",
+		"../../../../scss/themes/platform/_common/inc/colors/_varieties.scss",
+		"../../../../scss/themes/_common/_mixins.scss",
+		"../../../../scss/themes/_common/_math-functions.scss",
+		"../../../../scss/themes/_common/_color-contrast.scss",
+		"../../../../scss/themes/_common/_string-functions.scss",
+		"../../../../scss/themes/_common/_list-functions.scss",
+		"../../../../scss/themes/platform/_common/inc/_fonts.scss",
+		"../../../../scss/themes/platform/_common/inc/_mixins.scss",
+		"../../../../scss/themes/platform/default/inc/colors/_base.scss",
+		"../../../../scss/themes/platform/default/inc/_fonts.scss",
+		"../../../../scss/themes/platform/_common/base-theme.scss",
+		"../../../../scss/themes/platform/_common/inc/mediaqueries/_max-width-1024.scss"
+	],
+	"mappings": "AgBMA,AAyBQ,IAzBJ,CACA,IAAI,CAwBA,YAAY,AAAC,CACT,0BAA0B,CAAE,KAAM,CACrC",
+	"names": []
 }

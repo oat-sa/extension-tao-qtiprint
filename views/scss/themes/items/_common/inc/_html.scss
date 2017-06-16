@@ -10,25 +10,6 @@ html {
             /// Outside the item scope - read the warning above!
         }
 
-        &.one-section-per-page {
-            & > #{$main} {
-                & > #{$section} {
-                    &.item {
-                        page-break-after: always;
-                    }
-                }
-            }
-        }
-        &.one-item-per-page {
-            & > #{$main} {
-                & > #{$section} {
-                    &.item {
-                        page-break-before: always;
-                    }
-                }
-            }
-        }
-
         & /*>*/ #{$main} {
             font: 12pt/1.2 $regularFont;
 
@@ -40,6 +21,21 @@ html {
 
             padding: 0;
             max-width: none;
+
+            &.one-section-per-page {
+                & > #{$section} {
+                    &.item {
+                        page-break-after: always;
+                    }
+                }
+            }
+            &.one-item-per-page {
+                & > #{$section} {
+                    &.item {
+                        page-break-before: always;
+                    }
+                }
+            }
 
             & /*>*/ #{$section} {
 
