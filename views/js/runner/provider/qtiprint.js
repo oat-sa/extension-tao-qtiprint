@@ -44,8 +44,8 @@ define([
      * @type Object
      */
     var rendererModules = {
-        taoQtiItem: ['taoQtiItem/qtiCommonRenderer/renderers/config', 'css!taoQtiPrintCss/themes/items/default/theme.css'],
-        taoQtiPrint: ['taoQtiPrint/qtiPrintRenderer/renderers/config', 'css!taoQtiPrintCss/qti.css']
+        results: ['taoQtiPrint/qtiCommonRenderer/renderers/config', 'css!taoQtiPrintCss/themes/items/default/theme.css'],
+        booklet: ['taoQtiPrint/qtiPrintRenderer/renderers/config', 'css!taoQtiPrintCss/qti.css']
     };
 
     /**
@@ -155,7 +155,7 @@ define([
                         .race([
                             Promise.all(this._item.postRender()),
                             new Promise(function (resolve, reject) {
-                                _.delay(reject, timeout, new Error('Post rendering ran out of time.'));
+                                _.delay(reject, timeout, new Error('Post rendering ran out of time in item ' + self._itemData.serial));
                             })
                         ])
                         .then(function () {
@@ -169,12 +169,15 @@ define([
                         })
                         .catch(function (err) {
                             self.trigger('error', 'Error in post rendering : ' + err instanceof Error ? err.message : err);
+                            done();
                         });
 
                 } catch (e) {
-                    logger.error(e);
                     self.trigger('error', 'Error in post rendering : ' + e);
+                    done();
                 }
+            } else {
+                done();
             }
         },
 

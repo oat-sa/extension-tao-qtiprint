@@ -106,22 +106,33 @@ define([
             var item = itemRef.data;
             var assets = itemRef.assets;
             var baseUrl = itemRef.baseUrl || urlHelper.route('getFile', 'QtiCreator', 'taoQtiItem', {
-                    uri: uri,
-                    lang: 'en-US'
-                }) + '&relPath=';
+                uri: uri,
+                lang: 'en-US'
+            }) + '&relPath=';
+            var isDone = false;
+
+            /**
+             * @param [err]
+             */
+            function itemDone(err) {
+                if (!isDone) {
+                    isDone = true;
+                    done(err);
+                }
+            }
 
             itemRunner('qtiprint', item, {renderer: itemRef.renderer})
                 .on('error', function (err) {
-                    done(err);
+                    itemDone(err);
                 })
                 .on('init', function () {
-                    if (itemState) {
+                    if (itemState && _.isPlainObject(itemState)) {
                         this.setState(itemState);
                     }
                     this.render($container);
                 })
-                .on('render', function () {
-                    done();
+                .on('ready', function () {
+                    itemDone();
                 })
                 .assets([
                     {

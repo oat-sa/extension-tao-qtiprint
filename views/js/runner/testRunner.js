@@ -24,14 +24,12 @@ define([
     'lodash',
     'async',
     'core/eventifier',
-    'taoQtiPrint/runner/testIterator',
     'taoQtiPrint/runner/testRenderers',
     'tpl!taoQtiPrint/runner/tpl/pageBlock'
 ], function ($,
              _,
              asyncLib,
              eventifier,
-             testIteratorFactory,
              testRenderers,
              pageBlockTpl) {
     'use strict';
@@ -50,9 +48,8 @@ define([
      *
      * @returns {testRunner}
      */
-    var testRunnerFactory = function testRunnerFactory(testData, options) {
+    var testRunnerFactory = function testRunnerFactory(testDefinition, options) {
         var layoutOptions = options && options.layout || {};
-        var testIterator = testIteratorFactory(testData);
         var $container;
 
         /**
@@ -66,9 +63,7 @@ define([
             return $pageBlock;
         }
 
-        testData = testData || {};
-
-        if (!testData || !testData.data || !testData.items) {
+        if (!testDefinition || !testDefinition.data || !testDefinition.items) {
             throw new Error('Invalid test data structure');
         }
 
@@ -89,6 +84,9 @@ define([
             render: function render(elt) {
                 var self = this;
                 var pageRenderers = [];
+                var testData = testDefinition.data || {};
+                var items = testDefinition.items || {};
+                var states = testDefinition.states || {};
 
                 //check elt
                 if (!(elt instanceof HTMLElement) && !(elt instanceof $)) {
@@ -110,28 +108,32 @@ define([
 
                 //Build the pageRenderers array that contains each page to render
                 //Transform the functions of the renderer to fit the format required by async (partial with data and binding)
-                testIterator
-                    .on('test', function (test) {
-                        if (layoutOptions['cover_page']) {
-                            pageRenderers.push(
-                                _.partial(testRenderers.testPage, createPage('title'), test, options)
-                            );
-                        }
-                    })
-                    .on('section', function (section) {
+
+                if (layoutOptions['cover_page']) {
+                    pageRenderers.push(
+                        _.partial(testRenderers.testPage, createPage('title'), testData, options)
+                    );
+                }
+
+                _.forEach(testData.testParts, function (testPart) {
+                    _.forEach(testPart.sections, function (section) {
                         pageRenderers.push(
                             _.partial(testRenderers.sectionPage, createPage('section'), section)
                         );
-                    })
-                    .on('item', function (item, itemRef, itemState) {
-                        if (itemRef && itemRef.data) {
-                            itemRef.renderer = options.regular ? 'taoQtiItem' : 'taoQtiPrint';
-                            pageRenderers.push(
-                                _.partial(testRenderers.itemPage, createPage('item'), itemRef, itemState, item.href)
-                            );
-                        }
-                    })
-                    .iterate();
+
+                        _.forEach(section.items, function (item) {
+                            var itemRef = items[item.href];
+                            var itemState = states[item.href];
+
+                            if (itemRef && itemRef.data) {
+                                itemRef.renderer = options.regular ? 'results' : 'booklet';
+                                pageRenderers.push(
+                                    _.partial(testRenderers.itemPage, createPage('item'), itemRef, itemState, item.href)
+                                );
+                            }
+                        });
+                    });
+                });
 
                 //then we call all the renderers in parallel
                 asyncLib.parallel(pageRenderers, function renderingDone(err) {
