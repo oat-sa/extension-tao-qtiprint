@@ -24,19 +24,45 @@
  */
 define([
     'taoQtiItem/qtiCommonRenderer/renderers/config',
-    'taoQtiPrint/qtiPrintRenderer/renderers/interactions/NotSupported'
-], function(defaultConfig, NotSupported){
+    'taoQtiPrint/qtiPrintRenderer/renderers/interactions/NotSupported',
+    'taoQtiPrint/qtiPrintRenderer/renderers/interactions/RawResponse'
+], function(defaultConfig, NotSupported, RawResponse){
     'use strict';
+
+    /**
+     * Defines an interaction that is not supported
+     * @param qtiClass
+     */
+    function defineNotSupported(qtiClass) {
+        var moduleUri = 'taoQtiPrint/qtiPrintRenderer/renderers/' + qtiClass;
+        define(moduleUri, NotSupported(qtiClass));
+
+        defaultConfig.locations[qtiClass] = moduleUri;
+    }
+
+    /**
+     * Defines an interaction that will only display raw responses
+     * @param qtiClass
+     */
+    function defineRawResponse(qtiClass) {
+        var moduleUri = 'taoQtiPrint/qtiPrintRenderer/renderers/' + qtiClass;
+        define(moduleUri, RawResponse(qtiClass));
+
+        defaultConfig.locations[qtiClass] = moduleUri;
+    }
 
     // apply some tweaks to fit the print needs
     defaultConfig.options.enableDragAndDrop = null;
 
     // defines the interaction that are not supported
-    define('taoQtiPrint/qtiPrintRenderer/renderers/mediaInteraction', NotSupported('mediaInteraction'));
-    define('taoQtiPrint/qtiPrintRenderer/renderers/uploadInteraction', NotSupported('uploadInteraction'));
+    defineNotSupported('mediaInteraction');
+    defineNotSupported('uploadInteraction');
 
-    defaultConfig.locations.mediaInteraction = 'taoQtiPrint/qtiPrintRenderer/renderers/mediaInteraction';
-    defaultConfig.locations.uploadInteraction = 'taoQtiPrint/qtiPrintRenderer/renderers/uploadInteraction';
+    // defines the interaction that are partially supported: only the raw responses will be rendered
+    // @todo: fix those interactions
+    defineRawResponse('graphicAssociateInteraction');
+    defineRawResponse('graphicOrderInteraction');
+    defineRawResponse('selectPointInteraction');
 
     return defaultConfig;
 });
