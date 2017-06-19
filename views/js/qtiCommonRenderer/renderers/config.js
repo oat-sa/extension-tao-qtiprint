@@ -23,12 +23,20 @@
  * @author Bertrand Chevrier <bertrand@taotesting.com>
  */
 define([
-    'taoQtiItem/qtiCommonRenderer/renderers/config'
-], function(defaultConfig){
+    'taoQtiItem/qtiCommonRenderer/renderers/config',
+    'taoQtiPrint/qtiPrintRenderer/renderers/interactions/NotSupported'
+], function(defaultConfig, NotSupported){
     'use strict';
 
     // apply some tweaks to fit the print needs
     defaultConfig.options.enableDragAndDrop = null;
+
+    // defines the interaction that are not supported
+    define('taoQtiPrint/qtiPrintRenderer/renderers/mediaInteraction', NotSupported('mediaInteraction'));
+    define('taoQtiPrint/qtiPrintRenderer/renderers/uploadInteraction', NotSupported('uploadInteraction'));
+
+    defaultConfig.locations.mediaInteraction = 'taoQtiPrint/qtiPrintRenderer/renderers/mediaInteraction';
+    defaultConfig.locations.uploadInteraction = 'taoQtiPrint/qtiPrintRenderer/renderers/uploadInteraction';
 
     return defaultConfig;
 });
