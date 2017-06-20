@@ -17,10 +17,10 @@
     border-radius:1pt;
     transform: scale(.9);
     @if($checked == true) {
-        content: " ";
+        content: "\2713";
     }
     @else {
-        content: "\2713";
+        content: " ";
     }
 }
 
