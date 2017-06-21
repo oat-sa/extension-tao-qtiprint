@@ -63,6 +63,8 @@ define([
     defineRawResponse('graphicAssociateInteraction');
     defineRawResponse('graphicOrderInteraction');
     defineRawResponse('selectPointInteraction');
+    defineRawResponse('hotspotInteraction');
+    defineRawResponse('graphicGapMatchInteraction');
 
     return defaultConfig;
 });
