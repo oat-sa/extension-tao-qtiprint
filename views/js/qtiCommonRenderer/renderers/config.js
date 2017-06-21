@@ -65,12 +65,8 @@ define([
     defineNotSupported('uploadInteraction');
 
     // defines the interaction that are partially supported: only the raw responses will be rendered
-    // @todo: fix those interactions
-    defineRawResponse('graphicAssociateInteraction');
-    defineRawResponse('graphicOrderInteraction');
-    defineRawResponse('selectPointInteraction');
-    defineRawResponse('hotspotInteraction');
-    defineRawResponse('graphicGapMatchInteraction');
+    // @todo: provide support for custom interactions
+    defineRawResponse('customInteraction');
 
     return defaultConfig;
 });
