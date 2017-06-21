@@ -30,14 +30,23 @@ define([
     'use strict';
 
     /**
+     * Applies a custom renderer for a particular interaction
+     * @param {String} qtiClass
+     * @param {Function} rendererFactory
+     */
+    function applyRenderer(qtiClass, rendererFactory) {
+        var moduleUri = 'taoQtiPrint/qtiPrintRenderer/renderers/' + qtiClass;
+        define(moduleUri, rendererFactory(qtiClass));
+
+        defaultConfig.locations[qtiClass] = moduleUri;
+    }
+
+    /**
      * Defines an interaction that is not supported
      * @param qtiClass
      */
     function defineNotSupported(qtiClass) {
-        var moduleUri = 'taoQtiPrint/qtiPrintRenderer/renderers/' + qtiClass;
-        define(moduleUri, NotSupported(qtiClass));
-
-        defaultConfig.locations[qtiClass] = moduleUri;
+        applyRenderer(qtiClass, NotSupported);
     }
 
     /**
@@ -45,10 +54,7 @@ define([
      * @param qtiClass
      */
     function defineRawResponse(qtiClass) {
-        var moduleUri = 'taoQtiPrint/qtiPrintRenderer/renderers/' + qtiClass;
-        define(moduleUri, RawResponse(qtiClass));
-
-        defaultConfig.locations[qtiClass] = moduleUri;
+        applyRenderer(qtiClass, RawResponse);
     }
 
     // apply some tweaks to fit the print needs
