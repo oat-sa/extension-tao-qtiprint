@@ -1,0 +1,34 @@
+////
+/// TAO CSS SDK
+/// QTI choice interaction
+/// @group Item interactions
+////
+
+.qti-choiceInteraction {
+
+
+    ol {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+              
+    .item-instruction {
+    }
+
+    .choice-area {
+
+        &.solid {
+        }
+
+        .label-content {
+        }
+
+        li{
+            &:last-child {
+            }
+            .icon-checkbox, .icon-radio {
+            }
+        }
+    }
+}

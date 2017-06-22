@@ -1,4 +1,3 @@
-<section class="title">
 {{#if logo}}
     <div class="logo">
         <img src="{{logo}}" alt="{{__ "Logo"}}" />
@@ -14,4 +13,3 @@
 {{#if qrcode}}
     <div class="qr-code"></div>
 {{/if}}
-</section>

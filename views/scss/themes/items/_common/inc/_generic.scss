@@ -1,0 +1,103 @@
+////
+/// TAO CSS SDK
+/// Generic HTML elements, classes and such, all item themes
+/// @group Item Themes
+////
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 22pt;
+    margin: 12pt 0;
+}
+
+h2 {
+    font-size: 20pt;
+    margin: 10pt 0;
+}
+
+h3 {
+    font-size: 18pt;
+    margin: 10pt 0;
+}
+
+h4 {
+    font-size: 16pt;
+    margin: 9pt 0;
+}
+
+h5 {
+    font-size: 14pt;
+    margin: 9pt 0;
+}
+
+h6 {
+    font-size: 12pt;
+    margin: 8pt 0;
+}
+
+p {
+}
+
+
+.render-error {
+    .icon {}
+    .message {}
+    .additional {
+        font-size: 1.2rem;
+    }
+    .title {
+        font-weight: bold;
+        margin: 6px 0;
+    }
+    .info {
+        margin: 4px 10px 4px 20px;
+
+        &:before {
+            content: "- ";
+        }
+    }
+}
+
+
+pre {
+    padding: 10pt;
+    font-size: 12pt;
+    border-style: dashed;
+    font-family: $monospaceFont;
+}
+
+[dir="rtl"], .rtl {
+    direction: rtl;
+    menu, ol, ul {
+        padding: 0 40px 0 0;
+    }
+}
+
+article {
+    h1 {
+        font-size: 20pt;
+    }
+
+    h2 {
+        font-size: 18pt;
+    }
+
+    h3 {
+        font-size: 16pt;
+    }
+
+    h4 {
+        font-size: 14pt;
+    }
+
+    h5 {
+        font-size: 13pt;
+    }
+
+    h6 {
+        font-size: 12pt;
+    }
+}
