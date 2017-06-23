@@ -1,0 +1,12 @@
+////
+/// TAO CSS SDK
+/// QTI text entry interaction
+/// @group Item interactions
+////
+
+.qti-textEntryInteraction {
+    border: none;
+    border-bottom: dashed #000 1px;
+    background-color: $interactable;
+    border-radius: 2px;
+}

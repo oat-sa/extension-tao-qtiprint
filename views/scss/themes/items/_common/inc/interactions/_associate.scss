@@ -1,0 +1,33 @@
+////
+/// TAO CSS SDK
+/// QTI associate interaction
+/// @group Item interactions
+////
+
+.qti-associateInteraction {
+    .choice-area {
+        &.source {
+            &:hover {
+            }
+        }
+        & > .qti-choice {
+            border: 1px dashed black;
+            background-color: $interactable;
+        }
+    }
+    .result-area {
+        &.target {
+            &:hover {
+            }
+        }
+        & > .qti-choice {
+        }
+        & > li {
+            & > .target {
+                outline: none;
+                border: 1px dashed black;
+                background-color: $interactable;
+            }
+        }
+    }
+}

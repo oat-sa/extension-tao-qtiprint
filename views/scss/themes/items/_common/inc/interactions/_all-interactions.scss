@@ -1,0 +1,22 @@
+////
+/// TAO CSS SDK
+/// All QTI interactions
+/// @group Item interactions
+////
+
+.qti-interaction {
+
+    .solid, .bordered {
+        border: none;
+    }
+
+    &.qti-blockInteraction{
+        padding: 10pt !important;
+        border: 1px dashed grey !important;
+        border-radius: 2px;
+    }
+
+    .qti-prompt-container {
+        margin-bottom: 10pt;
+    }
+}

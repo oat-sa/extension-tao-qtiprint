@@ -12,7 +12,7 @@
     color: #000; /* Black prints faster: http://www.sanbeiji.com/archives/953 */
     box-shadow: none !important;
     text-shadow: none !important;
-    font-size: 14px;
+    box-sizing: border-box;
 }
 
 a,
