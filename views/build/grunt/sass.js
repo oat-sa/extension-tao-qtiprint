@@ -1,4 +1,5 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
+    'use strict';
 
     var sass    = grunt.config('sass') || {};
     var watch   = grunt.config('watch') || {};
@@ -7,9 +8,7 @@ module.exports = function(grunt) {
 
     //override load path
     sass.taoqtiprint = {
-        options : {
-            loadPath : ['../scss/', '../js/lib/', root + 'scss/inc', root + 'scss/qti']
-        },
+        options : {},
         files : {}
     };
 
