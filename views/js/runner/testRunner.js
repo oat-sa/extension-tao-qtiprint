@@ -126,7 +126,14 @@ define([
                             var itemState = states[item.href];
 
                             if (itemRef && itemRef.data) {
-                                itemRef.renderer = options.regular ? 'results' : 'booklet';
+                                itemRef.renderer = 'booklet';
+
+                                if(options.regular) {
+                                    itemRef.renderer = 'results';
+                                }
+                                else if(options.layout && options.layout.use_bubble_sheet) {
+                                    itemRef.renderer = 'bubbleSheet';
+                                }
                                 pageRenderers.push(
                                     _.partial(testRenderers.itemPage, createPage('item'), itemRef, itemState, item.href)
                                 );
