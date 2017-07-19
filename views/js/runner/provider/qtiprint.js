@@ -45,7 +45,8 @@ define([
      */
     var rendererModules = {
         results: ['taoQtiPrint/qtiCommonRenderer/renderers/config', 'css!taoQtiPrintCss/themes/items/default/theme.css'],
-        booklet: ['taoQtiPrint/qtiPrintRenderer/renderers/config', 'css!taoQtiPrintCss/qti.css']
+        booklet: ['taoQtiPrint/qtiPrintRenderer/renderers/config', 'css!taoQtiPrintCss/qti.css'],
+        bubbleSheet: ['taoQtiPrint/qtiPrintRenderer/renderers/config', 'css!taoQtiPrintCss/themes/items/bubble-sheet/theme.css']
     };
 
     /**
