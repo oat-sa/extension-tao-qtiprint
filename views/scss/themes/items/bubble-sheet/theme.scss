@@ -1,0 +1,108 @@
+////
+/// TAO CSS SDK
+/// Current item theme
+/// @group Item Themes
+////
+
+@import "inc/_bootstrap";
+
+/// additional theme code that is not covered in include files yet
+
+html {
+    body {
+        height: auto;
+        background: white;
+        margin: 0;
+
+        counter-reset: question;
+        &.tao-item-scope {
+            /// Outside the item scope - read the warning above!
+        }
+        & /*>*/ #{$main} {
+
+            //font: 10.5pt/1.2 $sansSerif;
+
+            // regular text blocks, _not_ interactions
+            // also the picture containers above the interactions
+            div.grid-row div > p {
+                img {
+                    margin: auto;
+                    display:block;
+                }
+            }
+            section {
+                &.grid-row {
+                    &.item {
+                        border: {
+                            width: 0 0 1px 0 !important;
+                            style: none none solid none !important;
+                            color: black;
+                            radius: 0;
+                        }
+                    }
+                    .qti-interaction.qti-blockInteraction {
+                        position: relative;
+                        padding: 0 20pt !important;
+                        border: none !important;
+
+                        & > .qti-prompt-container{
+                            &::before {
+                                counter-increment: question;
+                                content: counter(question) ". ";
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                display:inline-block;
+                                text-align: right;
+                                width: 20px;
+                            }
+                        }
+                        input[type="checkbox"] {
+                            display:none;
+                        }
+                        .qti-block {
+                            position:relative;
+                            padding: {
+                                bottom: 10pt;
+                                left: 20pt
+                            };
+                            &::before {
+                                // the checkbox
+                                content: ' ';
+                                display: inline-block;
+                                width: 12pt;
+                                height: 12pt;
+                                border: {
+                                    width: 1px;
+                                    style: solid;
+                                    color: black;
+                                    radius: 2pt;
+                                }
+                                margin-right: 1em;
+                                position: absolute;
+                                top: 2pt;
+                                left:4pt;
+                            }
+                        }
+                        .choice-area {
+                            counter-reset: answers;
+                        }
+                        .qti-choice {
+                            padding: {
+                                left: 25pt;
+                            }
+                            position: relative;
+                            &::before {
+                                counter-increment: answers;
+                                content: counter(answers) ") ";
+                                position: absolute;
+                                top: 0;
+                                left: 10pt;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
