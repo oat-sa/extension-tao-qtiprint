@@ -15,10 +15,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  * Copyright (c) 2017 (original work) Open Assessment Technologies SA;
- *
- *
  */
+
 namespace oat\taoQtiPrint\scripts\update;
+
+use oat\taoQtiPrint\model\DeliveryExecutionPacker;
 
 /**
  * Class Updater
@@ -34,6 +35,11 @@ class Updater extends \common_ext_ExtensionUpdater
     public function update($initialVersion) {
 
         $this->skip('0.1.0', '1.3.1');
+
+        if ($this->isVersion('1.3.1')) {
+            $this->getServiceManager()->register(DeliveryExecutionPacker::SERVICE_ID, new DeliveryExecutionPacker());
+            $this->setVersion('1.4.0');
+        }
 
     }
 }
