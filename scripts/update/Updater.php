@@ -20,6 +20,7 @@
 namespace oat\taoQtiPrint\scripts\update;
 
 use oat\taoQtiPrint\model\DeliveryExecutionPacker;
+use oat\taoQtiPrint\model\DeliveryPacker;
 
 /**
  * Class Updater
@@ -37,6 +38,7 @@ class Updater extends \common_ext_ExtensionUpdater
         $this->skip('0.1.0', '1.3.1');
 
         if ($this->isVersion('1.3.1')) {
+            $this->getServiceManager()->register(DeliveryPacker::SERVICE_ID, new DeliveryPacker());
             $this->getServiceManager()->register(DeliveryExecutionPacker::SERVICE_ID, new DeliveryExecutionPacker());
             $this->setVersion('1.4.0');
         }

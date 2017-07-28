@@ -24,13 +24,9 @@
 
 namespace oat\taoQtiPrint\model;
 
-use oat\oatbox\service\ConfigurableService;
 use oat\taoDelivery\model\execution\ServiceProxy;
-use oat\taoItems\model\pack\encoders\Base64fileEncoder;
-use oat\taoItems\model\pack\ExceptionMissingAsset;
 use oat\taoOutcomeUi\helper\ResponseVariableFormatter;
 use oat\taoOutcomeUi\model\ResultsService;
-use oat\taoQtiItem\model\QtiJsonItemCompiler;
 use oat\taoQtiTest\models\runner\config\QtiRunnerConfig;
 use oat\taoQtiTest\models\runner\rubric\QtiRunnerRubric;
 use oat\taoQtiTest\models\TestSessionService;
@@ -38,14 +34,19 @@ use oat\taoResultServer\models\classes\ResultServerService;
 
 /**
  * Class DeliveryExecutionPacker
+ * 
+ * Extracts the test definition data from a DeliveryExecution.
+ * Add the definition of items and theirs related assets, base64 encoded.
+ * Extracts the result variables related to a DeliveryExecution.
+ * 
  * @package oat\taoQtiPrint\model
  */
-class DeliveryExecutionPacker extends ConfigurableService
+class DeliveryExecutionPacker extends DeliveryPacker
 {
     const SERVICE_ID = 'taoQtiPrint/DeliveryExecutionPacker';
     
     /**
-     * Extracts the result variables related to a Delivery Execution
+     * Extracts the result variables related to a DeliveryExecution
      * @param string $uri
      * @return array
      */
@@ -81,7 +82,7 @@ class DeliveryExecutionPacker extends ConfigurableService
     }
 
     /**
-     * Extracts the test data related to a Delivery Execution
+     * Extracts the test data related to a DeliveryExecution
      * @param string $uri
      * @return array
      */
@@ -171,81 +172,4 @@ class DeliveryExecutionPacker extends ConfigurableService
 
         return $testData;
     }
-
-    /**
-     * Gets the definition of an item
-     * @param string $itemRef
-     * @param string $userDataLang
-     * @return array
-     * @throws \common_Exception
-     * @throws \common_exception_InconsistentData
-     * @throws \tao_models_classes_FileNotFoundException
-     */
-    protected function getItemData($itemRef, $userDataLang)
-    {
-        $directoryIds = explode('|', $itemRef);
-        if (count($directoryIds) < 3) {
-            throw new \common_exception_InconsistentData('The itemRef is not formatted correctly');
-        }
-
-        $itemUri = $directoryIds[0];
-        $publicDirectory = \tao_models_classes_service_FileStorage::singleton()->getDirectoryById($directoryIds[1]);
-        $privateDirectory = \tao_models_classes_service_FileStorage::singleton()->getDirectoryById($directoryIds[2]);
-
-        if ($privateDirectory->has($userDataLang)) {
-            $lang = $userDataLang;
-        } elseif ($privateDirectory->has(DEFAULT_LANG)) {
-            \common_Logger::i(
-                $userDataLang . ' is not part of compilation directory for item : ' . $itemUri . ' use ' . DEFAULT_LANG
-            );
-            $lang = DEFAULT_LANG;
-        } else {
-            throw new \common_Exception(
-                'item : ' . $itemUri . 'is neither compiled in ' . $userDataLang . ' nor in ' . DEFAULT_LANG
-            );
-        }
-
-        $fileName = QtiJsonItemCompiler::ITEM_FILE_NAME;
-        try {
-            return $this->resolveAssets(
-                json_decode($privateDirectory->read($lang . DIRECTORY_SEPARATOR . $fileName), true),
-                $publicDirectory,
-                $lang
-            );
-        } catch (\FileNotFoundException $e) {
-            throw new \tao_models_classes_FileNotFoundException(
-                $fileName . ' for item reference ' . $itemRef
-            );
-        }
-    }
-
-    /**
-     * @param array $itemData
-     * @param \tao_models_classes_service_StorageDirectory $publicDirectory
-     * @param string $lang
-     * @return array
-     */
-    protected function resolveAssets($itemData, $publicDirectory, $lang)
-    {
-        $itemData['baseUrl'] = $publicDirectory->getPublicAccessUrl() . $lang . '/';
-        $encoder = new Base64fileEncoder($publicDirectory);
-
-        $allowedTypes = ['img', 'css'];
-
-        if (isset($itemData['assets'])) {
-            foreach ($itemData['assets'] as $type => &$assets) {
-                if (in_array($type, $allowedTypes)) {
-                    foreach ($assets as $uri => $asset) {
-                        try {
-                            $assets[$uri] = $encoder->encode($lang . '/' . $asset);
-                        } catch (ExceptionMissingAsset $e) {
-                        }
-                    }
-                }
-            }
-        }
-
-        return $itemData;
-    }
-    
 }
