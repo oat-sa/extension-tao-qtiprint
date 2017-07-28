@@ -29,7 +29,7 @@ return array(
 	'requires' => array(
 	    'tao' => '>=9.0.0',
         'taoQtiItem' => '>=8.4.8',
-        'taoQtiTest' => '>=10.11.0'
+        'taoQtiTest' => '>=10.14.0'
     ),
 	// for compatibility
 	'dependencies' => array('tao','taoQtiItem'),
