@@ -86,7 +86,7 @@ class DeliveryExecutionPacker extends DeliveryPacker
      * @param string $uri
      * @return array
      */
-    public function getTestData($uri)
+    public function getTestData($uri, $user = '')
     {
         $deliveryExecution = ServiceProxy::singleton()->getDeliveryExecution($uri);
         $userIdentifier = $deliveryExecution->getUserIdentifier();
