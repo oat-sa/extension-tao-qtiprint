@@ -61,7 +61,8 @@ define([
                 subtitle: coverPageOptions['description'] && options.description,
                 qrcode: coverPageOptions['qr_code'],
                 logo: coverPageOptions['logo'] && options.logo,
-                date: coverPageOptions['date'] && options.date
+                date: coverPageOptions['date'] && options.date,
+                uniqid: coverPageOptions['unique_id'] && options.unique_id
             })).appendTo($container);
 
             if (coverPageOptions['qr_code']) {

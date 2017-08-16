@@ -34,6 +34,12 @@ function(tpl, getContainer){
     return {
         qtiClass:     'rubricBlock',
         getContainer: getContainer,
-        template:     tpl
+        template:     tpl,
+        getData : function getData(rubric, data){
+            if(rubric.isEmpty()){
+                data.empty = true;
+            }
+            return data;
+        }
     };
 });

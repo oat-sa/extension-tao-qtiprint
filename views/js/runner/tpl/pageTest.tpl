@@ -1,3 +1,6 @@
+{{#if uniqid}}
+<h3>{{uniqid}}</h3>
+{{/if}}
 {{#if logo}}
     <div class="logo">
         <img src="{{logo}}" alt="{{__ "Logo"}}" />

@@ -48,7 +48,7 @@ define([
      *
      * @returns {testRunner}
      */
-    var testRunnerFactory = function testRunnerFactory(testDefinition, options) {
+    var testRunnerFactory = function testRunnerFactory(testDefinitions, options) {
         var layoutOptions = options && options.layout || {};
         var $container;
 
@@ -63,9 +63,25 @@ define([
             return $pageBlock;
         }
 
-        if (!testDefinition || !testDefinition.data || !testDefinition.items) {
+        if (!testDefinitions) {
             throw new Error('Invalid test data structure');
         }
+
+        if (!_.isArray(testDefinitions)) {
+            testDefinitions = [testDefinitions];
+        }
+
+        _.forEach(testDefinitions, function(testDefinition) {
+            if (!testDefinition) {
+                throw new Error('Invalid test data structure: definition is empty');
+            }
+            if (!testDefinition.data) {
+                throw new Error('Invalid test data structure: data is missing');
+            }
+            if (!testDefinition.items) {
+                throw new Error('Invalid test data structure: items is missing');
+            }
+        });
 
         /**
          * @typedef {testRunner}
@@ -84,9 +100,6 @@ define([
             render: function render(elt) {
                 var self = this;
                 var pageRenderers = [];
-                var testData = testDefinition.data || {};
-                var items = testDefinition.items || {};
-                var states = testDefinition.states || {};
 
                 //check elt
                 if (!(elt instanceof HTMLElement) && !(elt instanceof $)) {
@@ -108,36 +121,41 @@ define([
 
                 //Build the pageRenderers array that contains each page to render
                 //Transform the functions of the renderer to fit the format required by async (partial with data and binding)
+                _.forEach(testDefinitions, function(testDefinition) {
+                    var testData = testDefinition.data || {};
+                    var items = testDefinition.items || {};
+                    var states = testDefinition.states || {};
 
-                if (layoutOptions['cover_page']) {
-                    pageRenderers.push(
-                        _.partial(testRenderers.testPage, createPage('title'), testData, options)
-                    );
-                }
-
-                _.forEach(testData.testParts, function (testPart) {
-                    _.forEach(testPart.sections, function (section) {
+                    if (layoutOptions['cover_page']) {
                         pageRenderers.push(
-                            _.partial(testRenderers.sectionPage, createPage('section'), section)
+                            _.partial(testRenderers.testPage, createPage('title'), testData, options)
                         );
+                    }
 
-                        _.forEach(section.items, function (item) {
-                            var itemRef = items[item.href];
-                            var itemState = states[item.href];
+                    _.forEach(testData.testParts, function (testPart) {
+                        _.forEach(testPart.sections, function (section) {
+                            pageRenderers.push(
+                                _.partial(testRenderers.sectionPage, createPage('section'), section)
+                            );
 
-                            if (itemRef && itemRef.data) {
-                                itemRef.renderer = 'booklet';
+                            _.forEach(section.items, function (item) {
+                                var itemRef = items[item.href];
+                                var itemState = states[item.href];
 
-                                if(options.regular) {
-                                    itemRef.renderer = 'results';
+                                if (itemRef && itemRef.data) {
+                                    itemRef.renderer = 'booklet';
+
+                                    if(options.regular) {
+                                        itemRef.renderer = 'results';
+                                    }
+                                    else if(options.layout && options.layout.use_bubble_sheet) {
+                                        itemRef.renderer = 'bubbleSheet';
+                                    }
+                                    pageRenderers.push(
+                                        _.partial(testRenderers.itemPage, createPage('item'), itemRef, itemState, item.href)
+                                    );
                                 }
-                                else if(options.layout && options.layout.use_bubble_sheet) {
-                                    itemRef.renderer = 'bubbleSheet';
-                                }
-                                pageRenderers.push(
-                                    _.partial(testRenderers.itemPage, createPage('item'), itemRef, itemState, item.href)
-                                );
-                            }
+                            });
                         });
                     });
                 });
