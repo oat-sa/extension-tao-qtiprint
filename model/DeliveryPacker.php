@@ -35,6 +35,7 @@ use oat\taoQtiTest\models\runner\config\QtiRunnerConfig;
 use qtism\data\AssessmentItemRef;
 use qtism\data\AssessmentSection;
 use qtism\data\storage\php\PhpDocument;
+use taoQtiTest_models_classes_QtiTestService;
 
 /**
  * Class DeliveryPacker
@@ -75,7 +76,7 @@ class DeliveryPacker extends ConfigurableService
         $reviewConfig = $config->getConfigValue('review');
         $displaySubsectionTitle = isset($reviewConfig['displaySubsectionTitle']) ? (bool)$reviewConfig['displaySubsectionTitle'] : true;
 
-        $testPhp = $compilationDirs['private']->read(TAOQTITEST_COMPILED_FILENAME);
+        $testPhp = $compilationDirs['private']->read(taoQtiTest_models_classes_QtiTestService::TEST_COMPILED_FILENAME);
         $phpDoc = new PhpDocument();
         $phpDoc->loadFromString($testPhp);
 
