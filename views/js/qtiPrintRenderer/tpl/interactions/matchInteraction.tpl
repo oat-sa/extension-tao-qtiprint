@@ -1,4 +1,5 @@
 <div {{#if attributes.id}}id="{{attributes.id}}"{{/if}} class="qti-interaction qti-blockInteraction qti-matchInteraction{{#if attributes.class}} {{attributes.class}}{{/if}}" data-serial="{{serial}}" data-qti-class="matchInteraction">
+  <span class="response-identifier">{{attributes.responseIdentifier}}</span>
   {{#if prompt}}{{{prompt}}}{{/if}}
   <div class="instruction-container"></div>
   <div class="match-interaction-area">
