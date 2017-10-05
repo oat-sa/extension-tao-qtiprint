@@ -122,7 +122,11 @@ define([
                 }
             }
 
-            itemRunner('qtiprint', item, {renderer: itemRef.renderer})
+            //set option here
+            itemRunner('qtiprint', item, {
+                    renderer: itemRef.renderer,
+                    showResponseIdentifier: itemRef.showResponseIdentifier
+                })
                 .on('error', function (err) {
                     itemDone(err);
                 })
