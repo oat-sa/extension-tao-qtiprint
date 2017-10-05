@@ -1,5 +1,37 @@
 
 $iaBackground: #eee;
+
+@mixin qtiChoiceBox {
+    content: ' ';
+    float: left;
+    width: 14px;
+    height: 14px;
+    margin: 0 6px 0 3px;
+    border: solid #000 1px;
+    background-color: $iaBackground;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    position: relative;
+    top: 3px;
+}
+@mixin qtiChoiceBoxRtl {
+    content: ' ';
+    float: right;
+    margin: 0 3px 0 6px;
+    border: solid #000 1px;
+}
+@mixin qtiChoiceBoxAnswered {
+    content: '\00d7';
+}
+@mixin qtiResponseIdentifier {
+    margin-left: 0px;
+    color: #444;
+    font-style: italic;
+    font-size: 10pt;
+}
+
 .qti-item{
 
     .response-identifier{
@@ -9,17 +41,45 @@ $iaBackground: #eee;
         .response-identifier{
             display: inline-block;
         }
-    }
-
-    .qti-blockInteraction{
-        position: relative;
-        .response-identifier{
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 4px;
-            font-style: italic;
-            color: #444;
+        .qti-blockInteraction{
+            position: relative;
+            .response-identifier{
+                @include qtiResponseIdentifier();
+                position: absolute;
+                top: 0;
+                right: 6px;
+                padding: 4px;
+            }
+        }
+        .qti-inlineChoiceInteraction{
+            border: 1px dashed grey;
+            padding: 2px;
+            .response-identifier{
+                @include qtiResponseIdentifier();
+                position: relative;
+                margin-left: 10px;
+            }
+            .qti-inlineChoice {
+                border:none;
+                margin:0;
+                padding-right: 1rem;
+            }
+        }
+        .qti-textEntryInteraction {
+            border: 1px dashed grey;
+            padding: 3pt;
+            background-color: transparent;
+            input{
+                background-color: $iaBackground;
+                position: relative;
+                top: -1pt;
+                padding: 4pt 5pt;
+            }
+            .response-identifier{
+                @include qtiResponseIdentifier();
+                position: relative;
+                margin-left: 4px;
+            }
         }
     }
 
@@ -45,14 +105,6 @@ $iaBackground: #eee;
         input{
             border: none;
         }
-        .response-identifier{
-            position: relative;
-            left: 6px;
-            top: -6px;
-            color: #444;
-            font-style: italic;
-            font-size: 10pt;
-        }
     }
 
     .qti-inlineChoice {
@@ -64,31 +116,6 @@ $iaBackground: #eee;
             margin-left: 0;
         }
     }
-}
-
-@mixin qtiChoiceBox {
-    content: ' ';
-    float: left;
-    width: 14px;
-    height: 14px;
-    margin: 0 6px 0 3px;
-    border: solid #000 1px;
-    background-color: $iaBackground;
-    border-radius: 2px;
-    font-size: 14px;
-    line-height: 14px;
-    text-align: center;
-    position: relative;
-    top: 3px;
-}
-@mixin qtiChoiceBoxRtl {
-    content: ' ';
-    float: right;
-    margin: 0 3px 0 6px;
-    border: solid #000 1px;
-}
-@mixin qtiChoiceBoxAnswered {
-    content: '\00d7';
 }
 
 .qti-choiceInteraction, .qti-inlineChoiceInteraction {
