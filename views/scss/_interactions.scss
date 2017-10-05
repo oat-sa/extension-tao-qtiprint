@@ -2,6 +2,27 @@
 $iaBackground: #eee;
 .qti-item{
 
+    .response-identifier{
+        display: none;
+    }
+    .show-response-identifier{
+        .response-identifier{
+            display: inline-block;
+        }
+    }
+
+    .qti-blockInteraction{
+        position: relative;
+        .response-identifier{
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 4px;
+            font-style: italic;
+            color: #444;
+        }
+    }
+
     .qti-extendedTextInteraction {
         textarea {
             display:block;
@@ -15,11 +36,23 @@ $iaBackground: #eee;
         }
     }
 
-    input.qti-textEntryInteraction {
+    .qti-textEntryInteraction {
         border: none;
         border-bottom: dashed #000 1px;
         background-color: $iaBackground;
         border-radius: 2px;
+        padding: 3pt;
+        input{
+            border: none;
+        }
+        .response-identifier{
+            position: relative;
+            left: 6px;
+            top: -6px;
+            color: #444;
+            font-style: italic;
+            font-size: 10pt;
+        }
     }
 
     .qti-inlineChoice {
