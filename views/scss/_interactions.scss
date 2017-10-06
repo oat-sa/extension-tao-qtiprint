@@ -1,5 +1,6 @@
 
 $iaBackground: #eee;
+$interactionBorder: #000;
 
 @mixin qtiChoiceBox {
     content: ' ';
@@ -7,7 +8,7 @@ $iaBackground: #eee;
     width: 14px;
     height: 14px;
     margin: 0 6px 0 3px;
-    border: solid #000 1px;
+    border: solid $interactionBorder 1px;
     background-color: $iaBackground;
     border-radius: 2px;
     font-size: 14px;
@@ -20,14 +21,14 @@ $iaBackground: #eee;
     content: ' ';
     float: right;
     margin: 0 3px 0 6px;
-    border: solid #000 1px;
+    border: solid $interactionBorder 1px;
 }
 @mixin qtiChoiceBoxAnswered {
     content: '\00d7';
 }
 @mixin qtiResponseIdentifier {
     margin-left: 0px;
-    color: #444;
+    color: #555;
     font-style: italic;
     font-size: 10pt;
 }
@@ -41,6 +42,7 @@ $iaBackground: #eee;
         .response-identifier{
             display: inline-block;
         }
+
         .qti-blockInteraction{
             position: relative;
             .response-identifier{
@@ -51,36 +53,40 @@ $iaBackground: #eee;
                 padding: 4px;
             }
         }
-        .qti-inlineChoiceInteraction{
+
+        .qti-inlineInteraction{
             border: 1px dashed grey;
             padding: 2px;
-            .response-identifier{
-                @include qtiResponseIdentifier();
-                position: relative;
-                margin-left: 10px;
+            &.qti-inlineChoiceInteraction{
+                .response-identifier{
+                    @include qtiResponseIdentifier();
+                    position: relative;
+                    margin-left: 10px;
+                    margin-right: 4px;
+                }
+                .qti-inlineChoice {
+                    border:none;
+                    margin:0;
+                    padding-right: 1rem;
+                }
             }
-            .qti-inlineChoice {
-                border:none;
-                margin:0;
-                padding-right: 1rem;
+            &.qti-textEntryInteraction {
+                background-color: transparent;
+                input{
+                    background-color: $iaBackground;
+                    position: relative;
+                }
+                .response-identifier{
+                    @include qtiResponseIdentifier();
+                    position: relative;
+                    margin: 0 4px;
+                }
             }
         }
-        .qti-textEntryInteraction {
-            border: 1px dashed grey;
-            padding: 3pt;
-            background-color: transparent;
-            input{
-                background-color: $iaBackground;
-                position: relative;
-                top: -1pt;
-                padding: 4pt 5pt;
-            }
-            .response-identifier{
-                @include qtiResponseIdentifier();
-                position: relative;
-                margin-left: 4px;
-            }
-        }
+    }
+
+    .qti-inlineInteraction {
+        display: inline-block;
     }
 
     .qti-extendedTextInteraction {
@@ -88,7 +94,7 @@ $iaBackground: #eee;
             display:block;
             padding: 10pt;
             font-size: 12pt;
-            border: 1px dashed #000;
+            border: 1px dashed $interactionBorder;
             font-family: $monospaceFont;
             width: 100%;
             min-height: 150px;
@@ -98,9 +104,8 @@ $iaBackground: #eee;
 
     .qti-textEntryInteraction {
         border: none;
-        border-bottom: dashed #000 1px;
+        border-bottom: dashed $interactionBorder 1px;
         background-color: $iaBackground;
-        border-radius: 2px;
         padding: 3pt;
         input{
             border: none;
@@ -108,7 +113,7 @@ $iaBackground: #eee;
     }
 
     .qti-inlineChoice {
-        border: dashed #000 1px;
+        border: dashed $interactionBorder 1px;
         background-color: $iaBackground;
         border-radius: 2px;
         margin-left: 1rem;
