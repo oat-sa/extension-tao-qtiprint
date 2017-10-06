@@ -122,7 +122,6 @@ define([
                 }
             }
 
-            //set option here
             itemRunner('qtiprint', item, {
                     renderer: itemRef.renderer,
                     showResponseIdentifier: itemRef.showResponseIdentifier

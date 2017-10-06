@@ -1,6 +1,8 @@
 
 $iaBackground: #eee;
 $interactionBorder: #000;
+$interactionContainerBorder: grey;
+$responseIdentifier: #555;
 
 @mixin qtiChoiceBox {
     content: ' ';
@@ -28,7 +30,7 @@ $interactionBorder: #000;
 }
 @mixin qtiResponseIdentifier {
     margin-left: 0px;
-    color: #555;
+    color: $responseIdentifier;
     font-style: italic;
     font-size: 10pt;
 }
@@ -55,7 +57,7 @@ $interactionBorder: #000;
         }
 
         .qti-inlineInteraction{
-            border: 1px dashed grey;
+            border: 1px dashed $interactionContainerBorder;
             padding: 2px;
             &.qti-inlineChoiceInteraction{
                 .response-identifier{
