@@ -25,6 +25,7 @@
 
 namespace oat\taoQtiPrint\model;
 
+use oat\generis\model\GenerisRdf;
 use oat\generis\model\OntologyAwareTrait;
 use oat\oatbox\service\ConfigurableService;
 use oat\taoDelivery\model\AssignmentService;
@@ -68,7 +69,7 @@ class DeliveryPacker extends ConfigurableService
         );
 
         $deliveryUser = new \core_kernel_users_GenerisUser(new \core_kernel_classes_Resource($user));
-        $lang = $deliveryUser->getPropertyValues(PROPERTY_USER_DEFLG);
+        $lang = $deliveryUser->getPropertyValues(GenerisRdf::PROPERTY_USER_DEFLG);
         $userDataLang = empty($lang) ? DEFAULT_LANG : (string)current($lang);
 
         $config = $this->getServiceLocator()->get(QtiRunnerConfig::SERVICE_ID);
