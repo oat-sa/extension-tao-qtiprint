@@ -151,6 +151,10 @@ define([
                                     else if(options.layout && options.layout.use_bubble_sheet) {
                                         itemRef.renderer = 'bubbleSheet';
                                     }
+
+                                    if(options && options.layout && options.layout.show_response_identifier){
+                                        itemRef.showResponseIdentifier = true;
+                                    }
                                     pageRenderers.push(
                                         _.partial(testRenderers.itemPage, createPage('item'), itemRef, itemState, item.href)
                                     );

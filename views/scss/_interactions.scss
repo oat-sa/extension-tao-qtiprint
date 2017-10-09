@@ -1,37 +1,8 @@
 
 $iaBackground: #eee;
-.qti-item{
-
-    .qti-extendedTextInteraction {
-        textarea {
-            display:block;
-            padding: 10pt;
-            font-size: 12pt;
-            border: 1px dashed #000;
-            font-family: $monospaceFont;
-            width: 100%;
-            min-height: 150px;
-            background:$iaBackground;
-        }
-    }
-
-    input.qti-textEntryInteraction {
-        border: none;
-        border-bottom: dashed #000 1px;
-        background-color: $iaBackground;
-        border-radius: 2px;
-    }
-
-    .qti-inlineChoice {
-        border: dashed #000 1px;
-        background-color: $iaBackground;
-        border-radius: 2px;
-        margin-left: 1rem;
-        &:first-child {
-            margin-left: 0;
-        }
-    }
-}
+$interactionBorder: #000;
+$interactionContainerBorder: grey;
+$responseIdentifier: #555;
 
 @mixin qtiChoiceBox {
     content: ' ';
@@ -39,7 +10,7 @@ $iaBackground: #eee;
     width: 14px;
     height: 14px;
     margin: 0 6px 0 3px;
-    border: solid #000 1px;
+    border: solid $interactionBorder 1px;
     background-color: $iaBackground;
     border-radius: 2px;
     font-size: 14px;
@@ -52,10 +23,106 @@ $iaBackground: #eee;
     content: ' ';
     float: right;
     margin: 0 3px 0 6px;
-    border: solid #000 1px;
+    border: solid $interactionBorder 1px;
 }
 @mixin qtiChoiceBoxAnswered {
     content: '\00d7';
+}
+@mixin qtiResponseIdentifier {
+    margin-left: 0px;
+    color: $responseIdentifier;
+    font-style: italic;
+    font-size: 10pt;
+}
+
+.qti-item{
+
+    .response-identifier{
+        display: none;
+    }
+    .show-response-identifier{
+        .response-identifier{
+            display: inline-block;
+        }
+
+        .qti-blockInteraction{
+            position: relative;
+            .response-identifier{
+                @include qtiResponseIdentifier();
+                position: absolute;
+                top: 0;
+                right: 6px;
+                padding: 4px;
+            }
+        }
+
+        .qti-inlineInteraction{
+            border: 1px dashed $interactionContainerBorder;
+            padding: 2px;
+            &.qti-inlineChoiceInteraction{
+                .response-identifier{
+                    @include qtiResponseIdentifier();
+                    position: relative;
+                    margin-left: 10px;
+                    margin-right: 4px;
+                }
+                .qti-inlineChoice {
+                    border:none;
+                    margin:0;
+                    padding-right: 1rem;
+                }
+            }
+            &.qti-textEntryInteraction {
+                background-color: transparent;
+                input{
+                    background-color: $iaBackground;
+                    position: relative;
+                }
+                .response-identifier{
+                    @include qtiResponseIdentifier();
+                    position: relative;
+                    margin: 0 4px;
+                }
+            }
+        }
+    }
+
+    .qti-inlineInteraction {
+        display: inline-block;
+    }
+
+    .qti-extendedTextInteraction {
+        textarea {
+            display:block;
+            padding: 10pt;
+            font-size: 12pt;
+            border: 1px dashed $interactionBorder;
+            font-family: $monospaceFont;
+            width: 100%;
+            min-height: 150px;
+            background:$iaBackground;
+        }
+    }
+
+    .qti-textEntryInteraction {
+        border: none;
+        border-bottom: dashed $interactionBorder 1px;
+        background-color: $iaBackground;
+        padding: 3pt;
+        input{
+            border: none;
+        }
+    }
+
+    .qti-inlineChoice {
+        border: dashed $interactionBorder 1px;
+        background-color: $iaBackground;
+        border-radius: 2px;
+        margin-left: 1rem;
+        &:first-child {
+            margin-left: 0;
+        }
+    }
 }
 
 .qti-choiceInteraction, .qti-inlineChoiceInteraction {
