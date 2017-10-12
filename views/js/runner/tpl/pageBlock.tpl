@@ -1,1 +1,1 @@
-<section class="{{type}}"></section>
+<section class="grid-row {{type}}"></section>
