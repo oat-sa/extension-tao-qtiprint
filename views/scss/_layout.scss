@@ -98,6 +98,7 @@ main > section {
         page-break-before: always;
     }
     &.item{
+        width:100%;
         page-break-inside: avoid;
         page-break-after: auto;
         padding-bottom: 10px;
