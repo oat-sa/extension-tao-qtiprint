@@ -143,6 +143,9 @@ define([
             var self = this;
             if (this._item) {
                 try {
+                    if(this.options.showResponseIdentifier){
+                        this._item.addClass('show-response-identifier');
+                    }
                     elt.innerHTML = this._item.render({});
                 } catch (e) {
                     logger.trace(e);

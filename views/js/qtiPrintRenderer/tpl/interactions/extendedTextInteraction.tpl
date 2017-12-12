@@ -1,4 +1,5 @@
 <article class="qti-interaction qti-blockInteraction qti-extendedTextInteraction" data-serial="{{serial}}" data-qti-class="extendedTextInteraction">
+    <span class="response-identifier">{{attributes.responseIdentifier}}</span>
     {{#if prompt}}{{{prompt}}}{{/if}}
     <div class="instruction-container"></div>
     {{#if multiple}}

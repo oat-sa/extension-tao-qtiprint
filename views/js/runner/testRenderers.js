@@ -67,7 +67,7 @@ define([
 
             if (coverPageOptions['qr_code']) {
                 new QRCode($('.qr-code', $container).get(0), {
-                    text: urlHelper.route('render', 'PrintTest', 'taoBooklet', {uri: test.uri}),
+                    text: coverPageOptions['qr_code_data'] || urlHelper.route('render', 'PrintTest', 'taoBooklet', {uri: options.uri}),
                     width: 192,
                     height: 192,
                     colorDark: "#000000",
@@ -122,7 +122,10 @@ define([
                 }
             }
 
-            itemRunner('qtiprint', item, {renderer: itemRef.renderer})
+            itemRunner('qtiprint', item, {
+                    renderer: itemRef.renderer,
+                    showResponseIdentifier: itemRef.showResponseIdentifier
+                })
                 .on('error', function (err) {
                     itemDone(err);
                 })
