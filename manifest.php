@@ -23,7 +23,7 @@ return array(
     'name' => 'taoQtiPrint',
 	'label' => 'qti',
 	'description' => 'Provides printable rendering for QTI Items',
-    'license' => 'GPL-2.0-only',
+    'license' => 'GPL-2.0',
     'version' => '1.7.1',
 	'author' => 'Open Assessment Technologies SA',
 	'requires' => array(
