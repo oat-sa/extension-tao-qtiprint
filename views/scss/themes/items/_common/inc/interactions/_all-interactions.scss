@@ -6,6 +6,15 @@
 
 .qti-interaction {
 
+    .response-identifier{
+        display: none;
+    }
+    .show-response-identifier {
+        .response-identifier {
+            display: inline-block;
+        }
+    }
+
     .solid, .bordered {
         border: none;
     }
