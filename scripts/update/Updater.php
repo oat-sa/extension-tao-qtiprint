@@ -42,7 +42,7 @@ class Updater extends \common_ext_ExtensionUpdater
             $this->getServiceManager()->register(DeliveryExecutionPacker::SERVICE_ID, new DeliveryExecutionPacker());
             $this->setVersion('1.4.0');
         }
-        $this->skip('1.4.0', '1.7.5');
+        $this->skip('1.4.0', '1.7.6');
 
     }
 }
