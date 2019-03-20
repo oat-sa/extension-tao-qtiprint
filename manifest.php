@@ -24,10 +24,10 @@ return array(
 	'label' => 'qti',
 	'description' => 'Provides printable rendering for QTI Items',
     'license' => 'GPL-2.0',
-    'version' => '1.7.6',
+    'version' => '1.8.0',
 	'author' => 'Open Assessment Technologies SA',
 	'requires' => array(
-	    'tao' => '>=9.0.0',
+	    'tao' => '>=30.0.0',
         'taoQtiItem' => '>=8.4.8',
         'taoQtiTest' => '>=10.14.0'
     ),
