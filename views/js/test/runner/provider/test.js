@@ -1,33 +1,32 @@
 define([
+
     'jquery',
     'lodash',
     'taoItems/runner/api/itemRunner',
     'taoQtiPrint/runner/provider/qtiprint',
     'json!taoQtiPrint/test/samples/space-shuttle.json'
-], function($, _, itemRunner, qtiRuntimeProvider, itemData){
+], function($, _, itemRunner, qtiRuntimeProvider, itemData) {
 
     var containerId = 'item-container';
 
-
     QUnit.module('Provider API');
 
-    QUnit.test('module', function(assert){
-        assert.ok(typeof qtiRuntimeProvider !== 'undefined', "The module exports something");
-        assert.ok(typeof qtiRuntimeProvider === 'object', "The module exports an object");
-        assert.ok(typeof qtiRuntimeProvider.init === 'function' || typeof qtiRuntimeProvider.render === 'function', "The provider expose an init or a render method");
+    QUnit.test('module', function(assert) {
+        assert.ok(typeof qtiRuntimeProvider !== 'undefined', 'The module exports something');
+        assert.ok(typeof qtiRuntimeProvider === 'object', 'The module exports an object');
+        assert.ok(typeof qtiRuntimeProvider.init === 'function' || typeof qtiRuntimeProvider.render === 'function', 'The provider expose an init or a render method');
     });
 
-
-
     QUnit.module('Register the provider', {
-        teardown : function(){
-            //reset the provider
+        afterEach: function(assert) {
+
+            //Reset the provider
             itemRunner.providers = undefined;
         }
     });
 
-    QUnit.test('register the qti provider', function(assert){
-        QUnit.expect(4);
+    QUnit.test('register the qti provider', function(assert) {
+        assert.expect(4);
 
         assert.ok(typeof itemRunner.providers === 'undefined', 'the runner has no providers');
 
@@ -39,56 +38,58 @@ define([
 
     });
 
-
-
     QUnit.module('Provider init', {
-        teardown : function(){
-            //reset the provides
+        beforeEach: function (){
             itemRunner.providers = undefined;
+
         }
     });
 
-    QUnit.asyncTest('Item data loading', function(assert){
-        QUnit.expect(2);
+    QUnit.test('Item data loading', function(assert) {
+        var ready = assert.async();
+        assert.expect(2);
 
         itemRunner.register('qtiprint', qtiRuntimeProvider);
 
+        itemRunner('qtiprint', itemData, {
+            renderer: 'results'
+        })
+          .on('init', function() {
 
-        itemRunner('qtiprint', itemData)
-          .on('init', function(){
+              assert.ok(typeof this._item === 'object', 'The item data is loaded and mapped to an object');
+              assert.ok(typeof this._item.bdy === 'object', 'The item contains a body object');
 
-            assert.ok(typeof this._item === 'object', 'The item data is loaded and mapped to an object');
-            assert.ok(typeof this._item.bdy === 'object', 'The item contains a body object');
-
-            QUnit.start();
+              ready();
           }).init();
     });
 
-    QUnit.asyncTest('Loading wrong data', function(assert){
-        QUnit.expect(2);
+    QUnit.test('Loading wrong data', function(assert) {
+        var ready = assert.async();
+        assert.expect(2);
 
         itemRunner.register('qtiprint', qtiRuntimeProvider);
 
-        itemRunner('qtiprint', { foo : true})
-          .on('error', function(message){
+        itemRunner('qtiprint', {foo: true})
+          .on('error', function(message) {
 
-            assert.ok(true, 'The provider triggers an error event');
-            assert.ok(typeof message === 'string', 'The error is a string');
+              assert.ok(true, 'The provider triggers an error event');
+              assert.ok(typeof message === 'string', 'The error is a string');
 
-            QUnit.start();
+              ready();
           }).init();
     });
-
 
     QUnit.module('Provider render', {
-        teardown : function(){
-            //reset the provides
+        afterEach: function(assert) {
+
+            //Reset the provides
             itemRunner.providers = undefined;
         }
     });
 
-    QUnit.asyncTest('Item rendering', function(assert){
-        QUnit.expect(3);
+    QUnit.test('Item rendering', function(assert) {
+        var ready = assert.async();
+        assert.expect(3);
 
         var $container = $('#' + containerId);
 
@@ -98,11 +99,11 @@ define([
         itemRunner.register('qtiprint', qtiRuntimeProvider);
 
         itemRunner('qtiprint', itemData)
-            .on('render', function(){
+            .on('render', function() {
 
                 assert.equal($container.children().length, 1, 'the container has children');
 
-                QUnit.start();
+                ready();
             })
             .init()
             .render($container);
