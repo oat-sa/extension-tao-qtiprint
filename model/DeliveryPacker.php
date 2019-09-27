@@ -32,10 +32,10 @@ use oat\taoDelivery\model\AssignmentService;
 use oat\taoItems\model\pack\encoders\Base64fileEncoder;
 use oat\taoItems\model\pack\ExceptionMissingAsset;
 use oat\taoQtiItem\model\QtiJsonItemCompiler;
+use oat\taoQtiTest\models\CompilationDataService;
 use oat\taoQtiTest\models\runner\config\QtiRunnerConfig;
 use qtism\data\AssessmentItemRef;
 use qtism\data\AssessmentSection;
-use qtism\data\storage\php\PhpDocument;
 use taoQtiTest_models_classes_QtiTestService;
 
 /**
@@ -57,6 +57,7 @@ class DeliveryPacker extends ConfigurableService
      * @param string $uri
      * @param string $user
      * @return array
+     * @throws \Exception
      */
     public function getTestData($uri, $user)
     {
@@ -77,11 +78,7 @@ class DeliveryPacker extends ConfigurableService
         $reviewConfig = $config->getConfigValue('review');
         $displaySubsectionTitle = isset($reviewConfig['displaySubsectionTitle']) ? (bool)$reviewConfig['displaySubsectionTitle'] : true;
 
-        $testPhp = $compilationDirs['private']->read(taoQtiTest_models_classes_QtiTestService::TEST_COMPILED_FILENAME);
-        $phpDoc = new PhpDocument();
-        $phpDoc->loadFromString($testPhp);
-
-        $testDefinition = $phpDoc->getDocumentComponent();
+        $testDefinition = $this->getCompilationDataService()->readCompilationData($compilationDirs['private'], taoQtiTest_models_classes_QtiTestService::TEST_COMPILED_FILENAME);
 
         $lastPart = null;
         $lastSection = null;
@@ -256,4 +253,12 @@ class DeliveryPacker extends ConfigurableService
         return $itemData;
     }
 
+    /**
+     * @return CompilationDataService
+     */
+    private function getCompilationDataService()
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return $this->getServiceLocator()->get(CompilationDataService::SERVICE_ID);
+    }
 }

@@ -33,8 +33,8 @@ class Updater extends \common_ext_ExtensionUpdater
      * @param string $initialVersion
      * @return string $versionUpdatedTo
      */
-    public function update($initialVersion) {
-
+    public function update($initialVersion)
+    {
         $this->skip('0.1.0', '1.3.1');
 
         if ($this->isVersion('1.3.1')) {
@@ -42,7 +42,7 @@ class Updater extends \common_ext_ExtensionUpdater
             $this->getServiceManager()->register(DeliveryExecutionPacker::SERVICE_ID, new DeliveryExecutionPacker());
             $this->setVersion('1.4.0');
         }
-        
-        $this->skip('1.4.0', '1.8.1');
+
+        $this->skip('1.4.0', '1.8.2');
     }
 }
