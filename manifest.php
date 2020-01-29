@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,42 +20,42 @@
  *
  */
 
-return array(
+return [
     'name' => 'taoQtiPrint',
-	'label' => 'qti',
-	'description' => 'Provides printable rendering for QTI Items',
+    'label' => 'qti',
+    'description' => 'Provides printable rendering for QTI Items',
     'license' => 'GPL-2.0',
     'version' => '1.8.2',
-	'author' => 'Open Assessment Technologies SA',
-	'requires' => array(
-	    'tao' => '>=30.0.0',
+    'author' => 'Open Assessment Technologies SA',
+    'requires' => [
+        'tao' => '>=30.0.0',
         'taoQtiItem' => '>=8.4.8',
         'taoQtiTest' => '>=10.14.0'
-    ),
-	// for compatibility
-	'dependencies' => array('tao','taoQtiItem'),
-	'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager',
-    'acl' => array(
-        array('grant', 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager', array('ext'=>'taoQtiPrint')),
-    ),
-    'uninstall' => array(
-    ),
-    'install' => array(
-    ),
+    ],
+    // for compatibility
+    'dependencies' => ['tao','taoQtiItem'],
+    'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager',
+    'acl' => [
+        ['grant', 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager', ['ext' => 'taoQtiPrint']],
+    ],
+    'uninstall' => [
+    ],
+    'install' => [
+    ],
     'update' => 'oat\\taoQtiPrint\\scripts\\update\\Updater',
-    'autoload' => array (
-        'psr-4' => array(
-            'oat\\taoQtiPrint\\' => dirname(__FILE__).DIRECTORY_SEPARATOR
-        )
-    ),
-    'routes' => array(
+    'autoload' =>  [
+        'psr-4' => [
+            'oat\\taoQtiPrint\\' => dirname(__FILE__) . DIRECTORY_SEPARATOR
+        ]
+    ],
+    'routes' => [
         '/taoQtiPrint' => 'oat\\taoQtiPrint\\controller'
-    ),
-	'constants' => array(
-	    # views directory
-	    "DIR_VIEWS" => dirname(__FILE__).DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR,
+    ],
+    'constants' => [
+        # views directory
+        "DIR_VIEWS" => dirname(__FILE__) . DIRECTORY_SEPARATOR . "views" . DIRECTORY_SEPARATOR,
 
-		#BASE URL (usually the domain root)
-		'BASE_URL' => ROOT_URL.'taoQtiPrint/',
-	)
-);
+        #BASE URL (usually the domain root)
+        'BASE_URL' => ROOT_URL . 'taoQtiPrint/',
+    ]
+];

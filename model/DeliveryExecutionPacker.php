@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,11 +36,11 @@ use oat\taoResultServer\models\classes\ResultServerService;
 
 /**
  * Class DeliveryExecutionPacker
- * 
+ *
  * Extracts the test definition data from a DeliveryExecution.
  * Add the definition of items and theirs related assets, base64 encoded.
  * Extracts the result variables related to a DeliveryExecution.
- * 
+ *
  * @package oat\taoQtiPrint\model
  */
 class DeliveryExecutionPacker extends DeliveryPacker
@@ -101,10 +102,10 @@ class DeliveryExecutionPacker extends DeliveryPacker
         $inputParameters = $testSessionService->getRuntimeInputParameters($deliveryExecution);
         $fileStorage = \tao_models_classes_service_FileStorage::singleton();
         $directoryIds = explode('|', $inputParameters['QtiTestCompilation']);
-        $compilationDirs = array(
+        $compilationDirs = [
             'private' => $fileStorage->getDirectoryById($directoryIds[0]),
             'public' => $fileStorage->getDirectoryById($directoryIds[1])
-        );
+        ];
         $assessmentTest = $testSession->getAssessmentTest();
         $route = $testSession->getRoute();
         $routeItems = $route->getAllRouteItems();

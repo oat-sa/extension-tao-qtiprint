@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -64,7 +65,6 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
         $testPack = null;
 
         try {
-
             //load resquired services
             $qtiTestService = taoQtiTest_models_classes_QtiTestService::singleton();
 
@@ -80,14 +80,13 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
             foreach ($qtiTestService->getItems($test) as $item) {
                 $itemPacker = new Packer($item, '');
                 $this->getServiceLocator()->propagate($itemPacker);
-                $items[$item->getUri()] = $itemPacker->pack(array('img' => 'base64file'));
+                $items[$item->getUri()] = $itemPacker->pack(['img' => 'base64file']);
             }
 
             //create the pack
             $testPack = new TestPack(self::$testType, $testData, $items);
-
-        } catch(common_Exception $e){
-            throw new common_Exception('Unable to pack test '. $test->getUri() . ' : ' . $e->getMessage());
+        } catch (common_Exception $e) {
+            throw new common_Exception('Unable to pack test ' . $test->getUri() . ' : ' . $e->getMessage());
         }
 
         return $testPack;
@@ -100,9 +99,10 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
      * @param XmlDocument $testDefinition - the QTI Test definition
      * @return array the test structure as it should be delivered.
      */
-    private function getRoute($testDefinition){
+    private function getRoute($testDefinition)
+    {
 
-        $route = array();
+        $route = [];
 
         // Make the test definition a compact one. Compact tests combine all needed
         // information to run a test instance.
@@ -119,21 +119,19 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
 
         //We are getting items with their respective test part and sections, so we need to restructure it
         foreach ($testSession->getRoute() as $routeItem) {
-
-            $item = array(
+            $item = [
                 'id'    => $routeItem->getAssessmentItemRef()->getIdentifier(),
                 'href'  => $routeItem->getAssessmentItemRef()->getHref()
-            );
+            ];
 
             $routeSections = $routeItem->getAssessmentSections()->getArrayCopy();
             $lastSection = $routeSections[count($routeSections) - 1];
 
-            if($sectionId != $lastSection->getIdentifier() || $testPartId != $routeItem->getTestPart()->getIdentifier()){
+            if ($sectionId != $lastSection->getIdentifier() || $testPartId != $routeItem->getTestPart()->getIdentifier()) {
                 $sectionId = $lastSection->getIdentifier();
 
-                           $rubricBlocks = array();
+                           $rubricBlocks = [];
                 foreach ($routeItem->getAssessmentSections() as $section) {
-
                     foreach ($section->getRubricBlocks() as $rubricBlock) {
                         $xmlRendering = $renderingEngine->render($rubricBlock);
                         $strRendering = $xmlRendering->saveXML($xmlRendering->documentElement);
@@ -147,34 +145,32 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
                         $rubricBlocks[] = $finalRendering;
                     }
                 }
-                $section = array(
+                $section = [
                     'id'          => $section->getIdentifier(),
                     'title'       => $section->getTitle(),
                     'rubricBlock' => $rubricBlocks,
-                    'items'       => array($item)
-                );
+                    'items'       => [$item]
+                ];
 
-                if($testPartId != $routeItem->getTestPart()->getIdentifier()){
+                if ($testPartId != $routeItem->getTestPart()->getIdentifier()) {
                     $testPartId = $routeItem->getTestPart()->getIdentifier();
-                    $route[] = array(
+                    $route[] = [
                         'id' => $testPartId,
-                        'sections' => array($section)
-                    );
-
+                        'sections' => [$section]
+                    ];
                 } else {
                     $route = $this->addSectionToRoute($route, $testPartId, $section);
                 }
-
             } else {
                 $route = $this->addItemToRoute($route, $testPartId, $sectionId, $item);
             }
         }
 
-        return array(
+        return [
             'id'        => $assessmentTest->getIdentifier(),
             'title'     => $assessmentTest->getTitle(),
             'testParts' => $route
-        );
+        ];
     }
 
     /**
@@ -184,9 +180,10 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
      * @param array $section - the section to add
      * @return array the route
      */
-    private function addSectionToRoute($route, $testPartId, $section){
-        foreach($route as $i => $routePart){
-            if($routePart['id'] == $testPartId){
+    private function addSectionToRoute($route, $testPartId, $section)
+    {
+        foreach ($route as $i => $routePart) {
+            if ($routePart['id'] == $testPartId) {
                 $route[$i]['sections'][] = $section;
                 break;
             }
@@ -202,11 +199,12 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
      * @param array $item - the item to add
      * @return array the route
      */
-    private function addItemToRoute($route, $testPartId, $sectionId, $item){
-        foreach($route as $i => $routePart){
-            if($routePart['id'] == $testPartId){
-                foreach($route[$i]['sections'] as $j => $section){
-                    if($section['id'] == $sectionId){
+    private function addItemToRoute($route, $testPartId, $sectionId, $item)
+    {
+        foreach ($route as $i => $routePart) {
+            if ($routePart['id'] == $testPartId) {
+                foreach ($route[$i]['sections'] as $j => $section) {
+                    if ($section['id'] == $sectionId) {
                         $route[$i]['sections'][$j]['items'][] = $item;
                         break;
                     }
