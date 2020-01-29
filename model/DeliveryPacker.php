@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,13 +63,13 @@ class DeliveryPacker extends ConfigurableService
     public function getTestData($uri, $user)
     {
         $runtime = $this->getServiceLocator()->get(AssignmentService::SERVICE_ID)->getRuntime($uri);
-        $inputParameters = \tao_models_classes_service_ServiceCallHelper::getInputValues($runtime, array());
+        $inputParameters = \tao_models_classes_service_ServiceCallHelper::getInputValues($runtime, []);
         $fileStorage = \tao_models_classes_service_FileStorage::singleton();
         $directoryIds = explode('|', $inputParameters['QtiTestCompilation']);
-        $compilationDirs = array(
+        $compilationDirs = [
             'private' => $fileStorage->getDirectoryById($directoryIds[0]),
             'public' => $fileStorage->getDirectoryById($directoryIds[1])
-        );
+        ];
 
         $deliveryUser = new \core_kernel_users_GenerisUser(new \core_kernel_classes_Resource($user));
         $lang = $deliveryUser->getPropertyValues(GenerisRdf::PROPERTY_USER_DEFLG);
@@ -94,16 +95,15 @@ class DeliveryPacker extends ConfigurableService
         ];
 
         foreach ($testDefinition->getTestParts() as $testPart) {
-            $assessmentSectionStack = array();
+            $assessmentSectionStack = [];
 
             foreach ($testPart->getAssessmentSections() as $assessmentSection) {
-                $trail = array();
-                $mark = array();
+                $trail = [];
+                $mark = [];
 
                 array_push($trail, $assessmentSection);
 
                 while (count($trail) > 0) {
-
                     $current = array_pop($trail);
 
                     if (!in_array($current, $mark, true) && $current instanceof AssessmentSection) {
@@ -120,7 +120,6 @@ class DeliveryPacker extends ConfigurableService
                         }
                     } elseif (in_array($current, $mark, true)) {
                         array_pop($assessmentSectionStack);
-
                     } elseif ($current instanceof AssessmentItemRef) {
                         // leaf node.
                         // AssessmentSectionHierarchy of AssessmentItemRef is in $assessmentSectionStack

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +44,6 @@ class Updater extends \common_ext_ExtensionUpdater
             $this->setVersion('1.4.0');
         }
 
-        $this->skip('1.4.0', '1.8.2');
+        $this->skip('1.4.0', '1.8.3');
     }
 }
