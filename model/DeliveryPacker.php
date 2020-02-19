@@ -160,6 +160,11 @@ class DeliveryPacker extends ConfigurableService
                                 'rubricBlock' => '', // TODO: get the rubric block from the delivery
                                 'items' => [],
                             ];
+
+                            if ($section->getSelection() && $section->getSelection()->getSelect()) {
+                                $testData['data']['testParts'][$partId]['sections'][$sectionId]['select'] =
+                                    $section->getSelection()->getSelect();
+                            }
                         }
 
                         $testData['data']['testParts'][$partId]['sections'][$sectionId]['items'][] = [
