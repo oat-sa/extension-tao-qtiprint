@@ -29,7 +29,6 @@ namespace oat\taoQtiPrint\model;
 use oat\generis\model\GenerisRdf;
 use oat\generis\model\OntologyAwareTrait;
 use oat\oatbox\service\ConfigurableService;
-use oat\taoDelivery\model\AssignmentService;
 use oat\taoItems\model\pack\encoders\Base64fileEncoder;
 use oat\taoItems\model\pack\ExceptionMissingAsset;
 use oat\taoQtiItem\model\QtiJsonItemCompiler;
@@ -38,6 +37,7 @@ use oat\taoQtiTest\models\runner\config\QtiRunnerConfig;
 use qtism\data\AssessmentItemRef;
 use qtism\data\AssessmentSection;
 use taoQtiTest_models_classes_QtiTestService;
+use oat\taoDelivery\model\RuntimeService;
 
 /**
  * Class DeliveryPacker
@@ -62,7 +62,7 @@ class DeliveryPacker extends ConfigurableService
      */
     public function getTestData($uri, $user)
     {
-        $runtime = $this->getServiceLocator()->get(AssignmentService::SERVICE_ID)->getRuntime($uri);
+        $runtime = $this->getServiceLocator()->get(RuntimeService::SERVICE_ID)->getRuntime($uri);
         $inputParameters = \tao_models_classes_service_ServiceCallHelper::getInputValues($runtime, []);
         $fileStorage = \tao_models_classes_service_FileStorage::singleton();
         $directoryIds = explode('|', $inputParameters['QtiTestCompilation']);
