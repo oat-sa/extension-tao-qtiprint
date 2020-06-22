@@ -26,6 +26,7 @@ use oat\taoQtiPrint\model\DeliveryPacker;
 /**
  * Class Updater
  * @package oat\taoQtiPrint\scripts\update
+ * @deprecated use migrations instead. See https://github.com/oat-sa/generis/wiki/Tao-Update-Process
  */
 class Updater extends \common_ext_ExtensionUpdater
 {
@@ -45,5 +46,10 @@ class Updater extends \common_ext_ExtensionUpdater
         }
 
         $this->skip('1.4.0', '1.9.1');
+        
+        //Updater files are deprecated. Please use migrations.
+        //See: https://github.com/oat-sa/generis/wiki/Tao-Update-Process
+
+        $this->setVersion($this->getExtension()->getManifest()->getVersion());
     }
 }
