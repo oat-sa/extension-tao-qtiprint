@@ -104,6 +104,10 @@ main > section {
         padding-bottom: 10px;
         margin-bottom: 10px;
     }
+    &.include {
+        page-break-before: always;
+        page-break-after: always;
+    }
 }
 main.one-section-per-page > section.item {
     page-break-after: always;
