@@ -1,20 +1,23 @@
 {
   "type": "qtiprint",
-  "data": [{
-    "id": "testPart-1",
-    "sections": [{
-      "id": "assessmentSection-1",
-      "title": "Langage ",
-      "rubricBlock": [],
-      "items": [{
-        "id": "item-1",
-        "href": "http:\/\/bertao\/tao.rdf#i1427719530668161"
-      }, {
-        "id": "item-2",
-        "href": "http:\/\/bertao\/tao.rdf#i1427720040909863"
+  "data": {
+    "id": "Test Example",
+    "testParts": [{
+      "id": "testPart-1",
+      "sections": [{
+        "id": "assessmentSection-1",
+        "title": "Langage ",
+        "rubricBlock": [],
+        "items": [{
+          "id": "item-1",
+          "href": "http:\/\/bertao\/tao.rdf#i1427719530668161"
+        }, {
+          "id": "item-2",
+          "href": "http:\/\/bertao\/tao.rdf#i1427720040909863"
+        }]
       }]
     }]
-  }],
+  },
   "items": {
     "http:\/\/bertao\/tao.rdf#i1427719530668161": {
       "type": "qti",
