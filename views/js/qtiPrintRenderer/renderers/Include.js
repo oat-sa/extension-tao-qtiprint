@@ -23,7 +23,7 @@ define([
 
     /**
      * Expose the renderer
-     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Img
+     * @exports taoQtiPrint/qtiPrintRenderer/renderers/Include
      */
     return {
         qtiClass:     'include',
