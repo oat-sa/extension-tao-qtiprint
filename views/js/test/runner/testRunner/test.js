@@ -41,7 +41,7 @@ define([
 
         assert.equal($container.length, 1, 'The container exists');
 
-        testRunner(testData)
+        testRunner(testData, {})
             .on('error', function(e) {
                 assert.ok(false, 'The test runner has failed :' + e);
             })
