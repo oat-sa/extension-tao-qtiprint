@@ -59,6 +59,7 @@ define([
             'simpleAssociableChoice.matchInteraction':     'taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleAssociableChoice.MatchInteraction',
             'inlineChoice':                                'taoQtiPrint/qtiPrintRenderer/renderers/choices/InlineChoice',
             'math':                                        'taoQtiPrint/qtiPrintRenderer/renderers/Math',
+            'include':                                     'taoQtiPrint/qtiPrintRenderer/renderers/Include',
 
 //do not print
             '_simpleFeedbackRule':                         false,

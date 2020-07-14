@@ -21,6 +21,6 @@
 		"../../../../scss/themes/platform/_common/base-theme.scss",
 		"../../../../scss/themes/platform/_common/inc/mediaqueries/_max-width-1024.scss"
 	],
-	"mappings": "AgBMA,AAyBQ,IAzBJ,CACA,IAAI,CAwBA,YAAY,AAAC,CACT,0BAA0B,CAAE,KAAM,CACrC",
-	"names": []
+	"names": [],
+	"mappings": "AgBMA,AAyBQ,IAzBJ,CACA,IAAI,CAwBA,YAAY,AAAC,CACT,0BAA0B,CAAE,KAAK,CACpC"
 }
