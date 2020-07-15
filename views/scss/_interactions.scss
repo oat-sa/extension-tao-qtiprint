@@ -153,9 +153,6 @@ $responseIdentifier: #555;
         }
 
         display: inline-block;
-        &:before {
-            @include qtiChoiceBox();
-        }
     }
 }
 
