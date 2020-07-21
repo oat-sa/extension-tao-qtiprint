@@ -4,6 +4,23 @@
 /// @group Item Assets
 ////
 table {
+    &.matrix {
+
+        th {
+        }
+        td {
+            &.numeric {
+            }
+            label {
+            }
+        }
+        tr {
+            &:nth-child(even){
+            }
+            &:nth-child(odd){
+            }
+        }
+    }
     &.qti-table {
         border: 1px solid $websiteBorder;
         border-collapse: collapse;
