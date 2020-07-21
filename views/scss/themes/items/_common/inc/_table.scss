@@ -3,25 +3,40 @@
 /// Tables, all themes
 /// @group Item Assets
 ////
-
-/// Tables in items are likely to be match interactions. In this case
-/// it would be better to edit interactions/_match.scss instead.
 table {
-    &.matrix {
+    &.qti-table {
+        border: 1px solid $websiteBorder;
+        border-collapse: collapse;
+
+        &.table-center {
+            display: table;
+            margin: 0 auto;
+        }
+
+        &.table-right {
+            display: table;
+            margin: 0 0 0 auto;
+        }
+
+        tr {
+            &:nth-child(even) {
+                background: white;
+            }
+            &:nth-child(odd) {
+                background: whiten($uiHeaderBg,0.7)
+            }
+        }
 
         th {
+            background-color: $uiHeaderBg;
+            font-weight: bold;
         }
-        td {
-            &.numeric {
-            }
-            label {
-            }
+
+        th, td {
+            border: 1px solid $websiteBorder;
+            min-width: 30px;
+            padding: 3px 5px;
         }
-        tr {
-            &:nth-child(even){
-            }
-            &:nth-child(odd){
-            }
-        }
+
     }
 }
