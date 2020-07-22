@@ -60,6 +60,7 @@ define([
             'inlineChoice':                                'taoQtiPrint/qtiPrintRenderer/renderers/choices/InlineChoice',
             'math':                                        'taoQtiPrint/qtiPrintRenderer/renderers/Math',
             'include':                                     'taoQtiPrint/qtiPrintRenderer/renderers/Include',
+            'table':                                        'taoQtiPrint/qtiPrintRenderer/renderers/Table',
 
 //do not print
             '_simpleFeedbackRule':                         false,
