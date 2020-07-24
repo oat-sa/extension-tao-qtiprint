@@ -177,11 +177,19 @@ $responseIdentifier: #555;
         margin: 0;
     }
     .qti-choice {
-        clear: both;
         margin-bottom: 3px;
         input[type="checkbox"] + label,
         input[type="radio"] + label {
             display: block;
+        }
+        .qti-block {
+            display: table;
+        }
+    }
+    .horizontal {
+        & >li {
+            display: block;
+            float: left; 
         }
     }
 }
