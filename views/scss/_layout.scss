@@ -55,9 +55,6 @@ html {
 }
 
 main > section {
-    &.grid-row {
-        width: 100%;
-    }
     &.title {
         h1, h2, h3 {
             text-align: center;
@@ -108,8 +105,11 @@ main > section {
         margin-bottom: 10px;
     }
     &.include {
+        width:100%;
         page-break-before: always;
         page-break-after: always;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
     }
 }
 main.one-section-per-page > section.item {
