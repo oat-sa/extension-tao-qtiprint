@@ -55,6 +55,9 @@ html {
 }
 
 main > section {
+    &.grid-row {
+        width: 100%;
+    }
     &.title {
         h1, h2, h3 {
             text-align: center;
