@@ -54,6 +54,14 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
      */
     private static $testType = 'qtiprint';
 
+    /** @var bool */
+    private $skipValidation;
+
+    public function __construct(bool $skipValidation = false)
+    {
+        $this->skipValidation = $skipValidation;
+    }
+
     /**
      * packTest implementation for QTI
      * @see {@link Packable}
@@ -78,7 +86,7 @@ class QtiTestPacker implements Packable, ServiceLocatorAwareInterface
             //pack each test's item
             $items = [];
             foreach ($qtiTestService->getItems($test) as $item) {
-                $itemPacker = new Packer($item, '');
+                $itemPacker = new Packer($item, '', $this->skipValidation);
                 $this->getServiceLocator()->propagate($itemPacker);
                 $items[$item->getUri()] = $itemPacker->pack(['img' => 'base64file']);
             }
