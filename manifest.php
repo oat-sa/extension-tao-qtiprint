@@ -25,15 +25,7 @@ return [
     'label' => 'qti',
     'description' => 'Provides printable rendering for QTI Items',
     'license' => 'GPL-2.0',
-    'version' => '1.15.0',
     'author' => 'Open Assessment Technologies SA',
-    'requires' => [
-        'tao' => '>=30.0.0',
-        'taoQtiItem' => '>=25.20.0',
-        'taoQtiTest' => '>=10.14.0'
-    ],
-    // for compatibility
-    'dependencies' => ['tao','taoQtiItem'],
     'managementRole' => 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager',
     'acl' => [
         ['grant', 'http://www.tao.lu/Ontologies/generis.rdf#taoQtiPrintManager', ['ext' => 'taoQtiPrint']],
