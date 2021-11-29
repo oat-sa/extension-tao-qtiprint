@@ -25,6 +25,7 @@
 
 namespace oat\taoQtiPrint\model;
 
+use common_Exception;
 use oat\generis\model\GenerisRdf;
 use oat\taoDelivery\model\execution\ServiceProxy;
 use oat\taoOutcomeUi\helper\ResponseVariableFormatter;
@@ -46,11 +47,13 @@ use oat\taoResultServer\models\classes\ResultServerService;
 class DeliveryExecutionPacker extends DeliveryPacker
 {
     const SERVICE_ID = 'taoQtiPrint/DeliveryExecutionPacker';
-    
+
     /**
      * Extracts the result variables related to a DeliveryExecution
+     *
      * @param string $uri
      * @return array
+     * @throws common_Exception
      */
     public function getResultVariables($uri)
     {
@@ -65,18 +68,17 @@ class DeliveryExecutionPacker extends DeliveryPacker
         $excludedVariables = array_flip(['numAttempts', 'duration']);
 
         $resultVariables = [];
-        foreach ($displayedVariables as &$item) {
+        foreach ($displayedVariables as $itemKey => &$item) {
             if (!isset($item['uri'])) {
                 continue;
             }
-            $itemUri = $item['uri'];
-            if (isset($responses[$itemUri])) {
-                $resultVariables[$itemUri] = array_diff_key($responses[$itemUri], $excludedVariables);
-                if (!count($resultVariables[$itemUri])) {
-                    $resultVariables[$itemUri] = null;
+            if (isset($responses[$itemKey])) {
+                $resultVariables[$itemKey] = array_diff_key($responses[$itemKey], $excludedVariables);
+                if (!count($resultVariables[$itemKey])) {
+                    $resultVariables[$itemKey] = null;
                 }
             } else {
-                $resultVariables[$itemUri] = null;
+                $resultVariables[$itemKey] = null;
             }
         }
 
