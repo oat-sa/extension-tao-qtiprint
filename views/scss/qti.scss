@@ -18,6 +18,16 @@
             box-shadow: 0 0 3px 0 #444 !important;
             background-color: white;
             padding: 15px;
+
+            figure {
+                margin: 0;
+                figcaption {
+                    font-size: 12px;
+                    line-height: 20px;
+                    padding: 6px 8px;
+                    word-wrap: break-word;
+                }
+            }
         }
     }
 }
