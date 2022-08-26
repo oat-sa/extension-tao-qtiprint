@@ -1,4 +1,4 @@
-/*
+/**
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; under version 2
@@ -14,7 +14,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  * Copyright (c) 2015 (original work) Open Assessment Technologies SA ;
- *
+ * Copyright (c) 2022 (original work) Open Assessment Technologies SA (under the project TAO-PRODUCT);
  */
 
 /**
@@ -46,6 +46,8 @@ define([
             'assessmentItem':                              'taoQtiPrint/qtiPrintRenderer/renderers/Item',
             '_container':                                  'taoQtiPrint/qtiPrintRenderer/renderers/Container',
             'stylesheet':                                  'taoQtiPrint/qtiPrintRenderer/renderers/Stylesheet',
+            'figure':                                      'taoQtiPrint/qtiPrintRenderer/renderers/Figure',
+            'figcaption':                                  'taoQtiPrint/qtiPrintRenderer/renderers/Figcaption',
             'img':                                         'taoQtiPrint/qtiPrintRenderer/renderers/Img',
             'rubricBlock':                                 'taoQtiPrint/qtiPrintRenderer/renderers/RubricBlock',
             'object':                                      'taoQtiPrint/qtiPrintRenderer/renderers/Object',
