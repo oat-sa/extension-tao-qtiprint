@@ -27,8 +27,8 @@ define([
         getContainer: getContainer,
         template: tpl,
         render: function(figure) {
-            const $figure = getContainer(figure);
-            const $img = $figure.find('img');
+            var $figure = getContainer(figure);
+            var $img = $figure.find('img');
             if ($img.length) {
                 // move width from image to figure
                 $figure.css({ width: $img.attr('width') });
