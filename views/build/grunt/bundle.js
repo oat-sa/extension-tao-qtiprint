@@ -39,6 +39,23 @@ module.exports = function (grunt) {
                                 'taoQtiPrint/qtiPrintRenderer/**/*',
                                 'taoQtiPrint/runner/**/*'
                             ]
+                        },
+                        {
+                            name: 'taoQtiPrint.es5',
+                            babel: true,
+                            targets: {
+                                ie: '11'
+                            },
+                            dependencies: [
+                                'taoItems/loader/taoItemsRunner.es5.min',
+                                'taoQtiItem/loader/taoQtiItemRunner.es5.min'
+                            ],
+                            include: [
+                                'taoQtiPrint/lib/**/*',
+                                'taoQtiPrint/qtiCommonRenderer/**/*',
+                                'taoQtiPrint/qtiPrintRenderer/**/*',
+                                'taoQtiPrint/runner/**/*'
+                            ]
                         }
                     ]
                 }
