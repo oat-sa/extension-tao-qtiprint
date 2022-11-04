@@ -1,18 +1,20 @@
-{{#if uniqid}}
-<h3>{{uniqid}}</h3>
-{{/if}}
-{{#if logo}}
+{{~#if uniqid~}}
+	<h3>{{uniqid}}</h3>
+{{~/if~}}
+{{~#if logo~}}
     <div class="logo">
         <img src="{{logo}}" alt="{{__ "Logo"}}" />
     </div>
-{{/if}}
+{{~/if~}}
+{{~#if title~}}
     <h1>{{title}}</h1>
-{{#if subtitle}}
+{{~/if~}}
+{{~#if subtitle~}}
     <h2>{{subtitle}}</h2>
-{{/if}}
-{{#if date}}
+{{~/if~}}
+{{~#if date~}}
     <h3>{{date}}</h3>
-{{/if}}
-{{#if qrcode}}
+{{~/if~}}
+{{~#if qrcode~}}
     <div class="qr-code"></div>
-{{/if}}
+{{~/if~}}
