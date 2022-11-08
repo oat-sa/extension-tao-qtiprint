@@ -115,9 +115,7 @@ $responseIdentifier: #555;
     }
 
     .qti-inlineChoice {
-        border: dashed $interactionBorder 1px;
         background-color: $iaBackground;
-        border-radius: 2px;
         margin-left: 1rem;
         &:first-child {
             margin-left: 0;
@@ -189,7 +187,7 @@ $responseIdentifier: #555;
     .horizontal {
         & >li {
             display: block;
-            float: left; 
+            float: left;
         }
     }
 }
