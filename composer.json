@@ -33,7 +33,7 @@
         "oat-sa/oatbox-extension-installer": "~1.1||dev-master",
         "oat-sa/generis" : ">=14.0.0",
         "oat-sa/tao-core" : ">=50.26.0",
-        "oat-sa/extension-tao-item" : ">=11.0.0",
+        "oat-sa/extension-tao-item" : ">=11.32.0",
         "oat-sa/extension-tao-itemqti" : ">=27.0.0",
         "oat-sa/extension-tao-testqti" : ">=41.0.0",
         "oat-sa/extension-tao-delivery" : ">=15.0.0",
