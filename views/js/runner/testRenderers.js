@@ -65,8 +65,8 @@ define([
                     urlHelper.route('render', 'PrintTest', 'taoBooklet', { uri: options.uri });
                 new QRCode($('.qr-code', $container).get(0), {
                     text: text.length > 192 && text.length < 220 ? text.padEnd(220) : text,
-                    width: 192,
-                    height: 192,
+                    width: 256,
+                    height: 256,
                     colorDark: '#000000',
                     colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.H
