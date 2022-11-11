@@ -30,14 +30,7 @@ define([
     'tpl!taoQtiPrint/runner/tpl/pageTest',
     'tpl!taoQtiPrint/runner/tpl/pageSection',
     'tpl!taoQtiPrint/runner/tpl/pageBlock'
-], function ($,
-             _,
-             urlHelper,
-             itemRunner,
-             assetStrategies,
-             QRCode,
-             pageTestTpl,
-             pageSectionTpl) {
+], function ($, _, urlHelper, itemRunner, assetStrategies, QRCode, pageTestTpl, pageSectionTpl) {
     'use strict';
 
     /**
@@ -45,7 +38,6 @@ define([
      * @typedef {testRenderers}
      */
     return {
-
         /**
          * Renders a block that represents a cover page
          * @param {jQuery} $container - The container in which renders the block
@@ -54,24 +46,29 @@ define([
          * @param {Function} done - A callback to call when the block is fully rendered
          */
         testPage: function testPage($container, test, options, done) {
-            var coverPageOptions = options && options.cover_page || {};
+            var coverPageOptions = (options && options.cover_page) || {};
 
-            $(pageTestTpl({
-                title: coverPageOptions['title'] && test.title,
-                subtitle: coverPageOptions['description'] && options.description,
-                qrcode: coverPageOptions['qr_code'],
-                logo: coverPageOptions['logo'] && options.logo,
-                date: coverPageOptions['date'] && options.date,
-                uniqid: coverPageOptions['unique_id'] && options.unique_id
-            })).appendTo($container);
+            $(
+                pageTestTpl({
+                    title: coverPageOptions['title'] && test.title,
+                    subtitle: coverPageOptions['description'] && options.description,
+                    qrcode: coverPageOptions['qr_code'],
+                    logo: coverPageOptions['logo'] && options.logo,
+                    date: coverPageOptions['date'] && options.date,
+                    uniqid: coverPageOptions['unique_id'] && options.unique_id
+                })
+            ).appendTo($container);
 
             if (coverPageOptions['qr_code']) {
+                const text =
+                    coverPageOptions['qr_code_data'] ||
+                    urlHelper.route('render', 'PrintTest', 'taoBooklet', { uri: options.uri });
                 new QRCode($('.qr-code', $container).get(0), {
-                    text: coverPageOptions['qr_code_data'] || urlHelper.route('render', 'PrintTest', 'taoBooklet', {uri: options.uri}),
-                    width: 192,
-                    height: 192,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
+                    text: text.length > 192 && text.length < 220 ? text.padEnd(220) : text,
+                    width: 256,
+                    height: 256,
+                    colorDark: '#000000',
+                    colorLight: '#ffffff',
                     correctLevel: QRCode.CorrectLevel.H
                 });
             }
@@ -86,11 +83,12 @@ define([
          * @param {Function} done - A callback to call when the block is fully rendered
          */
         sectionPage: function sectionPage($container, section, done) {
-
-            $(pageSectionTpl({
-                title: section.title,
-                rubricBlock: section.rubricBlock
-            })).appendTo($container);
+            $(
+                pageSectionTpl({
+                    title: section.title,
+                    rubricBlock: section.rubricBlock
+                })
+            ).appendTo($container);
 
             done();
         },
@@ -106,10 +104,12 @@ define([
         itemPage: function itemPage($container, itemRef, itemState, uri, done) {
             var item = itemRef.data;
             var assets = itemRef.assets;
-            var baseUrl = itemRef.baseUrl || urlHelper.route('getFile', 'QtiCreator', 'taoQtiItem', {
-                uri: uri,
-                lang: 'en-US'
-            }) + '&relPath=';
+            var baseUrl =
+                itemRef.baseUrl ||
+                urlHelper.route('getFile', 'QtiCreator', 'taoQtiItem', {
+                    uri: uri,
+                    lang: 'en-US'
+                }) + '&relPath=';
             var isDone = false;
 
             /**
@@ -123,9 +123,9 @@ define([
             }
 
             itemRunner('qtiprint', item, {
-                    renderer: itemRef.renderer,
-                    showResponseIdentifier: itemRef.showResponseIdentifier
-                })
+                renderer: itemRef.renderer,
+                showResponseIdentifier: itemRef.showResponseIdentifier
+            })
                 .on('error', function (err) {
                     itemDone(err);
                 })
@@ -138,28 +138,30 @@ define([
                 .on('ready', function () {
                     itemDone();
                 })
-                .assets([
-                    {
-                        name: 'base64package',
-                        handle: function handleBase64(url) {
-                            var id = url.file;
-                            var found = _.find(assets, function (assetsList) {
-                                var asset = assetsList[id];
-                                return !!(asset && urlHelper.isBase64(asset));
-                            });
-                            if (found) {
-                                return found[id];
+                .assets(
+                    [
+                        {
+                            name: 'base64package',
+                            handle: function handleBase64(url) {
+                                var id = url.file;
+                                var found = _.find(assets, function (assetsList) {
+                                    var asset = assetsList[id];
+                                    return !!(asset && urlHelper.isBase64(asset));
+                                });
+                                if (found) {
+                                    return found[id];
+                                }
                             }
-                        }
-                    },
-                    assetStrategies.taomedia,
-                    assetStrategies.external,
-                    assetStrategies.baseUrl
-                ], {
-                    baseUrl: baseUrl
-                })
+                        },
+                        assetStrategies.taomedia,
+                        assetStrategies.external,
+                        assetStrategies.baseUrl
+                    ],
+                    {
+                        baseUrl: baseUrl
+                    }
+                )
                 .init();
         }
     };
 });
-

@@ -19,22 +19,45 @@
 /**
  * Configure the extension bundles
  */
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     'use strict';
 
     grunt.config.merge({
-        bundle : {
-            taoqtiprint : {
-                options : {
-                    extension : 'taoQtiPrint',
-                    outputDir : 'loader',
-                    dependencies : ['taoItems', 'taoQtiItem'],
-                    bundles : [{
-                        name : 'taoQtiPrint',
-                        default : true,
-                        bootstrap : true,
-                        babel : true
-                    }]
+        bundle: {
+            taoqtiprint: {
+                options: {
+                    extension: 'taoQtiPrint',
+                    outputDir: 'loader',
+                    dependencies: ['taoItems', 'taoQtiItem'],
+                    bundles: [
+                        {
+                            name: 'taoQtiPrint',
+                            babel: true,
+                            include: [
+                                'taoQtiPrint/lib/**/*',
+                                'taoQtiPrint/qtiCommonRenderer/**/*',
+                                'taoQtiPrint/qtiPrintRenderer/**/*',
+                                'taoQtiPrint/runner/**/*'
+                            ]
+                        },
+                        {
+                            name: 'taoQtiPrint.es5',
+                            babel: true,
+                            targets: {
+                                ie: '11'
+                            },
+                            dependencies: [
+                                'taoItems/loader/taoItemsRunner.es5.min',
+                                'taoQtiItem/loader/taoQtiItemRunner.es5.min'
+                            ],
+                            include: [
+                                'taoQtiPrint/lib/**/*',
+                                'taoQtiPrint/qtiCommonRenderer/**/*',
+                                'taoQtiPrint/qtiPrintRenderer/**/*',
+                                'taoQtiPrint/runner/**/*'
+                            ]
+                        }
+                    ]
                 }
             }
         }
