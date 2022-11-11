@@ -60,10 +60,11 @@ define([
             ).appendTo($container);
 
             if (coverPageOptions['qr_code']) {
+                const text =
+                    coverPageOptions['qr_code_data'] ||
+                    urlHelper.route('render', 'PrintTest', 'taoBooklet', { uri: options.uri });
                 new QRCode($('.qr-code', $container).get(0), {
-                    text:
-                        coverPageOptions['qr_code_data'] ||
-                        urlHelper.route('render', 'PrintTest', 'taoBooklet', { uri: options.uri }).padEnd(220),
+                    text: text.length > 192 && text.length < 220 ? text.padEnd(220) : text,
                     width: 192,
                     height: 192,
                     colorDark: '#000000',
