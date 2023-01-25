@@ -147,7 +147,7 @@ $responseIdentifier: #555;
         responsive image size declaration */
         img[data-qti-class="img"] {
             min-width: 40px;
-            min-height: 40px;
+            height: auto;
         }
 
     }
