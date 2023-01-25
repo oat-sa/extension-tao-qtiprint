@@ -141,6 +141,15 @@ $responseIdentifier: #555;
                 @include qtiChoiceBoxAnswered();
             }
         }
+
+        /* fix for taoBooklet 
+        pdf generation doesn't work well with 
+        responsive image size declaration */
+        img[data-qti-class="img"] {
+            min-width: 40px;
+            min-height: 40px;
+        }
+
     }
 }
 
