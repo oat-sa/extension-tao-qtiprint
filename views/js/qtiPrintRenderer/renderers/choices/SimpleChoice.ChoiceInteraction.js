@@ -28,6 +28,20 @@ define([
     'use strict';
 
     /**
+     * Detects image of relative size in choice
+     * @param {jQuery} $container 
+     * @returns {boolean} flag if simple choice has relative sized image
+     */
+    function hasRelativeSizedImage($container) {
+        let flag = false;
+        const $img = $container.find('img');
+        if($img && $img.length && $img.attr('width') && ~$img.attr('width').indexOf('%')) {
+            flag = true;    
+        }
+        return flag;
+    }
+
+    /**
      * Expose the renderer
      * @exports taoQtiPrint/qtiPrintRenderer/renderers/choices/SimpleChoice.ChoiceInteration
      */
@@ -38,6 +52,17 @@ define([
         getData:      function(choice, data){
             data.unique = (parseInt(data.interaction.attributes.maxChoices) === 1);
             return data;
+        },
+        render: function(simpleChoice) {
+            const $container = getContainer(simpleChoice);
+            if(hasRelativeSizedImage($container)) {
+
+                const $img = $container.find('img');
+                const $label = $container.find('label');
+                const $qtiBlock = $container.find('.qti-block');
+                $label.attr('data-has-relative-image', 'true');
+                $qtiBlock.css('background-image', `url('${$img.attr("src")}'`);
+            }
         }
     };
 });
