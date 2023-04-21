@@ -56,12 +56,11 @@ define([
         render: function(simpleChoice) {
             const $container = getContainer(simpleChoice);
             if(hasRelativeSizedImage($container)) {
-
-                const $img = $container.find('img');
+                const imgSrc = $container.find('img').attr('src');
                 const $label = $container.find('label');
                 const $qtiBlock = $container.find('.qti-block');
                 $label.attr('data-has-relative-image', 'true');
-                $qtiBlock.css('background-image', `url('${$img.attr("src")}'`);
+                $qtiBlock.css('background-image', `url(${imgSrc})`);
             }
         }
     };
