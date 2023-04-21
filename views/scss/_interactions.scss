@@ -134,6 +134,32 @@ $responseIdentifier: #555;
             &:before {
                 @include qtiChoiceBox();
             }
+
+            &[data-has-relative-image="true"] {
+                width: 150px;
+                height: 150px;
+                position: relative;
+                overflow: hidden;
+
+                .qti-block {
+                    position: absolute;
+                    width: 130px;
+                    height: 130px;  
+                    right: 0;
+                    bottom: 0;
+                    top: 20px;
+                    left: 20px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+    
+                    img {
+                        display: none;
+                    }
+                }
+                
+            }
+
         }
         input[type="checkbox"]:checked + label,
         input[type="radio"]:checked + label {
@@ -141,15 +167,6 @@ $responseIdentifier: #555;
                 @include qtiChoiceBoxAnswered();
             }
         }
-
-        /* fix for taoBooklet 
-        pdf generation doesn't work well with 
-        responsive image size declaration */
-        img[data-qti-class="img"] {
-            min-width: 40px;
-            height: auto;
-        }
-
     }
 }
 
@@ -201,12 +218,20 @@ $responseIdentifier: #555;
     }
 }
 
-.rtl{
+.rtl {
     .qti-choiceInteraction {
         .qti-choice {
             input[type="checkbox"] + label,
             input[type="radio"] + label {
                 display: block;
+
+                &[data-has-relative-image="true"] {
+    
+                    .qti-block {
+                        right: 20px;
+                        left: 0;
+                    }       
+                }
             }
         }
     }
