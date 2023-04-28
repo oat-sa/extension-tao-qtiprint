@@ -39,7 +39,7 @@
         "oat-sa/extension-tao-delivery" : "dev-feature/AUT-2995",
         "oat-sa/extension-tao-test" : "dev-feature/AUT-2995",
         "oat-sa/extension-tao-outcomeui" : "dev-feature/AUT-2995",
-        "oat-sa/extension-tao-outcome" : "dev-feature/AUT-29950"
+        "oat-sa/extension-tao-outcome" : "dev-feature/AUT-2995"
     },
     "autoload" : {
         "psr-4" : {
