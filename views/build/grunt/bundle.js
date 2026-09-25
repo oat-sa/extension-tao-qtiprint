@@ -29,6 +29,7 @@ module.exports = function (grunt) {
                     extension: 'taoQtiPrint',
                     outputDir: 'loader',
                     dependencies: ['taoItems', 'taoQtiItem'],
+                    babelPreTransform: { enabled: true, exclude: ['mathjax'] },
                     bundles: [
                         {
                             name: 'taoQtiPrint',
